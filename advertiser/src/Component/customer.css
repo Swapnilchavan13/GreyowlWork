@@ -1,0 +1,13 @@
+.selelabel{
+    justify-content: center;
+    position: absolute;
+
+}
+.sele{
+    margin-left: 120px;
+    margin-top: 5px;
+    width: 300px;
+}
+input[type=text]{
+    width: 280px;
+}
