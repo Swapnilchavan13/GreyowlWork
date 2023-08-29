@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./customer.css";
 
-export const Customerdetails = () => {
+export const Campaigndetails = () => {
 
   var districtsData  = [
     {
@@ -50,26 +50,33 @@ export const Customerdetails = () => {
   const [selectAllTalukas, setSelectAllTalukas] = useState(false);
   const [selectAllVillages, setSelectAllVillages] = useState(false);
   const [range, setRange] = useState(0);
+  const [detail, setDetail] = useState('');
+
+//Customer Pofile
+  const [selectedAgeRange, setSelectedAgeRange] = useState('');
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedAttribute, setSelectedAttribute] = useState('');
+  
+
+  const ageRanges = [
+    { label: '13-17', value: '13-17' },
+    { label: '18-25', value: '18-25' },
+    { label: '26-35', value: '26-35' },
+    { label: '36-50', value: '36-50' },
+    { label: '50+', value: '50+' }
+  ];
+
+  const genderOptions = ['Male', 'Female'];
+
+  const attributeOptions = ['Individual', 'Couple', 'Children', 'Family'];
 
   // Media Details
   const [mediaSlide, setMediaSlide] = useState(false);
   const [mediaVideo, setMediaVideo] = useState(false);
   const [media3D, setMedia3D] = useState(false);
-  const [budget, setBudget] = useState('');
-  const [profile, setProfile] = useState('');
-
 
   const [newTaluka, setNewTaluka] = useState('');
   const [newVillage, setNewVillage] = useState('');
-
-  // Creative Details
-  const [creativeAvailable, setCreativeAvailable] = useState(false);
-  const [creativeBuildYourOwn, setCreativeBuildYourOwn] = useState(false);
-  const [video, setVideo] = useState(false);
-  const [three, setThree] = useState(false);
-  const [slide, setSlide] = useState(false);
-
-  
 
   const handleDistrictChange = (event) => {
     setSelectedDistrict(event.target.value);
@@ -156,16 +163,32 @@ export const Customerdetails = () => {
     : [];
 
   villageOptions.unshift({ label: 'Select All Villages', value: 'selectAll' });
-  
-  
 
+
+
+  // Target Range
   const handleRangeChange = (event) => {
-    const newRange = parseInt(event.target.value);
+    const newRange = event.target.value;
     setRange(newRange);
   };
-
+  const handleDetailChange = (event) =>{
+    const newDetail = event.target.value;
+    setDetail(newDetail);
+  }
 
   const handleSubmit = () => {
+    // Check if any necessary detail is missing
+    if (
+      !selectedAgeRange ||
+      !selectedGender ||
+      !selectedAttribute ||
+      !detail
+    ) {
+      alert('Please fill in all required details before submitting.');
+      return; // Don't submit the form
+    }
+
+    // Construct the form data
     const formData = {
       selectedDistrict,
       selectedTalukas,
@@ -174,49 +197,129 @@ export const Customerdetails = () => {
       mediaSlide,
       mediaVideo,
       media3D,
-      budget,
-      profile,
-      creativeAvailable,
-      creativeBuildYourOwn,
-      video,
-      three,
-      slide,
+      detail,
+      selectedAgeRange,
+      selectedGender,
+      selectedAttribute,
     };
-  
-    // Save the form data to local storage
-    localStorage.setItem('formData', JSON.stringify(formData));
-    alert("Data Saved")
+
+    const existingFormData = JSON.parse(localStorage.getItem('formData')) || [];
+
+    // Add the new form data to the array
+    existingFormData.push(formData);
+
+    // Save the updated form data array to local storage
+    localStorage.setItem('formData', JSON.stringify(existingFormData));
+
+    // Clear the form fields
+    setSelectedAgeRange('');
+    setSelectedGender('');
+    setSelectedAttribute('');
+    setDetail('');
+    setSelectedDistrict('');
+    setSelectedTalukas([]);
+    setSelectedVillages([]);
+    setRange('');
+    setMediaSlide(false);
+    setMediaVideo(false);
+    setMedia3D(false);
+
+    alert('Data Saved');
   };
-
-  const savedName = localStorage.getItem('userName');  
-
   
 
   return (
     <div className='App'>
-      <h2>Hello {savedName} !!!</h2>
-      <h1>Customer Details</h1>
-      <div>
-        <label>Target Number</label>
+      <h1>Campaign Details</h1>
+       <div>
+        <label>Target Range</label><br />
         <input
-          type="range"
-          min="1"
-          max="10000"
-          step="1"
-          value={range}
+          type="radio"
+          name="range"
+          value="1000-2500"
           onChange={handleRangeChange}
-        />      
-        <h3>{range}</h3>
-        </div>
-
+          checked={range === '1000-2500'}
+        /> 1000 - 2500
+        <input
+          type="radio"
+          name="range"
+          value="2500-5000"
+          onChange={handleRangeChange}
+          checked={range === '2500-5000'}
+        /> 2500 - 5000
+        <input
+          type="radio"
+          name="range"
+          value="5000-7500"
+          onChange={handleRangeChange}
+          checked={range === '5000-7500'}
+        /> 5000 - 7500
+        <input
+          type="radio"
+          name="range"
+          value="7500-10000"
+          onChange={handleRangeChange}
+          checked={range === '7500-10000'}
+        /> 7500 - 10000
+        <input
+          type="radio"
+          name="range"
+          value="10000+"
+          onChange={handleRangeChange}
+          checked={range === '10000+'}
+        /> 10000+
+      </div>
         <div>
         <label>
-            Customer Profile:
-            <input
-              type="text"
-              value={profile}
-              onChange={(event) => setProfile(event.target.value)}
-            />
+        <div>
+        <h1>Customer Profile</h1>
+        <div>
+          <label>Age Range:</label>
+          {ageRanges.map(range => (
+            <label key={range.value}>
+              <input
+                type="checkbox"
+                name="ageRange"
+                value={range.value}
+                // checked={selectedAgeRange === range.value}
+                onChange={() => setSelectedAgeRange(range.value)}
+              />
+              {range.label}
+            </label>
+          ))}
+        </div>
+        <div>
+          <label>Gender:</label>
+          {genderOptions.map(gender => (
+            <label key={gender}>
+              <input
+                type="checkbox"
+                name="gender"
+                value={gender}
+                // checked={selectedGender === gender}
+                onChange={() => setSelectedGender(gender)}
+              />
+              {gender}
+            </label>
+          ))}
+        </div>
+        <div>
+          <label>Attribute:</label>
+          {attributeOptions.map(attribute => (
+            <label key={attribute}>
+              <input
+                type="checkbox"
+                name="attribute"
+                value={attribute}
+                // checked={selectedAttribute === attribute}
+                onChange={() => setSelectedAttribute(attribute)}
+              />
+              {attribute}
+            </label>
+          ))}
+        </div>
+       
+      </div>
           </label>
 
         </div>
@@ -303,70 +406,44 @@ export const Customerdetails = () => {
             3D
           </label>
         </div>
-        <div>
-          <label>
-            Budget:
-            <input
-              type="text"
-              value={budget}
-              onChange={(event) => setBudget(event.target.value)}
-            />
-          </label>
         </div>
-          </div>
         </div>
         <div>
         <h1>Creative Details</h1>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={creativeAvailable}
-              onChange={() => setCreativeAvailable(!creativeAvailable)}
-            />
-            Available
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => setCreativeBuildYourOwn(!creativeBuildYourOwn)}
-              checked={creativeBuildYourOwn}
-            />
-            Build Your Own
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={slide}
-              onChange={() => setSlide(!slide)}
-            />
-            Slide
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={video}
-              onChange={() => setVideo(!video)}
-            />
-            Video
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={three}
-              onChange={() => setThree(!three)}
-            />
-            3D
-          </label>
-          </div>
+        <input
+          type="radio"
+          name="detail"
+          value="available"
+          onChange={handleDetailChange}
+          checked={detail === 'available'}
+        /> Available <br />
+         {detail === 'available' && (
+      <div>
+        <input
+          type="file"
+          accept=".jpg,.jpeg,.png,.gif"
+          // Add your onChange function and state here for handling the file upload
+        />
+      </div>
+    )}
+        <input
+          type="radio"
+          name="detail"
+          value="buildown"
+          onChange={handleDetailChange}
+          checked={detail === 'buildown'}
+        /> Build Your Own <br />
+        <input
+          type="radio"
+          name="detail"
+          value="buildme"
+          onChange={handleDetailChange}
+          checked={detail === 'buildme'}
+        /> Build For Me
+        
+      </div>
+        
           <button onClick={handleSubmit}>Submit</button>
 
         </div>

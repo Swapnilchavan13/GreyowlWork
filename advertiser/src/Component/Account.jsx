@@ -3,15 +3,20 @@ import {useNavigate} from "react-router-dom";
 import "./account.css";
 
 export const Account = () => {
+ 
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: '',
+    year: '',
+    businessType1: 'FMCG',
+    businessType2: '',
+    des:'',
     age: '',
     address: '',
     phone: '',
-    contactPerson1: '',
-    contactPerson2: '',
+    email: '',
+    contactPerson: '',
     etc: '',
   });
 
@@ -24,29 +29,93 @@ export const Account = () => {
   };
 
   const handleCreateAccount = () => {
-    if (Object.values(formData).some(value => value === '')) {
-        alert('Please fill in all required fields before creating an account.');
-        return;
-      }
-    
-      // Save data to local storage
-      localStorage.setItem('formData', JSON.stringify(formData));
-      localStorage.setItem('userName', formData.name);
-    
-      // Navigate to the customer page
-      alert('Account Created Successfully');
-      navigate('/customer'); // Replace '/customer' with the actual route
+    if (Object.values(formData).some((value) => value === '')) {
+      alert('Please fill in all required fields before creating an account.');
+      return;
+    }
+
+    // Get existing account data from local storage or initialize an empty array
+    const existingAccounts = JSON.parse(localStorage.getItem('accounts')) || [];
+
+    // Add the new account data to the array
+    existingAccounts.push(formData);
+
+    // Save the updated array to local storage
+    localStorage.setItem('accounts', JSON.stringify(existingAccounts));
+
+    // Clear form data
+    setFormData({
+      name: '',
+      year: '',
+      businessType1: 'FMCG',
+      businessType2: '',
+      des:'',
+      age: '',
+      address: '',
+      phone: '',
+      email: '',
+      contactPerson: '',
+      etc: '',
+    });
+
+    // Navigate to the customer page or other appropriate route
+    alert('Account Created Successfully');
+    navigate('/campaign'); // Replace with the actual route
   };
 
   return (
     <div className='account-container'>
       <h1>Account Creation Form</h1>
-      <div >
-        <label>Name</label><br />
-        <input type="text" name="name" placeholder='Enter Your Name' onChange={handleChange} required />
+      <div>
+        <label>Business Name</label><br />
+        <input type="text" name="name" placeholder='Enter Name of your Business' onChange={handleChange} required />
       </div>
       <div>
-        <label>Age</label><br />
+      <label>Year of Establishment</label><br />
+        <input
+          type="text"
+          name="year"
+          placeholder="Year Of Establishment Eg. 2026"
+          value={formData.year}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Choose Business Type</label><br />
+        <select
+          name="businessType1"
+          value={formData.businessType1}
+          onChange={handleChange}
+        >
+          <option value="FMCG">FMCG</option>
+          <option value="Retail">Retail</option>
+          <option value="Hospitality">Hospitality</option>
+          <option value="Education">Education</option>
+          <option value="Medical">Medical</option>
+        </select>
+        <span>
+          <select
+            name="businessType2"
+            value={formData.businessType2}
+            onChange={handleChange}
+          >
+            <option value="">Choose</option>
+            <option value="Jewelry">Jewelry</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Mobiles">Mobiles</option>
+            <option value="Food">Food</option>
+            <option value="Other">Other</option>
+          </select>
+        </span>
+      </div>
+      <div>
+        <label>Business Description</label><br />
+        <input type="text" name="des" placeholder='Describe Your Business' onChange={handleChange} required/>
+      </div>
+      <div>
+        <label>Enter Age</label><br />
         <input type="number" name="age" placeholder='Enter Your Age' onChange={handleChange} required/>
       </div>
       <div>
@@ -54,23 +123,22 @@ export const Account = () => {
         <input type="text" name="address" placeholder='Enter Your Address' onChange={handleChange} required/>
       </div>
       <div>
-        <label>Phone</label><br />
+        <label>Enter Phone Number</label><br />
         <input type="number" name="phone" placeholder='Enter Your Phone Number' onChange={handleChange} required/>
       </div>
       <div>
-        <label>Contact of Person 1</label><br />
-        <input type="number" name="contactPerson1" placeholder='Add Other Contact' onChange={handleChange} required/>
+        <label>Enter Email</label><br />
+        <input type="email" name="email" placeholder='Enter Your Email Id' onChange={handleChange} required/>
       </div>
       <div>
-        <label>Contact of Person 2</label><br />
-        <input type="number" name="contactPerson2" placeholder='Add Other Contact' onChange={handleChange} required/>
+        <label>Contact Persone Name</label><br />
+        <input type="text" name="contactPerson" placeholder='Enter Contact Persone Name' onChange={handleChange} required/>
       </div>
       <div>
         <label>Etc</label><br />
         <input type="text" name="etc" placeholder='Other' onChange={handleChange} required/>
       </div>
-
-<br />
+      <br />
       <button className='create-button' onClick={handleCreateAccount}>
         Create Account
       </button>

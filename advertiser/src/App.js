@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Account } from './Component/Account';
-import { Customerdetails } from './Component/Customerdetails';
+import { Campaigndetails } from './Component/Campaigndetails';
+import { Module2 } from './Component/Module2';
 
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Account />}></Route>
-      <Route path="/customer" element={<Customerdetails />}></Route>
+      <Route path="/campaign" element={<Campaigndetails />}></Route>
+      <Route path="/module2" element={<Module2 />}></Route>
+
     </Routes>
   </BrowserRouter>
   );
