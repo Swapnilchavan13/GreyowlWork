@@ -87,6 +87,21 @@ export const Campaigndetails = () => {
   };
 
 
+  const [budget, setBudget] = useState(1000);
+
+  const handleDecrease = () => {
+    if (budget - 250 >= 500) {
+      setBudget(budget - 250);
+    }
+  };
+
+  const handleIncrease = () => {
+   
+      setBudget(budget + 250);
+  
+  };
+
+
   const handleAddTaluka = () => {
     
       const updatedDistrictsData = [...districtsData];
@@ -201,6 +216,7 @@ export const Campaigndetails = () => {
       selectedAgeRange,
       selectedGender,
       selectedAttribute,
+      budget
     };
 
     const existingFormData = JSON.parse(localStorage.getItem('formData')) || [];
@@ -442,6 +458,15 @@ export const Campaigndetails = () => {
           checked={detail === 'buildme'}
         /> Build For Me
         
+      </div>
+      <div>
+        <h1>Campaign Budget/Week</h1>
+        <div className="budget-control">
+        <button className="decrease-button" onClick={handleDecrease}>-</button>
+        <span className="budget-amount">Rs.{budget}</span>
+        <button onClick={handleIncrease}>+</button>
+      </div>
+      <br />
       </div>
         
           <button onClick={handleSubmit}>Submit</button>
