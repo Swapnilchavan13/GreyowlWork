@@ -12,7 +12,7 @@ export const Account = () => {
     businessType1: 'FMCG',
     businessType2: '',
     des:'',
-    age: '',
+    // age: '',
     address: '',
     phone: '',
     email: '',
@@ -50,7 +50,7 @@ export const Account = () => {
       businessType1: 'FMCG',
       businessType2: '',
       des:'',
-      age: '',
+      // age: '',
       address: '',
       phone: '',
       email: '',
@@ -114,10 +114,10 @@ export const Account = () => {
         <label>Business Description</label><br />
         <input type="text" name="des" placeholder='Describe Your Business' onChange={handleChange} required/>
       </div>
-      <div>
+      {/* <div>
         <label>Enter Age</label><br />
         <input type="number" name="age" placeholder='Enter Your Age' onChange={handleChange} required/>
-      </div>
+      </div> */}
       <div>
         <label>Address</label><br />
         <input type="text" name="address" placeholder='Enter Your Address' onChange={handleChange} required/>
@@ -131,8 +131,8 @@ export const Account = () => {
         <input type="email" name="email" placeholder='Enter Your Email Id' onChange={handleChange} required/>
       </div>
       <div>
-        <label>Contact Persone Name</label><br />
-        <input type="text" name="contactPerson" placeholder='Enter Contact Persone Name' onChange={handleChange} required/>
+        <label>Contact Person Name</label><br />
+        <input type="text" name="contactPerson" placeholder='Enter Contact Person Name' onChange={handleChange} required/>
       </div>
       <div>
         <label>Etc</label><br />
