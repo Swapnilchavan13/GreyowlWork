@@ -53,9 +53,9 @@ export const Campaigndetails = () => {
   const [detail, setDetail] = useState('');
 
 //Customer Pofile
-  const [selectedAgeRange, setSelectedAgeRange] = useState('');
-  const [selectedGender, setSelectedGender] = useState('');
-  const [selectedAttribute, setSelectedAttribute] = useState('');
+  // const [selectedAgeRange, setSelectedAgeRange] = useState('');
+  // const [selectedGender, setSelectedGender] = useState('');
+  // const [selectedAttribute, setSelectedAttribute] = useState('');
   
 
   const ageRanges = [
@@ -66,9 +66,39 @@ export const Campaigndetails = () => {
     { label: '50+', value: '50+' }
   ];
 
-  const genderOptions = ['Male', 'Female'];
+  const [selectedRanges, setSelectedRanges] = useState([]);
 
+  const handleCheckboxChange = (value) => {
+    if (selectedRanges.includes(value)) {
+      setSelectedRanges(selectedRanges.filter(range => range !== value));
+    } else {
+      setSelectedRanges([...selectedRanges, value]);
+    }
+  };
+
+
+  const genderOptions = ['Male', 'Female'];
   const attributeOptions = ['Individual', 'Couple', 'Children', 'Family'];
+
+  const [selectedGenders, setSelectedGenders] = useState([]);
+  const [selectedAttributes, setSelectedAttributes] = useState([]);
+
+  const handleGenderChange = (gender) => {
+    if (selectedGenders.includes(gender)) {
+      setSelectedGenders(selectedGenders.filter((g) => g !== gender));
+    } else {
+      setSelectedGenders([...selectedGenders, gender]);
+    }
+  };
+
+  const handleAttributeChange = (attribute) => {
+    if (selectedAttributes.includes(attribute)) {
+      setSelectedAttributes(selectedAttributes.filter((a) => a !== attribute));
+    } else {
+      setSelectedAttributes([...selectedAttributes, attribute]);
+    }
+  };
+  
 
   // Media Details
   const [mediaSlide, setMediaSlide] = useState(false);
@@ -194,9 +224,9 @@ export const Campaigndetails = () => {
   const handleSubmit = () => {
     // Check if any necessary detail is missing
     if (
-      !selectedAgeRange ||
-      !selectedGender ||
-      !selectedAttribute ||
+      !selectedRanges ||
+      !selectedGenders ||
+      !selectedAttributes ||
       !detail
     ) {
       alert('Please fill in all required details before submitting.');
@@ -213,9 +243,9 @@ export const Campaigndetails = () => {
       mediaVideo,
       media3D,
       detail,
-      selectedAgeRange,
-      selectedGender,
-      selectedAttribute,
+      selectedRanges,
+      selectedGenders,
+      selectedAttributes,
       budget
     };
 
@@ -228,9 +258,9 @@ export const Campaigndetails = () => {
     localStorage.setItem('formData', JSON.stringify(existingFormData));
 
     // Clear the form fields
-    setSelectedAgeRange('');
-    setSelectedGender('');
-    setSelectedAttribute('');
+    setSelectedRanges([]);
+    setSelectedGenders([]);
+    setSelectedAttributes([]);
     setDetail('');
     setSelectedDistrict('');
     setSelectedTalukas([]);
@@ -248,7 +278,7 @@ export const Campaigndetails = () => {
     <div className='App'>
       <h1>Campaign Details</h1>
        <div>
-        <label>Target Range</label><br />
+        <label>Campaign Limit</label><br />
         <input
           type="radio"
           name="range"
@@ -290,49 +320,47 @@ export const Campaigndetails = () => {
         <div>
         <h1>Customer Profile</h1>
         <div>
-          <label>Age Range:</label>
-          {ageRanges.map(range => (
-            <label key={range.value}>
-              <input
-                type="checkbox"
-                name="ageRange"
-                value={range.value}
-                // checked={selectedAgeRange === range.value}
-                onChange={() => setSelectedAgeRange(range.value)}
-              />
-              {range.label}
-            </label>
-          ))}
-        </div>
+          <label>Select Age Range:</label>
+      {ageRanges.map(range => (
+        <label key={range.value}>
+          <input
+            type="checkbox"
+            value={range.value}
+            checked={selectedRanges.includes(range.value)}
+            onChange={() => handleCheckboxChange(range.value)}
+          />
+          {range.label}
+        </label>
+      ))}
+
+      </div>
         <div>
           <label>Gender:</label>
-          {genderOptions.map(gender => (
-            <label key={gender}>
-              <input
-                type="checkbox"
-                name="gender"
-                value={gender}
-                // checked={selectedGender === gender}
-                onChange={() => setSelectedGender(gender)}
-              />
-              {gender}
-            </label>
-          ))}
+          {genderOptions.map((gender) => (
+        <label key={gender}>
+          <input
+            type="checkbox"
+            value={gender}
+            checked={selectedGenders.includes(gender)}
+            onChange={() => handleGenderChange(gender)}
+          />
+          {gender}
+        </label>
+      ))}
         </div>
         <div>
           <label>Attribute:</label>
-          {attributeOptions.map(attribute => (
-            <label key={attribute}>
-              <input
-                type="checkbox"
-                name="attribute"
-                value={attribute}
-                // checked={selectedAttribute === attribute}
-                onChange={() => setSelectedAttribute(attribute)}
-              />
-              {attribute}
-            </label>
-          ))}
+          {attributeOptions.map((attribute) => (
+        <label key={attribute}>
+          <input
+            type="checkbox"
+            value={attribute}
+            checked={selectedAttributes.includes(attribute)}
+            onChange={() => handleAttributeChange(attribute)}
+          />
+          {attribute}
+        </label>
+      ))}
         </div>
        
       </div>

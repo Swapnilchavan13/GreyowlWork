@@ -12,8 +12,10 @@ export const Account = () => {
     businessType1: 'FMCG',
     businessType2: '',
     des:'',
-    // age: '',
     address: '',
+    state:'',
+    city:'',
+    pin:'',
     phone: '',
     email: '',
     contactPerson: '',
@@ -50,8 +52,10 @@ export const Account = () => {
       businessType1: 'FMCG',
       businessType2: '',
       des:'',
-      // age: '',
       address: '',
+      state:'',
+      city:'',
+      pin:'',
       phone: '',
       email: '',
       contactPerson: '',
@@ -101,7 +105,7 @@ export const Account = () => {
             onChange={handleChange}
           >
             <option value="">Choose</option>
-            <option value="Jewelry">Jewelry</option>
+            <option value="Jewellery">Jewellery</option>
             <option value="Clothing">Clothing</option>
             <option value="Electronics">Electronics</option>
             <option value="Mobiles">Mobiles</option>
@@ -114,13 +118,28 @@ export const Account = () => {
         <label>Business Description</label><br />
         <input type="text" name="des" placeholder='Describe Your Business' onChange={handleChange} required/>
       </div>
-      {/* <div>
-        <label>Enter Age</label><br />
-        <input type="number" name="age" placeholder='Enter Your Age' onChange={handleChange} required/>
-      </div> */}
+  
       <div>
         <label>Address</label><br />
-        <input type="text" name="address" placeholder='Enter Your Address' onChange={handleChange} required/>
+        <input type="text" name="address" placeholder='House Number Building Name' onChange={handleChange} required/>
+        <input type="number" name="pin" placeholder='Enter Your Pin Code' onChange={handleChange} required/>
+        <select name="state" 
+        value={formData.state}
+          onChange={handleChange}>
+          <option value="">select your State</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+        </select>
+        <select name="city" 
+        value={formData.city}
+          onChange={handleChange}>
+          <option value="">select your city</option>
+          <option value="Aurangabad">Aurangabad</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Pune">Pune</option>
+        </select>
+          
       </div>
       <div>
         <label>Enter Phone Number</label><br />
