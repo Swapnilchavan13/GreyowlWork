@@ -168,8 +168,6 @@ export const Module2 = () => {
   
   };
 
-
-
   return (
   <div className='account-container'>
     <form onSubmit={handleSubmit}>

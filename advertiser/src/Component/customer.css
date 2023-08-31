@@ -14,3 +14,12 @@ input[type=text]{
 select{
     height: 35px;
 }
+#summary{
+    display: flex;
+    gap: 20px;
+}
+#summary>div{
+    border: 1px solid black;
+    width: 33%;
+    padding: 10px;
+}
