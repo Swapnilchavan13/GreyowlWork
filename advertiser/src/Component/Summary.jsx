@@ -43,7 +43,7 @@ export const Summary = () => {
       };
 
   return (
-    <div>
+    <div style={{"padding":"10px"}}>
         <h1>Campaign Summary</h1>
         <div id='summary'>
             <div>
@@ -104,13 +104,13 @@ export const Summary = () => {
         <ul>
         {mediaData.map((data, index) => (
           <li key={index}>
-            <strong>Business Name:</strong> {data.businessName}<br />
             <strong>Tagline:</strong> {data.tagline}<br />
             <strong>Description:</strong> {data.description}<br />
             <strong>Logo File:</strong> {data.logoFile ? 'Yes' : 'No'}<br />
             <strong>Product Photos:</strong> {data.productPhotos.filter(photo => photo).length}<br />
             <strong>Product Videos:</strong> {data.productVideos.filter(video => video).length}<br />
             <strong>Selected Ad Types:</strong> {data.selectedAdTypes.join(', ')}<br />
+            <strong>Business Name:</strong> {data.businessName}<br />
             <strong>Selected Adjectives:</strong> {data.selectedAdjectives.join(', ')}<br />
             <strong>Selected Duration:</strong> {data.selectedDuration}<br />
             <strong>Selected Model Types:</strong> {data.selectedModelTypes.join(', ')}<br />

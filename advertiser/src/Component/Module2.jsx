@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const businessAdjectives = [
   'Reliable',
@@ -48,6 +49,9 @@ const durations = [
 
 
 export const Module2 = () => {
+
+  const navigate = useNavigate()
+
   const [businessName, setBusinessName] = useState('');
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
@@ -166,6 +170,7 @@ export const Module2 = () => {
     setSelectedAdTypes([]);
     setSelectedDuration('');
   
+    navigate('/summary')
   };
 
   return (

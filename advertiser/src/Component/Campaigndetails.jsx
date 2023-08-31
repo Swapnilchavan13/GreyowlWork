@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import "./customer.css";
+import { useNavigate } from 'react-router-dom';
 
 export const Campaigndetails = () => {
+
+  const navigate = useNavigate();
+
 
   var districtsData  = [
     {
@@ -271,6 +275,7 @@ export const Campaigndetails = () => {
     setMedia3D(false);
 
     alert('Data Saved');
+    navigate('/module2')
   };
   
 

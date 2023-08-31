@@ -30,41 +30,32 @@ export const Account = () => {
     }));
   };
 
-  const handleCreateAccount = () => {
+  const handleCreateAccount = async () => {
     if (Object.values(formData).some((value) => value === '')) {
       alert('Please fill in all required fields before creating an account.');
       return;
     }
 
-    // Get existing account data from local storage or initialize an empty array
-    const existingAccounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    try {
+      const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/address', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Add the new account data to the array
-    existingAccounts.push(formData);
+      if (response.ok) {
+        alert('Account Created Successfully');
+        navigate('/campaign'); // Replace with the actual route
 
-    // Save the updated array to local storage
-    localStorage.setItem('accounts', JSON.stringify(existingAccounts));
-
-    // Clear form data
-    setFormData({
-      name: '',
-      year: '',
-      businessType1: 'FMCG',
-      businessType2: '',
-      des:'',
-      address: '',
-      state:'',
-      city:'',
-      pin:'',
-      phone: '',
-      email: '',
-      contactPerson: '',
-      etc: '',
-    });
-
-    // Navigate to the customer page or other appropriate route
-    alert('Account Created Successfully');
-    navigate('/campaign'); // Replace with the actual route
+      } else {
+        alert('Failed to create account');
+      }
+    } catch (error) {
+      console.error('Error creating account:', error);
+      alert('An error occurred while creating the account');
+    }
   };
 
   return (
@@ -139,7 +130,6 @@ export const Account = () => {
           <option value="Mumbai">Mumbai</option>
           <option value="Pune">Pune</option>
         </select>
-          
       </div>
       <div>
         <label>Enter Phone Number</label><br />
