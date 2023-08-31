@@ -4,6 +4,10 @@ export const Summary = () => {
     const [savedData, setSavedData] = useState([]);
     const [campData, setCampdata] = useState([]);
     const [mediaData, setMediaData] = useState([]);
+    const [sum, setSum] = useState(false);
+    const [camp, setCamp] = useState(false);
+    const [media, setMedia] = useState(false);
+
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('accounts'));
@@ -26,6 +30,17 @@ export const Summary = () => {
             setMediaData(mediaData);
         }
       }, []);
+
+      const handleApproveTogglesum = (sum) => {
+        setSum(!sum)
+      };
+
+      const handleApproveTogglecamp = (camp) => {
+        setCamp(!camp)
+      };
+      const handleApproveTogglemedia = (media) => {
+        setMedia(!media)
+      };
 
   return (
     <div>
@@ -54,6 +69,9 @@ export const Summary = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => handleApproveTogglesum(sum)}>
+                  { sum? 'Not Approve' : 'Approve'}
+        </button>
       </div>
     </div>
     <div>
@@ -77,6 +95,9 @@ export const Summary = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => handleApproveTogglecamp(camp)}>
+                  { camp? 'Not Approve' : 'Approve'}
+        </button>
     </div>
     <div>
         <h3>Media Summary</h3>
@@ -99,6 +120,9 @@ export const Summary = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => handleApproveTogglemedia(media)}>
+                  { media? 'Not Approve' : 'Approve'}
+        </button>
     
             </div>
             
