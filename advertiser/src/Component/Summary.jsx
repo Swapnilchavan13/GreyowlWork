@@ -4,24 +4,55 @@ export const Summary = () => {
     const [savedData, setSavedData] = useState([]);
     const [campData, setCampdata] = useState([]);
     const [mediaData, setMediaData] = useState([]);
+    // Define the API endpoint URL
     const [sum, setSum] = useState(false);
     const [camp, setCamp] = useState(false);
     const [media, setMedia] = useState(false);
 
 
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('accounts'));
-        if (storedData) {
-          setSavedData(storedData);
-        }
-      }, []);
+      const apiUrl = 'https://lonely-cow-life-jacket.cyclic.app/address';
+  
+      // Fetch data from the API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Update the component's state with the received data
+          console.log(data)
+          setSavedData(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }, []);
 
-      useEffect(() => {
-        const campData = JSON.parse(localStorage.getItem('formData'));
-        if (campData) {
-        setCampdata(campData);
-        }
-      }, []);
+    useEffect(() => {
+      // Define the API endpoint URL
+      const apiUrl = 'https://lonely-cow-life-jacket.cyclic.app/campaign';
+  
+      // Fetch data from the API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Update the component's state with the received data
+          setCampdata(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }, []);
+
+      
 
 
       useEffect(() => {
@@ -34,7 +65,6 @@ export const Summary = () => {
       const handleApproveTogglesum = (sum) => {
         setSum(!sum)
       };
-
       const handleApproveTogglecamp = (camp) => {
         setCamp(!camp)
       };
