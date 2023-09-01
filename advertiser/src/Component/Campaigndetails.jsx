@@ -6,7 +6,6 @@ export const Campaigndetails = () => {
 
   const navigate = useNavigate();
 
-
   var districtsData  = [
     {
       "district": "Mumbai",
@@ -55,13 +54,7 @@ export const Campaigndetails = () => {
   const [selectAllVillages, setSelectAllVillages] = useState(false);
   const [range, setRange] = useState(0);
   const [detail, setDetail] = useState('');
-
-//Customer Pofile
-  // const [selectedAgeRange, setSelectedAgeRange] = useState('');
-  // const [selectedGender, setSelectedGender] = useState('');
-  // const [selectedAttribute, setSelectedAttribute] = useState('');
   
-
   const ageRanges = [
     { label: '13-17', value: '13-17' },
     { label: '18-25', value: '18-25' },
@@ -79,7 +72,6 @@ export const Campaigndetails = () => {
       setSelectedRanges([...selectedRanges, value]);
     }
   };
-
 
   const genderOptions = ['Male', 'Female'];
   const attributeOptions = ['Individual', 'Couple', 'Children', 'Family'];
@@ -103,14 +95,10 @@ export const Campaigndetails = () => {
     }
   };
   
-
   // Media Details
   const [mediaSlide, setMediaSlide] = useState(false);
   const [mediaVideo, setMediaVideo] = useState(false);
   const [media3D, setMedia3D] = useState(false);
-
-  const [newTaluka, setNewTaluka] = useState('');
-  const [newVillage, setNewVillage] = useState('');
 
   const handleDistrictChange = (event) => {
     setSelectedDistrict(event.target.value);
@@ -119,7 +107,6 @@ export const Campaigndetails = () => {
     setSelectAllTalukas(false);
     setSelectAllVillages(false);
   };
-
 
   const [budget, setBudget] = useState(1000);
 
@@ -130,32 +117,7 @@ export const Campaigndetails = () => {
   };
 
   const handleIncrease = () => {
-   
       setBudget(budget + 250);
-  
-  };
-
-
-  const handleAddTaluka = () => {
-    
-      const updatedDistrictsData = [...districtsData];
-      const selectedDistrictData = updatedDistrictsData.find(district => district.district === selectedDistrict);
-      selectedDistrictData.talukas.push({ taluka: newTaluka, villages: [] });
-      setNewTaluka('');
-    
-  };
-
-  const handleAddVillage = () => {
-    if (newVillage && selectedTalukas.length > 0) {
-      const updatedDistrictsData = [...districtsData];
-      const selectedDistrictData = updatedDistrictsData.find(district => district.district === selectedDistrict);
-      selectedDistrictData.talukas.forEach(taluka => {
-        if (selectedTalukas.includes(taluka.taluka)) {
-          taluka.villages.push(newVillage);
-        }
-      });
-      setNewVillage('');
-    }
   };
 
   const handleTalukaChange = (event) => {
@@ -224,44 +186,37 @@ export const Campaigndetails = () => {
     const newDetail = event.target.value;
     setDetail(newDetail);
   }
+   
+    const handleSubmit = async (event) => {
+      event.preventDefault();
 
-  const handleSubmit = () => {
-    // Check if any necessary detail is missing
-    if (
-      !selectedRanges ||
-      !selectedGenders ||
-      !selectedAttributes ||
-      !detail
-    ) {
-      alert('Please fill in all required details before submitting.');
-      return; // Don't submit the form
-    }
-
-    // Construct the form data
-    const formData = {
-      selectedDistrict,
-      selectedTalukas,
-      selectedVillages,
-      range,
-      mediaSlide,
-      mediaVideo,
-      media3D,
-      detail,
-      selectedRanges,
-      selectedGenders,
-      selectedAttributes,
-      budget
-    };
-
-    const existingFormData = JSON.parse(localStorage.getItem('formData')) || [];
-
-    // Add the new form data to the array
-    existingFormData.push(formData);
-
-    // Save the updated form data array to local storage
-    localStorage.setItem('formData', JSON.stringify(existingFormData));
-
-    // Clear the form fields
+      const formData = {
+        selectedDistrict,
+        selectedTalukas,
+        selectedVillages,
+        range,
+        mediaSlide,
+        mediaVideo,
+        media3D,
+        detail,
+        selectedRanges,
+        selectedGenders,
+        selectedAttributes,
+        budget
+      };
+  
+      
+      try {
+        const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/campaign', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+    
+        if (response.ok) {
+          // Clear the form fields
     setSelectedRanges([]);
     setSelectedGenders([]);
     setSelectedAttributes([]);
@@ -273,12 +228,20 @@ export const Campaigndetails = () => {
     setMediaSlide(false);
     setMediaVideo(false);
     setMedia3D(false);
+    setBudget(1000)
 
-    alert('Data Saved');
-    navigate('/module2')
-  };
+    alert('Data Saved');          
+    
+          navigate('/module2');
+        } else {
+          alert('Failed to store data.');
+        }
+      } catch (error) {
+        alert('An error occurred while saving data.');
+        console.error(error);
+      }
+    };
   
-
   return (
     <div className='App'>
       <h1>Campaign Details</h1>
@@ -391,15 +354,6 @@ export const Campaigndetails = () => {
               </option>
             ))}
           </select>
-          {/* <div>
-        <label>Add Taluka:</label>
-        <input
-          type="text"
-          value={newTaluka}
-          onChange={(event) => setNewTaluka(event.target.value)}
-        />
-        <button onClick={handleAddTaluka}>Add Taluka</button>
-      </div> */}
           
         </div>
         <div className='dropdown'>
@@ -411,15 +365,6 @@ export const Campaigndetails = () => {
               </option>
             ))}
           </select>
-          {/* <div>
-        <label>Add Village:</label>
-        <input
-          type="text"
-          value={newVillage}
-          onChange={(event) => setNewVillage(event.target.value)}
-        />
-        <button onClick={handleAddVillage}>Add Village</button>
-      </div> */}
         </div>
         </div>
         <div>

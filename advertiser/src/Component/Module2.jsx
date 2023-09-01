@@ -136,45 +136,63 @@ export const Module2 = () => {
     setSelectedDuration(duration);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newData = {
-      businessName,
-      tagline,
-      description,
-      selectedAdjectives,
-      logoFile,
-      storePhotos,
-      storeVideos,
-      productPhotos,
-      productVideos,
-      selectedModelTypes,
-      selectedAdTypes,
-      selectedDuration
-    };
-    setSavedData([...savedData, newData]);
-    localStorage.setItem('savedData', JSON.stringify([...savedData, newData]));
-  
-    alert("Data Stored")
-    // Reset state values
-    setBusinessName('');
-    setTagline('');
-    setDescription('');
-    setSelectedAdjectives([]);
-    setLogoFile(null);
-    setStorePhotos(Array(5).fill(null));
-    setStoreVideos(Array(4).fill(null));
-    setProductPhotos(Array(5).fill(null));
-    setProductVideos(Array(4).fill(null));
-    setSelectedModelTypes([]);
-    setSelectedAdTypes([]);
-    setSelectedDuration('');
-  
-    navigate('/summary')
+  const handleSubmit = async (event) => {
+  event.preventDefault();
+  const newData = {
+    businessName,
+    tagline,
+    description,
+    selectedAdjectives,
+    // logoFile,
+    // storePhotos,
+    // storeVideos,
+    // productPhotos,
+    // productVideos,
+    selectedModelTypes,
+    selectedAdTypes,
+    selectedDuration,
   };
+
+  try {
+    const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newData),
+    });
+
+    if (response.ok) {
+      // Data saved successfully
+      alert('Data Stored');
+      // Reset state values
+      setBusinessName('');
+      setTagline('');
+      setDescription('');
+      setSelectedAdjectives([]);
+      setLogoFile(null);
+      setStorePhotos(Array(5).fill(null));
+      setStoreVideos(Array(4).fill(null));
+      setProductPhotos(Array(5).fill(null));
+      setProductVideos(Array(4).fill(null));
+      setSelectedModelTypes([]);
+      setSelectedAdTypes([]);
+      setSelectedDuration('');
+
+      navigate('/summary');
+    } else {
+      alert('Failed to store data.');
+    }
+  } catch (error) {
+    alert('An error occurred while saving data.');
+    console.error(error);
+  }
+};
+
 
   return (
   <div className='account-container'>
+    <h1>Module 2</h1>
     <form onSubmit={handleSubmit}>
         <label htmlFor="businessName">Business Name:</label>
         <input
