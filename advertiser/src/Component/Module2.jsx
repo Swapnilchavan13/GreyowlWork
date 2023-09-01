@@ -188,8 +188,6 @@ export const Module2 = () => {
     console.error(error);
   }
 };
-
-
   return (
   <div className='account-container'>
     <h1>Business Details</h1>

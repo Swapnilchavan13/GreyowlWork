@@ -52,9 +52,6 @@ export const Summary = () => {
         });
     }, []);
 
-      
-
-
     useEffect(() => {
       // Define the API endpoint URL
       const apiUrl = 'https://lonely-cow-life-jacket.cyclic.app/business';
@@ -92,8 +89,8 @@ export const Summary = () => {
         <div id='summary'>
             <div >
                 <h3>Creative Summary</h3>
-                <div>
-                <ul>
+             <div>
+          <ul>
         {savedData.map((data, index) => (
           <div className='main' key={index}>
             <strong>Name:</strong> {data.name}<br />
