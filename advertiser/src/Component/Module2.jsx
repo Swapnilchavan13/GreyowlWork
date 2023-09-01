@@ -192,7 +192,7 @@ export const Module2 = () => {
 
   return (
   <div className='account-container'>
-    <h1>Module 2</h1>
+    <h1>Business Details</h1>
     <form onSubmit={handleSubmit}>
         <label htmlFor="businessName">Business Name:</label>
         <input

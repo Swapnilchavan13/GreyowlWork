@@ -55,12 +55,26 @@ export const Summary = () => {
       
 
 
-      useEffect(() => {
-        const mediaData = JSON.parse(localStorage.getItem('savedData'));
-        if (mediaData) {
-            setMediaData(mediaData);
-        }
-      }, []);
+    useEffect(() => {
+      // Define the API endpoint URL
+      const apiUrl = 'https://lonely-cow-life-jacket.cyclic.app/business';
+  
+      // Fetch data from the API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Update the component's state with the received data
+          setMediaData(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }, []);
 
       const handleApproveTogglesum = (sum) => {
         setSum(!sum)
@@ -76,12 +90,12 @@ export const Summary = () => {
     <div style={{"padding":"10px"}}>
         <h1>Campaign Summary</h1>
         <div id='summary'>
-            <div>
+            <div >
                 <h3>Creative Summary</h3>
                 <div>
                 <ul>
         {savedData.map((data, index) => (
-          <li key={index}>
+          <div className='main' key={index}>
             <strong>Name:</strong> {data.name}<br />
             <strong>Year:</strong> {data.year}<br />
             <strong>Business Type 1:</strong> {data.businessType1}<br />
@@ -96,7 +110,7 @@ export const Summary = () => {
             <strong>Phone:</strong> {data.phone}<br />
             <strong>ETC:</strong> {data.etc}<br />
             {/* Add more fields here */}
-          </li>
+          </div>
         ))}
       </ul>
       <button onClick={() => handleApproveTogglesum(sum)}>
@@ -108,7 +122,7 @@ export const Summary = () => {
         <h3>Campaign Elements</h3>
         <ul>
         {campData.map((data, index) => (
-          <li key={index}>
+          <div className='main'>
             <strong>Selected District:</strong> {data.selectedDistrict}<br />
             <strong>Selected Talukas:</strong> {data.selectedTalukas.join(', ')}<br />
             <strong>Budget:</strong> {data.budget}<br />
@@ -122,7 +136,7 @@ export const Summary = () => {
             <strong>Selected Villages:</strong> {data.selectedVillages.join(', ')}<br />
             <strong>Detail:</strong> {data.detail}<br />
             {/* Add more fields here */}    
-          </li>
+          </div>
         ))}
       </ul>
       <button onClick={() => handleApproveTogglecamp(camp)}>
@@ -133,21 +147,21 @@ export const Summary = () => {
         <h3>Media Summary</h3>
         <ul>
         {mediaData.map((data, index) => (
-          <li key={index}>
+          <div className='main'key={index}>
             <strong>Tagline:</strong> {data.tagline}<br />
             <strong>Description:</strong> {data.description}<br />
-            <strong>Logo File:</strong> {data.logoFile ? 'Yes' : 'No'}<br />
-            <strong>Product Photos:</strong> {data.productPhotos.filter(photo => photo).length}<br />
-            <strong>Product Videos:</strong> {data.productVideos.filter(video => video).length}<br />
+            {/* <strong>Logo File:</strong> {data.logoFile ? 'Yes' : 'No'}<br /> */}
+            {/* <strong>Product Photos:</strong> {data.productPhotos.filter(photo => photo).length}<br /> */}
+            {/* <strong>Product Videos:</strong> {data.productVideos.filter(video => video).length}<br /> */}
             <strong>Selected Ad Types:</strong> {data.selectedAdTypes.join(', ')}<br />
             <strong>Business Name:</strong> {data.businessName}<br />
             <strong>Selected Adjectives:</strong> {data.selectedAdjectives.join(', ')}<br />
             <strong>Selected Duration:</strong> {data.selectedDuration}<br />
             <strong>Selected Model Types:</strong> {data.selectedModelTypes.join(', ')}<br />
-            <strong>Store Photos:</strong> {data.storePhotos.filter(photo => photo).length}<br />
-            <strong>Store Videos:</strong> {data.storeVideos.filter(video => video).length}<br />
+            {/* <strong>Store Photos:</strong> {data.storePhotos.filter(photo => photo).length}<br /> */}
+            {/* <strong>Store Videos:</strong> {data.storeVideos.filter(video => video).length}<br /> */}
             {/* Add more fields here */}
-          </li>
+          </div>
         ))}
       </ul>
       <button onClick={() => handleApproveTogglemedia(media)}>

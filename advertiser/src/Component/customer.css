@@ -23,3 +23,9 @@ select{
     width: 33%;
     padding: 10px;
 }
+
+.main{
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+}
