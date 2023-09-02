@@ -179,7 +179,7 @@ export const Module2 = () => {
       setSelectedAdTypes([]);
       setSelectedDuration('');
 
-      navigate('/summary');
+      navigate('/usersummary');
     } else {
       alert('Failed to store data.');
     }

@@ -137,7 +137,7 @@ export const Summary = () => {
         ))}
       </ul>
       <button onClick={() => handleApproveTogglecamp(camp)}>
-                  { camp? 'Not Approve' : 'Approve'}
+        { camp? 'Not Approve' : 'Approve'}
         </button>
     </div>
     <div>
@@ -162,10 +162,10 @@ export const Summary = () => {
         ))}
       </ul>
       <button onClick={() => handleApproveTogglemedia(media)}>
-                  { media? 'Not Approve' : 'Approve'}
+        { media? 'Not Approve' : 'Approve'}
         </button>
     
-            </div>
+        </div>
             
         </div>
     </div>
