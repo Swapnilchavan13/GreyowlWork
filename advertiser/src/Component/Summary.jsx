@@ -162,7 +162,7 @@ export const Summary = () => {
         ))}
       </ul>
       <button onClick={() => handleApproveTogglemedia(media)}>
-                  { media? 'Not Approve' : 'Approve'}
+                  { media? 'Not Approve' : 'Approve Now'}
         </button>
     
             </div>
