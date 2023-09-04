@@ -122,6 +122,7 @@ export const Summary = () => {
           <div className='main'>
             <strong>Selected District:</strong> {data.selectedDistrict}<br />
             <strong>Selected Talukas:</strong> {data.selectedTalukas.join(', ')}<br />
+            <strong>Selected Villages:</strong> {data.selectedVillages.join(', ')}<br />
             <strong>Budget:</strong> {data.budget}<br />
             <strong>3D Media:</strong> {data.media3D ? 'Yes' : 'No'}<br />
             <strong>Slide Media:</strong> {data.mediaSlide ? 'Yes' : 'No'}<br />
@@ -130,7 +131,6 @@ export const Summary = () => {
             <strong>Selected Attributes:</strong> {data.selectedAttributes.join(', ')}<br />
             <strong>Selected Genders:</strong> {data.selectedGenders.join(', ')}<br />
             <strong>Selected Ranges:</strong> {data.selectedRanges.join(', ')}<br />
-            <strong>Selected Villages:</strong> {data.selectedVillages.join(', ')}<br />
             <strong>Detail:</strong> {data.detail}<br />
             {/* Add more fields here */}    
           </div>
