@@ -13,32 +13,45 @@ export const Usersummary = () => {
   const [isEditingcamp, setIsEditingcamp] = useState(false);
   const [isEditingbuss, setIsEditingbuss] = useState(false);
 
-  var Btype  = [
+  var Btype = [
     {
-      "type": "FMCG",
-      "subtype": ["Food and Beverages","Personal Care and Hygiene", "Home care"]
+      type: "FMCG",
+      subtype: ["Food and Beverages", "Personal Care and Hygiene", "Home care"],
     },
 
     {
-      "type": "Retail",
-      "subtype":["Jewellery", "Clothing", "Electronics", "Mobile", "Food and Beverages", "Children Care"]
+      type: "Retail",
+      subtype: [
+        "Jewellery",
+        "Clothing",
+        "Electronics",
+        "Mobile",
+        "Food and Beverages",
+        "Children Care",
+      ],
     },
 
     {
-      "type": "Hospitality",
-      "subtype":["Wedding", "Lodging", "Restaurant", "Travel and Tourism", "Events"]
-    },
-    
-    {
-      "type": "Education",
-      "subtype":["School", "College", "Professional","Institute"]
+      type: "Hospitality",
+      subtype: [
+        "Wedding",
+        "Lodging",
+        "Restaurant",
+        "Travel and Tourism",
+        "Events",
+      ],
     },
 
     {
-      "type": "Medical",
-      "subtype":["Medical Store", "Hospital", "Nursing Homes", "Clinics"]
-    }
-  ]
+      type: "Education",
+      subtype: ["School", "College", "Professional", "Institute"],
+    },
+
+    {
+      type: "Medical",
+      subtype: ["Medical Store", "Hospital", "Nursing Homes", "Clinics"],
+    },
+  ];
 
   useEffect(() => {
     const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/address";
@@ -244,8 +257,6 @@ export const Usersummary = () => {
       });
   };
 
-
-
   var districtsData = [
     {
       district: "Mumbai",
@@ -398,12 +409,12 @@ export const Usersummary = () => {
                 }
               />
               <br />
-              {/* <div>
+              <div>
                 <label>Choose Business Type</label>
                 <br />
                 <select
                   name="businessType1"
-                  value={editedData.businessType1}
+                  value={editedData.businessType1} // Change to editedData.businessType1
                   onChange={(e) =>
                     setEditedData({
                       ...editedData,
@@ -411,74 +422,39 @@ export const Usersummary = () => {
                     })
                   }
                 >
-                  <option value="FMCG">FMCG</option>
-                  <option value="Retail">Retail</option>
-                  <option value="Hospitality">Hospitality</option>
-                  <option value="Education">Education</option>
-                  <option value="Medical">Medical</option>
+                  <option value="">Choose</option>
+                  {Btype.map((item) => (
+                    <option key={item.type} value={item.type}>
+                      {item.type}
+                    </option>
+                  ))}
                 </select>
-                <span>
-                  <select
-                    name="businessType2"
-                    value={editedData.businessType2}
-                    onChange={(e) =>
-                      setEditedData({
-                        ...editedData,
-                        businessType2: e.target.value,
-                      })
-                    }
-                  >
-                    <option value="">Choose</option>
-                    <option value="Jewellery">Jewellery</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Mobiles">Mobiles</option>
-                    <option value="Food">Food</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </span>
-              </div> */}
 
-<div>
-  <label>Choose Business Type</label>
-  <br />
-  <select
-    name="businessType1"
-    value={editedData.businessType1} // Change to editedData.businessType1
-    onChange={(e) =>
-      setEditedData({ ...editedData, businessType1: e.target.value })
-    }
-  >
-    <option value="">Choose</option>
-    {Btype.map((item) => (
-      <option key={item.type} value={item.type}>
-        {item.type}
-      </option>
-    ))}
-  </select>
-
-  {editedData.businessType1 && (
-    <span>
-      <select
-        name="businessType2"
-        value={editedData.businessType2}
-        onChange={(e) =>
-          setEditedData({ ...editedData, businessType2: e.target.value })
-        }
-      >
-        <option value="">Choose</option>
-        {/* Use optional chaining to safely access the subtype array */}
-        {Btype.find((item) => item.type === editedData.businessType1)?.subtype?.map((subtype) => (
-          <option key={subtype} value={subtype}>
-            {subtype}
-          </option>
-        ))}
-      </select>
-    </span>
-  )}
-</div>
-
-
+                {editedData.businessType1 && (
+                  <span>
+                    <select
+                      name="businessType2"
+                      value={editedData.businessType2}
+                      onChange={(e) =>
+                        setEditedData({
+                          ...editedData,
+                          businessType2: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="">Choose</option>
+                      {/* Use optional chaining to safely access the subtype array */}
+                      {Btype.find(
+                        (item) => item.type === editedData.businessType1
+                      )?.subtype?.map((subtype) => (
+                        <option key={subtype} value={subtype}>
+                          {subtype}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
+                )}
+              </div>
               <br />
               <label>Description</label>
               <br />
@@ -1087,7 +1063,7 @@ export const Usersummary = () => {
                   </label>
                 ))}
               </div>
-
+              <br />
               <div>
                 <label>Choose Model Types For Your AD (Select any 2):</label>
                 <br />
@@ -1131,7 +1107,7 @@ export const Usersummary = () => {
                   </label>
                 ))}
               </div>
-
+              <br />
               <div>
                 <label>AD Types (Select one or more):</label>
                 <br />
@@ -1168,6 +1144,8 @@ export const Usersummary = () => {
               </div>
 
               <div>
+                <label htmlFor="">Duration:</label>
+                <br />
                 {durations.map((duration) => (
                   <label key={duration}>
                     <input
