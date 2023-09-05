@@ -128,7 +128,7 @@ export const Campaigndetails = () => {
     } else {
       if (selectedTalukas.includes(talukaName)) {
         setSelectedTalukas(selectedTalukas.filter(taluka => taluka !== talukaName));
-      } else {
+      } else {  
         setSelectedTalukas([...selectedTalukas, talukaName]);
       }
     }

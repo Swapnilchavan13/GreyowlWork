@@ -6,10 +6,38 @@ export const Account = () => {
  
   const navigate = useNavigate();
 
+  var Btype  = [
+    {
+      "type": "FMCG",
+      "subtype": ["Food and Beverages","Personal Care and Hygiene", "Home care"]
+    },
+
+    {
+      "type": "Retail",
+      "subtype":["Jewellery", "Clothing", "Electronics", "Mobile", "Food and Beverages", "Children Care"]
+    },
+
+    {
+      "type": "Hospitality",
+      "subtype":["Wedding", "Lodging", "Restaurant", "Travel and Tourism", "Events"]
+    },
+    
+    {
+      "type": "Education",
+      "subtype":["School", "College", "Professional","Institute"]
+    },
+
+    {
+      "type": "Medical",
+      "subtype":["Medical Store", "Hospital", "Nursing Homes", "Clinics"]
+    }
+  ]
+
+  
   const [formData, setFormData] = useState({
     name: '',
     year: '',
-    businessType1: 'FMCG',
+    businessType1: '',
     businessType2: '',
     des:'',
     address: '',
@@ -22,12 +50,12 @@ export const Account = () => {
     etc: '',
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
       [name]: value,
-    }));
+    });
   };
 
   const handleCreateAccount = async () => {
@@ -76,19 +104,23 @@ export const Account = () => {
           required
         />
       </div>
+
       <div>
-        <label>Choose Business Type</label><br />
-        <select
-          name="businessType1"
-          value={formData.businessType1}
-          onChange={handleChange}
-        >
-          <option value="FMCG">FMCG</option>
-          <option value="Retail">Retail</option>
-          <option value="Hospitality">Hospitality</option>
-          <option value="Education">Education</option>
-          <option value="Medical">Medical</option>
-        </select>
+      <label>Choose Business Type</label><br />
+      <select
+        name="businessType1"
+        value={formData.businessType1}
+        onChange={handleChange}
+      >
+        <option value="">Choose</option>
+        {Btype.map((item) => (
+          <option key={item.type} value={item.type}>
+            {item.type}
+          </option>
+        ))}
+      </select>
+
+      {formData.businessType1 && (
         <span>
           <select
             name="businessType2"
@@ -96,15 +128,16 @@ export const Account = () => {
             onChange={handleChange}
           >
             <option value="">Choose</option>
-            <option value="Jewellery">Jewellery</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Mobiles">Mobiles</option>
-            <option value="Food">Food</option>
-            <option value="Other">Other</option>
+            {Btype.find((item) => item.type === formData.businessType1)?.subtype.map((subtype) => (
+              <option key={subtype} value={subtype}>
+                {subtype}
+              </option>
+            ))}
           </select>
         </span>
-      </div>
+      )}
+    </div>
+      
       <div>
         <label>Business Description</label><br />
         <input type="text" name="des" placeholder='Describe Your Business' onChange={handleChange} required/>
@@ -117,7 +150,7 @@ export const Account = () => {
         <select name="state" 
         value={formData.state}
           onChange={handleChange}>
-          <option value="">select your State</option>
+          <option value="">Select your State</option>
           <option value="Maharashtra">Maharashtra</option>
           <option value="Punjab">Punjab</option>
           <option value="Rajasthan">Rajasthan</option>
@@ -125,7 +158,7 @@ export const Account = () => {
         <select name="city" 
         value={formData.city}
           onChange={handleChange}>
-          <option value="">select your city</option>
+          <option value="">Select your city</option>
           <option value="Aurangabad">Aurangabad</option>
           <option value="Mumbai">Mumbai</option>
           <option value="Pune">Pune</option>

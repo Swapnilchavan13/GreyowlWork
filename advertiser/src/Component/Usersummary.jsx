@@ -217,6 +217,8 @@ export const Usersummary = () => {
       });
   };
 
+  
+
   var districtsData = [
     {
       district: "Mumbai",
