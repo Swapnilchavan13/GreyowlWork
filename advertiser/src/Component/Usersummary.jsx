@@ -13,6 +13,33 @@ export const Usersummary = () => {
   const [isEditingcamp, setIsEditingcamp] = useState(false);
   const [isEditingbuss, setIsEditingbuss] = useState(false);
 
+  var Btype  = [
+    {
+      "type": "FMCG",
+      "subtype": ["Food and Beverages","Personal Care and Hygiene", "Home care"]
+    },
+
+    {
+      "type": "Retail",
+      "subtype":["Jewellery", "Clothing", "Electronics", "Mobile", "Food and Beverages", "Children Care"]
+    },
+
+    {
+      "type": "Hospitality",
+      "subtype":["Wedding", "Lodging", "Restaurant", "Travel and Tourism", "Events"]
+    },
+    
+    {
+      "type": "Education",
+      "subtype":["School", "College", "Professional","Institute"]
+    },
+
+    {
+      "type": "Medical",
+      "subtype":["Medical Store", "Hospital", "Nursing Homes", "Clinics"]
+    }
+  ]
+
   useEffect(() => {
     const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/address";
 
@@ -217,7 +244,7 @@ export const Usersummary = () => {
       });
   };
 
-  
+
 
   var districtsData = [
     {
@@ -371,7 +398,7 @@ export const Usersummary = () => {
                 }
               />
               <br />
-              <div>
+              {/* <div>
                 <label>Choose Business Type</label>
                 <br />
                 <select
@@ -410,7 +437,48 @@ export const Usersummary = () => {
                     <option value="Other">Other</option>
                   </select>
                 </span>
-              </div>
+              </div> */}
+
+<div>
+  <label>Choose Business Type</label>
+  <br />
+  <select
+    name="businessType1"
+    value={editedData.businessType1} // Change to editedData.businessType1
+    onChange={(e) =>
+      setEditedData({ ...editedData, businessType1: e.target.value })
+    }
+  >
+    <option value="">Choose</option>
+    {Btype.map((item) => (
+      <option key={item.type} value={item.type}>
+        {item.type}
+      </option>
+    ))}
+  </select>
+
+  {editedData.businessType1 && (
+    <span>
+      <select
+        name="businessType2"
+        value={editedData.businessType2}
+        onChange={(e) =>
+          setEditedData({ ...editedData, businessType2: e.target.value })
+        }
+      >
+        <option value="">Choose</option>
+        {/* Use optional chaining to safely access the subtype array */}
+        {Btype.find((item) => item.type === editedData.businessType1)?.subtype?.map((subtype) => (
+          <option key={subtype} value={subtype}>
+            {subtype}
+          </option>
+        ))}
+      </select>
+    </span>
+  )}
+</div>
+
+
               <br />
               <label>Description</label>
               <br />
