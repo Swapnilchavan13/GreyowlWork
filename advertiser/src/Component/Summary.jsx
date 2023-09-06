@@ -5,10 +5,10 @@ export const Summary = () => {
     const [campData, setCampdata] = useState([]);
     const [mediaData, setMediaData] = useState([]);
     // Define the API endpoint URL
-    const [sum, setSum] = useState(false);
-    const [camp, setCamp] = useState(false);
-    const [media, setMedia] = useState(false);
-
+    const [sumApproved, setSumApproved] = useState(false);
+    const [campApproved, setCampApproved] = useState(false);
+    const [mediaApproved, setMediaApproved] = useState(false);
+  
 
     useEffect(() => {
       const apiUrl = 'https://lonely-cow-life-jacket.cyclic.app/address';
@@ -73,15 +73,29 @@ export const Summary = () => {
         });
     }, []);
 
-      const handleApproveTogglesum = (sum) => {
-        setSum(!sum)
-      };
-      const handleApproveTogglecamp = (camp) => {
-        setCamp(!camp)
-      };
-      const handleApproveTogglemedia = (media) => {
-        setMedia(!media)
-      };
+    const handleApproveTogglesum = (_id) => {
+      setSumApproved((prevSumApproved) => ({
+        ...prevSumApproved,
+        [_id]: !prevSumApproved[_id],
+      }));
+      alert("Status Updated")
+    };
+  
+    const handleApproveTogglecamp = (_id) => {
+      setCampApproved((prevCampApproved) => ({
+        ...prevCampApproved,
+        [_id]: !prevCampApproved[_id],
+      }));
+      alert("Status Updated")
+    };
+  
+    const handleApproveTogglemedia = (_id) => {
+      setMediaApproved((prevMediaApproved) => ({
+        ...prevMediaApproved,
+        [_id]: !prevMediaApproved[_id],
+      }));
+      alert("Status Updated")
+    };
 
   return (
     <div style={{"padding":"10px"}}>
@@ -91,8 +105,8 @@ export const Summary = () => {
                 <h3>Creative Summary</h3>
              <div>
           <ul>
-        {savedData.map((data, index) => (
-          <div className='main' key={index}>
+        {savedData.map((data) => (
+          <div className='main' key={data._id}>
             <strong>Name:</strong> {data.name}<br />
             <strong>Year:</strong> {data.year}<br />
             <strong>Business Type 1:</strong> {data.businessType1}<br />
@@ -107,19 +121,21 @@ export const Summary = () => {
             <strong>Phone:</strong> {data.phone}<br />
             <strong>ETC:</strong> {data.etc}<br />
             {/* Add more fields here */}
+            <button onClick={() => handleApproveTogglesum(data._id)}>
+                    {sumApproved[data._id] ? 'Not Approve' : 'Approve'}
+                  </button>
           </div>
         ))}
+        
       </ul>
-      <button onClick={() => handleApproveTogglesum(sum)}>
-                  { sum? 'Not Approve' : 'Approve'}
-        </button>
+      
       </div>
     </div>
     <div>
         <h3>Campaign Elements</h3>
         <ul>
-        {campData.map((data, index) => (
-          <div className='main'>
+        {campData.map((data) => (
+          <div className='main' key={data._id}>
             <strong>Selected District:</strong> {data.selectedDistrict}<br />
             <strong>Selected Talukas:</strong> {data.selectedTalukas.join(', ')}<br />
             <strong>Selected Villages:</strong> {data.selectedVillages.join(', ')}<br />
@@ -133,18 +149,20 @@ export const Summary = () => {
             <strong>Selected Ranges:</strong> {data.selectedRanges.join(', ')}<br />
             <strong>Detail:</strong> {data.detail}<br />
             {/* Add more fields here */}    
+            <button onClick={() => handleApproveTogglecamp(data._id)}>
+                  {campApproved[data._id] ? 'Not Approve' : 'Approve'}
+              </button>
           </div>
         ))}
+        
       </ul>
-      <button onClick={() => handleApproveTogglecamp(camp)}>
-        { camp? 'Not Approve' : 'Approve'}
-        </button>
+      
     </div>
     <div>
         <h3>Media Summary</h3>
         <ul>
-        {mediaData.map((data, index) => (
-          <div className='main'key={index}>
+        {mediaData.map((data) => (
+          <div className='main'key={data._id}>
             <strong>Tagline:</strong> {data.tagline}<br />
             <strong>Description:</strong> {data.description}<br />
             {/* <strong>Logo File:</strong> {data.logoFile ? 'Yes' : 'No'}<br /> */}
@@ -158,12 +176,14 @@ export const Summary = () => {
             {/* <strong>Store Photos:</strong> {data.storePhotos.filter(photo => photo).length}<br /> */}
             {/* <strong>Store Videos:</strong> {data.storeVideos.filter(video => video).length}<br /> */}
             {/* Add more fields here */}
+            <button onClick={() => handleApproveTogglemedia(data._id)}>
+                  {mediaApproved[data._id] ? 'Not Approve' : 'Approve'}
+            </button>
           </div>
         ))}
+        
       </ul>
-      <button onClick={() => handleApproveTogglemedia(media)}>
-        { media? 'Not Approve' : 'Approve'}
-        </button>
+      
     
         </div>
             
