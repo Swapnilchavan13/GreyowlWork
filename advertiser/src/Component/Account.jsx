@@ -5,6 +5,8 @@ import "./account.css";
 export const Account = () => {
  
   const navigate = useNavigate();
+  const [isSaving, setIsSaving] = useState(false);
+
 
   var Btype  = [
     {
@@ -65,6 +67,8 @@ export const Account = () => {
     }
 
     try {
+
+      setIsSaving(true);
       const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/address', {
         method: 'POST',
         headers: {
@@ -75,6 +79,7 @@ export const Account = () => {
 
       if (response.ok) {
         alert('Account Created Successfully');
+        setIsSaving(false);
         navigate('/campaign'); // Replace with the actual route
 
       } else {
@@ -181,9 +186,10 @@ export const Account = () => {
         <input type="text" name="etc" placeholder='Other' onChange={handleChange} required/>
       </div>
       <br />
-      <button className='create-button' onClick={handleCreateAccount}>
-        Create Account
+      <button className='create-button' onClick={handleCreateAccount} disabled={isSaving}>
+      {isSaving ? 'Saving...' : 'Create Account'}
       </button>
+     
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 const businessAdjectives = [
   'Reliable',
   'Innovative',
@@ -51,6 +50,7 @@ const durations = [
 export const Module2 = () => {
 
   const navigate = useNavigate()
+  const [isSub, setIssub] = useState(false)
 
   const [businessName, setBusinessName] = useState('');
   const [tagline, setTagline] = useState('');
@@ -154,6 +154,7 @@ export const Module2 = () => {
   };
 
   try {
+    setIssub(true)
     const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
       method: 'POST',
       headers: {
@@ -178,6 +179,7 @@ export const Module2 = () => {
       setSelectedModelTypes([]);
       setSelectedAdTypes([]);
       setSelectedDuration('');
+      setIssub(false)
 
       navigate('/usersummary');
     } else {
@@ -341,7 +343,9 @@ export const Module2 = () => {
         ))}
         <br />
 
-        <button type="submit">Submit</button>
+        <button disabled={isSub} type="submit">
+          {isSub ? "Submiting":"Submit"}
+        </button>
       </form>
   </div>
   )

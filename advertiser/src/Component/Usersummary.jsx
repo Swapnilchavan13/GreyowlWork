@@ -299,6 +299,12 @@ export const Usersummary = () => {
     },
   ];
 
+  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [selectedTalukas, setSelectedTalukas] = useState([]);
+  const [selectedVillages, setSelectedVillages] = useState([]);
+  const [selectAllTalukas, setSelectAllTalukas] = useState(false);
+  const [selectAllVillages, setSelectAllVillages] = useState(false);
+
   const ageRanges = [
     { label: "13-17", value: "13-17" },
     { label: "18-25", value: "18-25" },
@@ -617,22 +623,24 @@ export const Usersummary = () => {
               <div className="dropdown">
                 <label className="selelabel">Select Talukas:</label>
                 <select
-                  className="sele"
-                  multiple
-                  value={editedCamp.selectedTalukas}
-                  onChange={(e) =>
-                    setEditedCamp({
-                      ...editedCamp,
-                      selectedTalukas: e.target.value,
-                    })
-                  }
-                >
-                  {/* {talukaOptions.map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))} */}
-                </select>
+  className="sele"
+  multiple
+  value={editedCamp.selectedTalukas}
+  onChange={(e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+    setEditedCamp({
+      ...editedCamp,
+      selectedTalukas: selectedOptions,
+    });
+  }}
+>
+  {editedCamp.selectedTalukas.map((option) => (
+    <option key={option.value} value={option.value}>
+      {option.value}
+    </option>
+  ))}
+</select>
+
               </div>
               <div className="dropdown">
                 <label className="selelabel">Select Villages:</label>

@@ -6,6 +6,9 @@ export const Campaigndetails = () => {
 
   const navigate = useNavigate();
 
+  const [isSubmit, setIssubmit] = useState(false);
+
+
   var districtsData  = [
     {
       "district": "Mumbai",
@@ -176,7 +179,6 @@ export const Campaigndetails = () => {
   villageOptions.unshift({ label: 'Select All Villages', value: 'selectAll' });
 
 
-
   // Target Range
   const handleRangeChange = (event) => {
     const newRange = event.target.value;
@@ -207,6 +209,7 @@ export const Campaigndetails = () => {
   
       
       try {
+        setIssubmit(true)
         const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/campaign', {
           method: 'POST',
           headers: {
@@ -229,6 +232,8 @@ export const Campaigndetails = () => {
     setMediaVideo(false);
     setMedia3D(false);
     setBudget(1000)
+
+    setIssubmit(false)
 
     alert('Data Saved');          
     
@@ -447,7 +452,9 @@ export const Campaigndetails = () => {
       <br />
       </div>
         
-          <button onClick={handleSubmit}>Submit</button>
+          <button disabled={isSubmit} onClick={handleSubmit}>
+            {isSubmit ? 'Submiting...' : 'Submit'}
+          </button>
 
         </div>
     </div>
