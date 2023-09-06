@@ -59,13 +59,13 @@ export const Module2 = () => {
   const [logoFile, setLogoFile] = useState(null);
   const [storePhotos, setStorePhotos] = useState(Array(5).fill(null));
   const [productPhotos, setProductPhotos] = useState(Array(5).fill(null));
+
   const [productVideos, setProductVideos] = useState(Array(4).fill(null));
   const [storeVideos, setStoreVideos] = useState(Array(4).fill(null));
   const [selectedModelTypes, setSelectedModelTypes] = useState([]);
   const [selectedAdTypes, setSelectedAdTypes] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState('');
   const [savedData, setSavedData] = useState([]);
-
 
   const handleAdjectiveChange = (adjective) => {
     if (selectedAdjectives.includes(adjective)) {
@@ -192,7 +192,7 @@ export const Module2 = () => {
   <div className='account-container'>
     <h1>Business Details</h1>
     <form onSubmit={handleSubmit}>
-        <label htmlFor="businessName">Business Name:</label>
+        <label htmlFor="businessName">Business Name:</label><br />
         <input
           type="text"
           id="businessName"
@@ -204,7 +204,7 @@ export const Module2 = () => {
         />
         <br />
 
-        <label htmlFor="tagline">Tagline:</label>
+        <label htmlFor="tagline">Tagline:</label><br />
         <input
           type="text"
           id="tagline"
@@ -215,7 +215,7 @@ export const Module2 = () => {
           required
         />
         <br />
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description">Description:</label><br />
         <textarea
           id="description"
           name="description"
@@ -240,8 +240,8 @@ export const Module2 = () => {
           </label>
         ))}
         <br />
-
-        <label>Upload Logo:</label>
+        <br />
+        <label>Upload Logo:</label><br />
         <input
           type="file"
           accept="image/*"
@@ -311,7 +311,7 @@ export const Module2 = () => {
           </label>
         ))}
         <br />
-
+        <br />
         <label>AD Types (Select one or more):</label>
         <br />
         {adTypes.map(adType => (
@@ -324,6 +324,7 @@ export const Module2 = () => {
             {adType}
           </label>
         ))}
+        <br />
         <br />
         <label>Duration:</label>
         <br />

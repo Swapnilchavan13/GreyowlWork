@@ -173,8 +173,8 @@ export const Account = () => {
         <input type="email" name="email" placeholder='Enter Your Email Id' onChange={handleChange} required/>
       </div>
       <div>
-        <label>Contact Person Name</label><br />
-        <input type="text" name="contactPerson" placeholder='Enter Contact Person Name' onChange={handleChange} required/>
+        <label>Contact Person`s Name</label><br />
+        <input type="text" name="contactPerson" placeholder='Enter Contact Person`s Name' onChange={handleChange} required/>
       </div>
       <div>
         <label>Etc</label><br />

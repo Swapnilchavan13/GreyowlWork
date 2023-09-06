@@ -246,7 +246,7 @@ export const Campaigndetails = () => {
     <div className='App'>
       <h1>Campaign Details</h1>
        <div>
-        <label>Campaign Limit</label><br />
+        <h4>Audience Target Range (Choose 1):</h4>
         <input
           type="radio"
           name="range"
@@ -286,9 +286,9 @@ export const Campaigndetails = () => {
         <div>
         <label>
         <div>
-        <h1>Customer Profile</h1>
+        <h4>Customer Profile</h4>
         <div>
-          <label>Select Age Range:</label>
+          <label>Select Age Range:</label><br />
       {ageRanges.map(range => (
         <label key={range.value}>
           <input
@@ -303,7 +303,7 @@ export const Campaigndetails = () => {
 
       </div>
         <div>
-          <label>Gender:</label>
+          <label>Select Gender:</label><br />
           {genderOptions.map((gender) => (
         <label key={gender}>
           <input
@@ -317,7 +317,7 @@ export const Campaigndetails = () => {
       ))}
         </div>
         <div>
-          <label>Attribute:</label>
+          <label>Attribute:</label><br />
           {attributeOptions.map((attribute) => (
         <label key={attribute}>
           <input
@@ -337,7 +337,7 @@ export const Campaigndetails = () => {
         </div>
 
         <div>
-        <label>Customer Geography</label>
+        <label>Customer Geography:</label>
         <div>
           <label>Select District:</label>
           <select value={selectedDistrict} onChange={handleDistrictChange}>
@@ -368,7 +368,7 @@ export const Campaigndetails = () => {
         </div>
         </div>
         <div>
-          <h1>Media Details</h1>
+          <h4>Media Details:</h4>
           <div>
         <div>
           <label>
@@ -403,7 +403,7 @@ export const Campaigndetails = () => {
         </div>
         </div>
         <div>
-        <h1>Creative Details</h1>
+        <h4>Creative Details:</h4>
         <div>
         <input
           type="radio"
@@ -438,7 +438,7 @@ export const Campaigndetails = () => {
         
       </div>
       <div>
-        <h1>Campaign Budget/Week</h1>
+        <h4>Campaign Budget/Week</h4>
         <div className="budget-control">
         <button className="decrease-button" onClick={handleDecrease}>-</button>
         <span className="budget-amount">Rs.{budget}</span>
