@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Demo from './Demo';
+
 const businessAdjectives = [
   'Reliable',
   'Innovative',
@@ -66,6 +68,8 @@ export const Module2 = () => {
   const [selectedAdTypes, setSelectedAdTypes] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState('');
   const [savedData, setSavedData] = useState([]);
+
+  // const [imgandVideos, setimgandVideos]=useState('')
 
   const handleAdjectiveChange = (adjective) => {
     if (selectedAdjectives.includes(adjective)) {
@@ -137,59 +141,77 @@ export const Module2 = () => {
   };
 
   const handleSubmit = async (event) => {
-  event.preventDefault();
-  const newData = {
-    businessName,
-    tagline,
-    description,
-    selectedAdjectives,
-    // logoFile,
-    // storePhotos,
-    // storeVideos,
-    // productPhotos,
-    // productVideos,
-    selectedModelTypes,
-    selectedAdTypes,
-    selectedDuration,
-  };
-
-  try {
-    setIssub(true)
-    const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newData),
-    });
-
-    if (response.ok) {
-      // Data saved successfully
-      alert('Data Stored');
-      // Reset state values
-      setBusinessName('');
-      setTagline('');
-      setDescription('');
-      setSelectedAdjectives([]);
-      setLogoFile(null);
-      setStorePhotos(Array(5).fill(null));
-      setStoreVideos(Array(4).fill(null));
-      setProductPhotos(Array(5).fill(null));
-      setProductVideos(Array(4).fill(null));
-      setSelectedModelTypes([]);
-      setSelectedAdTypes([]);
-      setSelectedDuration('');
-      setIssub(false)
-
-      navigate('/usersummary');
-    } else {
-      alert('Failed to store data.');
+    event.preventDefault();
+    const newData = {
+      businessName,
+      tagline,
+      description,
+      selectedAdjectives,
+      selectedModelTypes,
+      selectedAdTypes,
+      selectedDuration,
+    };
+  
+    const imgandVideos = {
+    store_photo: storePhotos,
+    product_photo: productPhotos,
+    store_video: storeVideos,
+    product_video: productVideos,
+    form_id: 5656665,
+    upload_logo: null
     }
-  } catch (error) {
-    alert('An error occurred while saving data.');
-    console.error(error);
-  }
-};
+  
+    try {
+      setIssub(true);
+      const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+      });
+  
+      if (response.ok) {
+        // Data saved successfully
+        alert('Data Stored');
+        // Reset state values
+        setBusinessName('');
+        setTagline('');
+        setDescription('');
+        setSelectedAdjectives([]);
+        // setLogoFile(null);
+        // setStorePhotos(Array(5).fill(null));
+        // setStoreVideos(Array(4).fill(null));
+        // setProductPhotos(Array(5).fill(null));
+        // setProductVideos(Array(4).fill(null));
+        setSelectedModelTypes([]);
+        setSelectedAdTypes([]);
+        setSelectedDuration('');
+        
+        // Now, send a POST request for image and video data
+        const imgAndVideosResponse = await fetch('http://62.72.59.146:8005/business-details-media', {
+          method: 'POST',
+          body: JSON.stringify(imgandVideos),
+        });
+  
+        if (imgAndVideosResponse.ok) {
+          alert('Image and video data stored successfully.');
+        } else {
+          alert('Failed to store image and video data.');
+        }
+  
+        setIssub(false);
+  
+        navigate('/usersummary');
+      } else {
+        alert('Failed to store data.');
+      }
+    } catch (error) {
+      alert('An error occurred while saving data.');
+      console.error(error);
+    }
+  };
+  
   return (
   <div className='account-container'>
     <h1>Business Details</h1>
@@ -347,6 +369,7 @@ export const Module2 = () => {
           {isSub ? "Submiting":"Submit"}
         </button>
       </form>
+<Demo />
   </div>
   )
 };
