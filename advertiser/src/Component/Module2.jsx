@@ -58,18 +58,11 @@ export const Module2 = () => {
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
   const [selectedAdjectives, setSelectedAdjectives] = useState([]);
-  const [logoFile, setLogoFile] = useState(null);
-  const [storePhotos, setStorePhotos] = useState(Array(5).fill(null));
-  const [productPhotos, setProductPhotos] = useState(Array(5).fill(null));
-
-  const [productVideos, setProductVideos] = useState(Array(4).fill(null));
-  const [storeVideos, setStoreVideos] = useState(Array(4).fill(null));
   const [selectedModelTypes, setSelectedModelTypes] = useState([]);
   const [selectedAdTypes, setSelectedAdTypes] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState('');
   const [savedData, setSavedData] = useState([]);
 
-  // const [imgandVideos, setimgandVideos]=useState('')
 
   const handleAdjectiveChange = (adjective) => {
     if (selectedAdjectives.includes(adjective)) {
@@ -90,34 +83,6 @@ export const Module2 = () => {
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
-  };
-
-  const handleLogoChange = (event) => {
-    setLogoFile(event.target.files[0]);
-  };
-
-  const handleStorePhotoChange = (event, index) => {
-    const newPhotos = Array.from(event.target.files);
-    const updatedPhotos = storePhotos.map((photo, i) => (i === index ? newPhotos[0] : photo));
-    setStorePhotos(updatedPhotos);
-  };
-
-  const handleProductPhotoChange = (event, index) => {
-    const newPhotos = Array.from(event.target.files);
-    const updatedPhotos = productPhotos.map((photo, i) => (i === index ? newPhotos[0] : photo));
-    setProductPhotos(updatedPhotos);
-  };
-
-  const handleStoreVideoChange = (event, index) => {
-    const newVideos = Array.from(event.target.files);
-    const updatedVideos = storeVideos.map((video, i) => (i === index ? newVideos[0] : video));
-    setStoreVideos(updatedVideos);
-  };
-
-  const handleProductVideoChange = (event, index) => {
-    const newVideos = Array.from(event.target.files);
-    const updatedVideos = productVideos.map((video, i) => (i === index ? newVideos[0] : video));
-    setProductVideos(updatedVideos);
   };
 
   const handleModelTypeChange = (modelType) => {
@@ -152,14 +117,6 @@ export const Module2 = () => {
       selectedDuration,
     };
   
-    const imgandVideos = {
-    store_photo: storePhotos,
-    product_photo: productPhotos,
-    store_video: storeVideos,
-    product_video: productVideos,
-    form_id: 5656665,
-    upload_logo: null
-    }
   
     try {
       setIssub(true);
@@ -179,29 +136,10 @@ export const Module2 = () => {
         setTagline('');
         setDescription('');
         setSelectedAdjectives([]);
-        // setLogoFile(null);
-        // setStorePhotos(Array(5).fill(null));
-        // setStoreVideos(Array(4).fill(null));
-        // setProductPhotos(Array(5).fill(null));
-        // setProductVideos(Array(4).fill(null));
         setSelectedModelTypes([]);
         setSelectedAdTypes([]);
         setSelectedDuration('');
         
-        // Now, send a POST request for image and video data
-        const imgAndVideosResponse = await fetch('http://62.72.59.146:8005/business-details-media', {
-          method: 'POST',
-          body: JSON.stringify(imgandVideos),
-        });
-  
-        if (imgAndVideosResponse.ok) {
-          alert('Image and video data stored successfully.');
-        } else {
-          alert('Failed to store image and video data.');
-        }
-  
-        setIssub(false);
-  
         navigate('/usersummary');
       } else {
         alert('Failed to store data.');
@@ -265,61 +203,7 @@ export const Module2 = () => {
         ))}
         <br />
         <br />
-        <label>Upload Logo:</label><br />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleLogoChange}
-        />
-        <br />
-
-        <label>Upload Store Photos (up to 5):</label>
-        {storePhotos.map((photo, index) => (
-          <div key={index}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(event) => handleStorePhotoChange(event, index)}
-            />
-            <br />
-          </div>
-        ))}
-
-        <label>Upload Product Photos (up to 5):</label>
-         {productPhotos.map((photo, index) => (
-          <div key={index}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(event) => handleProductPhotoChange(event, index)}
-            />
-            <br />
-          </div>
-        ))}
-
-        <label>Upload Store Videos (up to 4):</label>
-        {storeVideos.map((video, index) => (
-          <div key={index}>
-            <input
-              type="file"
-              accept="video/*"
-              onChange={(event) => handleStoreVideoChange(event, index)}
-            />
-            <br />
-          </div>
-        ))}
-
-<label>Upload Product Videos (up to 4):</label>
-        {productVideos.map((video, index) => (
-          <div key={index}>
-            <input
-              type="file"
-              accept="video/*"
-              onChange={(event) => handleProductVideoChange(event, index)}
-            />
-            <br />
-          </div>
-        ))}
+        <Demo />
 
 <label>Choose Model Types For Your AD (Select any 2):</label>
         <br />
@@ -369,7 +253,6 @@ export const Module2 = () => {
           {isSub ? "Submiting":"Submit"}
         </button>
       </form>
-<Demo />
   </div>
   )
 };

@@ -29,8 +29,6 @@ function Demo() {
     const newImageFile = event.target.files[0];
     setImageState(newImageFile); // Set the file object, not a Blob URL
   };
-  
-  
 
   const handleVideoChange = (event, setVideoState) => {
     const newVideoFile = event.target.files[0];
@@ -149,13 +147,7 @@ function Demo() {
           accept="image/*"
           onChange={handleLogoChange}
         />
-        {/* {uploadLogo && (
-          <img
-            src={uploadLogo}
-            alt="Uploaded Logo"
-            style={{ width: '100px', height: '100px' }}
-          />
-        )} */}
+        
       </div>
       <div>
         <h2>Store Photos (Max 5)</h2>
@@ -166,13 +158,6 @@ function Demo() {
           onChange={(event) => 
           handleImageChange(event, setStorePhotoOne)} />
 
-          {/* {storePhotoOne && (
-            <img
-              src={storePhotoOne}
-              alt="Store Photo One"
-              style={{ width: '100px', height: '100px' }}
-            />
-          )} */}
         </div>
         <div>
           <input
@@ -181,13 +166,7 @@ function Demo() {
             accept="image/*"
             onChange={(event) => handleImageChange(event, setStorePhotoTwo)}
           />
-          {/* {storePhotoTwo && (
-            <img
-              src={storePhotoTwo}
-              alt="Store Photo Two"
-              style={{ width: '100px', height: '100px' }}
-            />
-          )} */}
+          
         </div>
         <div>
           <input
@@ -197,29 +176,17 @@ function Demo() {
 
             onChange={(event) => handleImageChange(event, setStorePhotoThree)}
           />
-          {/* {storePhotoThree && (
-            <img
-              src={storePhotoThree}
-              alt="Store Photo Three"
-              style={{ width: '100px', height: '100px' }}
-            />
-          )} */}
+          
         </div>
         <div>
           <input
             type="file"
             accept="image/*"
-            name="store_photo_three"
+            name="store_photo_"
 
             onChange={(event) => handleImageChange(event, setStorePhotoFour)}
           />
-          {/* {storePhotoFour && (
-            <img
-              src={storePhotoFour}
-              alt="Store Photo Four"
-              style={{ width: '100px', height: '100px' }}
-            />
-          )} */}
+         
         </div>
         <div>
           <input
@@ -229,13 +196,7 @@ function Demo() {
             accept="image/*"
             onChange={(event) => handleImageChange(event, setStorePhotoFive)}
           />
-          {/* {storePhotoFive && (
-            <img
-              src={storePhotoFive}
-              alt="Store Photo Five"
-              style={{ width: '100px', height: '100px' }}
-            />
-          )} */}
+         
         </div>
       </div>
       <div>
@@ -248,13 +209,7 @@ function Demo() {
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoOne)}
     />
-    {/* {productPhotoOne && (
-      <img
-        src={productPhotoOne}
-        alt="Product Photo One"
-        style={{ width: '100px', height: '100px' }}
-      />
-    )} */}
+    
   </div>
   <div>
     <input
@@ -264,13 +219,7 @@ function Demo() {
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoTwo)}
     />
-    {/* {productPhotoTwo && (
-      <img
-        src={productPhotoTwo}
-        alt="Product Photo Two"
-        style={{ width: '100px', height: '100px' }}
-      />
-    )} */}
+   
   </div>
   <div>
     <input
@@ -280,13 +229,7 @@ function Demo() {
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoThree)}
     />
-    {/* {productPhotoThree && (
-      <img
-        src={productPhotoThree}
-        alt="Product Photo Three"
-        style={{ width: '100px', height: '100px' }}
-      />
-    )} */}
+    
   </div>
   <div>
     <input
@@ -296,13 +239,7 @@ function Demo() {
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoFour)}
     />
-    {/* {productPhotoFour && (
-      <img
-        src={productPhotoFour}
-        alt="Product Photo Four"
-        style={{ width: '100px', height: '100px' }}
-      />
-    )} */}
+   
   </div>
   <div>
     <input
@@ -312,13 +249,7 @@ function Demo() {
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoFive)}
     />
-    {/* {productPhotoFive && (
-      <img
-        src={productPhotoFive}
-        alt="Product Photo Five"
-        style={{ width: '100px', height: '100px' }}
-      />
-    )} */}
+   
   </div>
 </div>
 
@@ -332,17 +263,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoOne)}
     />
-    {/* {storeVideoOne && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={storeVideoOne}
-        alt="Store Video One"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+  
   </div>
   <div>
     <input
@@ -352,17 +273,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoTwo)}
     />
-    {/* {storeVideoTwo && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={storeVideoTwo}
-        alt="Store Video Two"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+  
   </div>
   <div>
     <input
@@ -372,17 +283,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoThree)}
     />
-    {/* {storeVideoThree && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={storeVideoThree}
-        alt="Store Video Three"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+    
   </div>
   <div>
     <input
@@ -392,17 +293,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoFour)}
     />
-    {/* {storeVideoFour && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={storeVideoFour}
-        alt="Store Video Four"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+    
   </div>
 </div>
 
@@ -416,17 +307,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoOne)}
     />
-    {/* {productVideoOne && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={productVideoOne}
-        alt="Product Video One"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+    
   </div>
   <div>
     <input
@@ -436,16 +317,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoTwo)}
     />
-    {/* {productVideoTwo && (
-      <video
-        width="320"
-        controls
-        src={productVideoTwo}
-        alt="Product Video Two"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+   
   </div>
   <div>
     <input
@@ -456,17 +328,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoThree)}
     />
-    {/* {productVideoThree && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={productVideoThree}
-        alt="Product Video Three"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+    
   </div>
   <div>
     <input
@@ -476,17 +338,7 @@ function Demo() {
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoFour)}
     />
-    {/* {productVideoFour && (
-      <video
-        width="320"
-        height="240"
-        controls
-        src={productVideoFour}
-        alt="Product Video Four"
-      >
-        Your browser does not support the video tag.
-      </video>
-    )} */}
+    
   </div>
 </div>
 

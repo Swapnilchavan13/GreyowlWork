@@ -29,3 +29,15 @@ select{
     padding: 10px;
     margin: 10px;
 }
+
+img{
+    height: 50px;
+    width: 70px;
+    margin: 5px;
+}
+video{
+    height: 100px;
+    width: 150px;
+    margin: 5px;
+
+}

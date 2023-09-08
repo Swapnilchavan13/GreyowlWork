@@ -5,6 +5,9 @@ export const Usersummary = () => {
   const [campData, setCampdata] = useState([]);
   const [mediaData, setMediaData] = useState([]);
 
+  const [allMediaData, setAllMediaData] = useState([]);
+
+
   const [editedData, setEditedData] = useState({});
   const [editedCamp, setEditedCamp] = useState({});
   const [editedBuss, setEditedBuss] = useState({});
@@ -12,6 +15,21 @@ export const Usersummary = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingcamp, setIsEditingcamp] = useState(false);
   const [isEditingbuss, setIsEditingbuss] = useState(false);
+
+
+  useEffect(() => {
+    // Fetch data from the API when the component mounts
+    fetch('http://62.72.59.146:8005/business-details-media/')
+      .then((response) => response.json())
+      .then((data) => {
+        const lth = data.data.length-1
+        const allmedia = data.data[lth]// Get the last item
+        setAllMediaData(allmedia);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   var Btype = [
     {
@@ -1207,13 +1225,73 @@ export const Usersummary = () => {
                 <br />
                 <strong>Selected Duration:</strong> {mediaData.selectedDuration}
                 <br />
-                {/* <strong>Store Photos:</strong> {data.storePhotos.filter(photo => photo).length}<br /> */}
-                {/* <strong>Store Videos:</strong> {data.storeVideos.filter(video => video).length}<br /> */}
-                {/* Add more fields here */}
+                
               </div>
+
+              <div>
+              <div className="media-display">
+    
+        <div key={allMediaData.id}>
+          {/* <h2>Form ID: {allMediaData.form_id}</h2> */}
+          <h3>Uploaded Logo</h3>
+          <img src={allMediaData.upload_logo} alt="Logo" />
+
+          <h3>Store Photos</h3>
+          <div className="photo-container">
+            <img src={allMediaData.store_photo_one} alt="Store Photo 1" />
+            <img src={allMediaData.store_photo_two} alt="Store Photo 2" />
+            <img src={allMediaData.store_photo_three} alt="Store Photo 3" />
+            <img src={allMediaData.store_photo_four} alt="Store Photo 4" />
+            <img src={allMediaData.store_photo_five} alt="Store Photo 5" />
+          </div>
+
+          <h3>Product Photos</h3>
+          <div className="photo-container">
+            <img src={allMediaData.product_photo_one} alt="Product Photo 1" />
+            <img src={allMediaData.product_photo_two} alt="Product Photo 2" />
+            <img src={allMediaData.product_photo_three} alt="Product Photo 3" />
+            <img src={allMediaData.product_photo_four} alt="Product Photo 4" />
+            <img src={allMediaData.product_photo_five} alt="Product Photo 5" />
+          </div>
+
+          <h3>Store Videos</h3>
+          <div className="video-container">
+            <video controls>
+              <source src={allMediaData.store_video_one} type="video/mp4" />
+            </video>
+            <video controls>
+              <source src={allMediaData.store_video_two} type="video/mp4" />
+            </video>
+            <video controls>
+              <source src={allMediaData.store_video_three} type="video/mp4" />
+            </video>
+            <video controls>
+              <source src={allMediaData.store_video_four} type="video/mp4" />
+            </video>
+          </div>
+
+          <h3>Product Videos</h3>
+          <div className="video-container">
+            <video controls>
+              <source src={allMediaData.product_video_one} type="video/mp4" />
+            </video>
+            <video controls>
+              <source src={allMediaData.product_video_two} type="video/mp4" />
+            </video>
+            <video controls>
+              <source src={allMediaData.product_video_three} type="video/mp4" />
+            </video>
+            <video controls>
+              <source src={allMediaData.product_video_four} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+    </div>
+        </div>    
               <button onClick={handleEditBuss}>Edit</button>
             </ul>
           )}
+        
         </div>
       </div>
     </div>
