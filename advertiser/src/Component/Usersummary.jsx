@@ -1225,10 +1225,7 @@ export const Usersummary = () => {
                 <br />
                 <strong>Selected Duration:</strong> {mediaData.selectedDuration}
                 <br />
-                
-              </div>
-
-              <div>
+                <div>
               <div className="media-display">
     
         <div key={allMediaData.id}>
@@ -1288,6 +1285,10 @@ export const Usersummary = () => {
         </div>
     </div>
         </div>    
+                
+              </div>
+
+             
               <button onClick={handleEditBuss}>Edit</button>
             </ul>
           )}

@@ -182,7 +182,7 @@ function Demo() {
           <input
             type="file"
             accept="image/*"
-            name="store_photo_"
+            name="store_photo_four"
 
             onChange={(event) => handleImageChange(event, setStorePhotoFour)}
           />
