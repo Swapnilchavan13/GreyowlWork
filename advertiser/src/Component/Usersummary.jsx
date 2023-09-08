@@ -740,38 +740,36 @@ export const Usersummary = () => {
                 <label>Select Age Range :</label>
                 <br />
                 {ageRanges.map((range) => (
-                  <label key={range}>
-                    <input
-                      type="checkbox"
-                      value={range.value}
-                      checked={editedCamp.selectedRanges.includes(range.value)}
-                      // onChange={() => handleCheckboxChange(range.value)}
-                      onChange={(e) => {
-                        const isChecked = e.target.checked;
-                        if (isChecked) {
-                          // Add the gender to the selectedGenders array
-                          setEditedCamp({
-                            ...editedCamp,
-                            selectedRanges: [
-                              ...editedCamp.selectedRanges,
-                              range.value,
-                            ],
-                          });
-                        } else {
-                          // Remove the gender from the selectedGenders array
-                          setEditedCamp({
-                            ...editedCamp,
-                            selectedRanges: editedCamp.selectedRanges.filter(
-                              (selectedRanges) =>
-                                selectedRanges.value !== range.value
-                            ),
-                          });
-                        }
-                      }}
-                    />
-                    {range.label}
-                  </label>
-                ))}
+  <label key={range.value}>
+    <input
+      type="checkbox"
+      value={range.value}
+      checked={editedCamp.selectedRanges.includes(range.value)}
+      onChange={(e) => {
+        const isChecked = e.target.checked;
+        setEditedCamp((prevState) => {
+          if (isChecked) {
+            // Add the age range to the selectedRanges array
+            return {
+              ...prevState,
+              selectedRanges: [...prevState.selectedRanges, range.value],
+            };
+          } else {
+            // Remove the age range from the selectedRanges array
+            return {
+              ...prevState,
+              selectedRanges: prevState.selectedRanges.filter(
+                (selectedRange) => selectedRange !== range.value
+              ),
+            };
+          }
+        });
+      }}
+    />
+    {range.label}
+  </label>
+))}
+
               </div>
 
               <div>

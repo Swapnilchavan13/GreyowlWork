@@ -251,12 +251,12 @@ export const Module2 = () => {
         setProductPhotoFive('');
         setStoreVideoOne('');
         setStoreVideoTwo('');
-        setStoreVideoThree('');
         setStoreVideoFour('');
         setProductVideoOne('');
         setProductVideoTwo('');
         setProductVideoThree('');
         setProductVideoFour('');
+        setStoreVideoThree('');
         alert('Media data uploaded successfully');
 
       } else {

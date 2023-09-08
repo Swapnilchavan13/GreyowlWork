@@ -165,17 +165,11 @@ export const Summary = () => {
           <div className='main'key={data._id}>
             <strong>Tagline:</strong> {data.tagline}<br />
             <strong>Description:</strong> {data.description}<br />
-            {/* <strong>Logo File:</strong> {data.logoFile ? 'Yes' : 'No'}<br /> */}
-            {/* <strong>Product Photos:</strong> {data.productPhotos.filter(photo => photo).length}<br /> */}
-            {/* <strong>Product Videos:</strong> {data.productVideos.filter(video => video).length}<br /> */}
             <strong>Selected Ad Types:</strong> {data.selectedAdTypes.join(', ')}<br />
             <strong>Business Name:</strong> {data.businessName}<br />
             <strong>Selected Adjectives:</strong> {data.selectedAdjectives.join(', ')}<br />
             <strong>Selected Duration:</strong> {data.selectedDuration}<br />
             <strong>Selected Model Types:</strong> {data.selectedModelTypes.join(', ')}<br />
-            {/* <strong>Store Photos:</strong> {data.storePhotos.filter(photo => photo).length}<br /> */}
-            {/* <strong>Store Videos:</strong> {data.storeVideos.filter(video => video).length}<br /> */}
-            {/* Add more fields here */}
             <button onClick={() => handleApproveTogglemedia(data._id)}>
                   {mediaApproved[data._id] ? 'Not Approve' : 'Approve'}
             </button>
