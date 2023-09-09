@@ -317,11 +317,11 @@ export const Usersummary = () => {
     },
   ];
 
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedTalukas, setSelectedTalukas] = useState([]);
-  const [selectedVillages, setSelectedVillages] = useState([]);
-  const [selectAllTalukas, setSelectAllTalukas] = useState(false);
-  const [selectAllVillages, setSelectAllVillages] = useState(false);
+  const [districtOption, setDistrictOption] = useState([]);
+  const [talukaOptions, setTalukaOptions] = useState([]);
+  const [villageOptions, setVillageOptions] = useState([]);
+
+
 
   const ageRanges = [
     { label: "13-17", value: "13-17" },
@@ -402,6 +402,11 @@ export const Usersummary = () => {
     "50 Sec",
     "60 Sec",
   ];
+
+                  // value={editedCamp.selectedDistrict}
+                  console.log("hello")
+  console.log(editedCamp.selectedDistrict)
+  
 
   return (
     <div style={{ padding: "10px" }}>

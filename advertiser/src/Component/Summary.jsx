@@ -4,10 +4,33 @@ export const Summary = () => {
     const [savedData, setSavedData] = useState([]);
     const [campData, setCampdata] = useState([]);
     const [mediaData, setMediaData] = useState([]);
+    const [imgAndVideos, setImgAndVideos] =useState([])
     // Define the API endpoint URL
     const [sumApproved, setSumApproved] = useState(false);
     const [campApproved, setCampApproved] = useState(false);
     const [mediaApproved, setMediaApproved] = useState(false);
+
+    useEffect(() => {
+      const apiUrl = 'http://62.72.59.146:8005/business-details-media/';
+
+      // Fetch data from the API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Update the component's state with the received data
+          console.log(data.data)
+          setImgAndVideos(data.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }, []);
+
   
 
     useEffect(() => {
@@ -175,11 +198,68 @@ export const Summary = () => {
             </button>
           </div>
         ))}
-        
       </ul>
-      
-    
         </div>
+        <div>
+        <h3>Images and Videos Details</h3>
+      {imgAndVideos.map((item) => (
+        <div key={item.id} style={{border:"1px solid black",margin:"10px"}}>
+          <h4 htmlFor="">Logo</h4>
+          <img src={item.upload_logo} alt="Logo" />
+          <h4>Store Images</h4>
+          <img src={item.store_photo_one} alt="Store Photo 1" />
+          <img src={item.store_photo_two} alt="Store Photo 2" />
+          <img src={item.store_photo_three} alt="Store Photo 3" />
+          <img src={item.store_photo_four} alt="Store Photo 4" />
+          <img src={item.store_photo_five} alt="Store Photo 5" />
+          <h4>Store Videos</h4>
+            <video controls>
+              <source src={item.store_video_one} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <video controls>
+              <source src={item.store_video_two} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <video controls>
+              <source src={item.store_video_three} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <video controls>
+              <source src={item.store_video_four} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <h4>Product Images</h4>
+          <img src={item.product_photo_one} alt="Store Photo 1" />
+          <img src={item.product_photo_two} alt="Store Photo 2" />
+          <img src={item.product_photo_three} alt="Store Photo 3" />
+          <img src={item.product_photo_four} alt="Store Photo 4" />
+          <img src={item.product_photo_five} alt="Store Photo 5" />
+          <h4>Store Videos</h4>
+            <video controls>
+              <source src={item.product_video_one} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <video controls>
+              <source src={item.product_video_two} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <video controls>
+              <source src={item.product_video_three} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <video controls>
+              <source src={item.product_video_four} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+
+
+        </div>
+      ))}
+        </div>
+        
             
         </div>
     </div>
