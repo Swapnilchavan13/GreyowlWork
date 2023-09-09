@@ -634,63 +634,65 @@ export const Usersummary = () => {
           {isEditingcamp ? (
             <div>
               <div>
-                <label>Select District:</label>
-                <select
-                  value={editedCamp.selectedDistrict}
-                  onChange={(e) =>
-                    setEditedCamp({
-                      ...editedCamp,
-                      selectedDistrict: e.target.value,
-                    })
-                  }
-                >
-                  <option value="">Select</option>
-                  {districtOptions}
-                </select>
-              </div>
+  <label>Select District:</label>
+  <select
+    value={editedCamp.selectedDistrict}
+    onChange={(e) =>
+      setEditedCamp({
+        ...editedCamp,
+        selectedDistrict: e.target.value,
+      })
+    }
+  >
+    <option value="">Select</option>
+    {districtOptions}
+  </select>
+</div>
 
-              <div className="dropdown">
-                <label className="selelabel">Select Talukas:</label>
-                <select
-  className="sele"
-  multiple
-  value={editedCamp.selectedTalukas}
-  onChange={(e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-    setEditedCamp({
-      ...editedCamp,
-      selectedTalukas: selectedOptions,
-    });
-  }}
->
-  {editedCamp.selectedTalukas.map((option) => (
-    <option key={option.value} value={option.value}>
-      {option.value}
-    </option>
-  ))}
-</select>
+<div className="dropdown">
+  <label className="selelabel">Select Talukas:</label>
+  <select
+    className="sele"
+    multiple
+    value={editedCamp.selectedTalukas}
+    onChange={(e) => {
+      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+      setEditedCamp({
+        ...editedCamp,
+        selectedTalukas: selectedOptions,
+      });
+    }}
+  >
+    {editedCamp.selectedTalukas.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+</div>
 
-              </div>
-              <div className="dropdown">
-                <label className="selelabel">Select Villages:</label>
-                <select
-                  className="sele"
-                  multiple
-                  value={editedCamp.selectedVillages}
-                  onChange={(e) =>
-                    setEditedCamp({
-                      ...editedCamp,
-                      selectedVillages: e.target.value,
-                    })
-                  }
-                >
-                  {/* {villageOptions.map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))} */}
-                </select>
-              </div>
+<div className="dropdown">
+  <label className="selelabel">Select Villages:</label>
+  <select
+    className="sele"
+    multiple
+    value={editedCamp.selectedVillages}
+    onChange={(e) => {
+      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+      setEditedCamp({
+        ...editedCamp,
+        selectedVillages: selectedOptions,
+      });
+    }}
+  >
+    {villageOptions.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+</div>
+
 
               <div>
                 <label>Campaign Range :</label>
