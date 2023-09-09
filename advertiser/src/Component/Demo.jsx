@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
 function Demo() {
+
+  const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
+
+
   const [formId, setFormId] = useState('');
   const [uploadLogo, setUploadLogo] = useState(null);
   const [storePhotoOne, setStorePhotoOne] = useState(null);
@@ -45,9 +49,6 @@ function Demo() {
   
     // Create a new FormData object
     const data = new FormData();
-    // const form = new FormData();
-  //  data.append('data', JSON.stringify(data));
-
   
     // Append individual form fields one by one
     data.append('form_id', formId);
@@ -79,49 +80,60 @@ function Demo() {
     data.append('product_video_three', productVideoThree);
     data.append('product_video_four', productVideoFour);
   
-    try {
-      // Now, you can send a POST request with the FormData object
-      const response = await fetch('http://62.72.59.146:8005/business-details-media/', {
-        method: 'POST',
-        body: data, // Use the FormData object as the body
-      });
+    // Create an XMLHttpRequest object
+    const xhr = new XMLHttpRequest();
   
-      if (response.status === 200) {
-        // alert('Media data uploaded successfully');
+    // Configure the request
+    xhr.open('POST', 'http://62.72.59.146:8005/business-details-media/');
+  
+    // Listen for the progress event to track upload progress
+   xhr.upload.addEventListener('progress', (event) => {
+      if (event.lengthComputable) {
+        const percentage = (event.loaded / event.total) * 100;
+        setUploadPercentage(percentage.toFixed(2)); // Update the state with the percentage
+      }
+    });
+  
+    // Listen for the load event when the upload is complete
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
         // Clear the form after successful upload
         setFormId('');
         setUploadLogo(null);
-        setStorePhotoOne('');
-        setStorePhotoTwo('');
-        setStorePhotoThree('');
-        setStorePhotoFour('');
-        setStorePhotoFive('');
-        setProductPhotoOne('');
-        setProductPhotoTwo('');
-        setProductPhotoThree('');
-        setProductPhotoFour('');
-        setProductPhotoFive('');
-        setStoreVideoOne('');
-        setStoreVideoTwo('');
-        setStoreVideoThree('');
-        setStoreVideoFour('');
-        setProductVideoOne('');
-        setProductVideoTwo('');
-        setProductVideoThree('');
-        setProductVideoFour('');
+        setStorePhotoOne(null);
+        setStorePhotoTwo(null);
+        setStorePhotoThree(null);
+        setStorePhotoFour(null);
+        setStorePhotoFive(null);
+        setProductPhotoOne(null);
+        setProductPhotoTwo(null);
+        setProductPhotoThree(null);
+        setProductPhotoFour(null);
+        setProductPhotoFive(null);
+        setStoreVideoOne(null);
+        setStoreVideoTwo(null);
+        setStoreVideoThree(null);
+        setStoreVideoFour(null);
+        setProductVideoOne(null);
+        setProductVideoTwo(null);
+        setProductVideoThree(null);
+        setProductVideoFour(null);
         alert('Media data uploaded successfully');
-
       } else {
-        // alert('Failed to upload media data');
+        alert('Failed to upload media data');
       }
-    } catch (error) {
+    });
+  
+    // Listen for the error event
+    xhr.addEventListener('error', (error) => {
       console.error('Error uploading media data:', error);
       alert('An error occurred while uploading media data');
-    }
+    });
+  
+    // Send the FormData object with the XMLHttpRequest
+    xhr.send(data);
   };
   
-  
-
      
 
   return (
@@ -341,7 +353,7 @@ function Demo() {
     
   </div>
 </div>
-
+<h2>Upload Progress: {uploadPercentage}%</h2>
       <button type='submit'>Upload Media Data</button>
     </div>
 </form>

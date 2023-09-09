@@ -402,10 +402,6 @@ export const Usersummary = () => {
     "50 Sec",
     "60 Sec",
   ];
-
-                  // value={editedCamp.selectedDistrict}
-                  console.log("hello")
-  console.log(editedCamp.selectedDistrict)
   
 
   return (

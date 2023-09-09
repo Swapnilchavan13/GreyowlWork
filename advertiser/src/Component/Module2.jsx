@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import Demo from './Demo';
 
 const businessAdjectives = [
   'Reliable',
@@ -51,9 +50,12 @@ const durations = [
 
 export const Module2 = () => {
 
+  const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
+
   ////////////////////////
   const [formId, setFormId] = useState(Date.now());
   const [uploadLogo, setUploadLogo] = useState(null);
+  const [productPhotoFive, setProductPhotoFive] = useState(null);
   const [storePhotoOne, setStorePhotoOne] = useState(null);
   const [storePhotoTwo, setStorePhotoTwo] = useState(null);
   const [storePhotoThree, setStorePhotoThree] = useState(null);
@@ -64,7 +66,6 @@ export const Module2 = () => {
   const [productPhotoTwo, setProductPhotoTwo] = useState(null);
   const [productPhotoThree, setProductPhotoThree] = useState(null);
   const [productPhotoFour, setProductPhotoFour] = useState(null);
-  const [productPhotoFive, setProductPhotoFive] = useState(null);
 
   const [storeVideoOne, setStoreVideoOne] = useState(null);
   const [storeVideoTwo, setStoreVideoTwo] = useState(null);
@@ -148,48 +149,9 @@ export const Module2 = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newData = {
-      businessName,
-      tagline,
-      description,
-      selectedAdjectives,
-      selectedModelTypes,
-      selectedAdTypes,
-      selectedDuration,
-    };
-  
-  
-    try {
-      setIssub(true);
-      const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newData),
-      });
-  
-      if (response.ok) {
-        // Data saved successfully
-        alert('Data Stored');
-        // Reset state values
-        setBusinessName('');
-        setTagline('');
-        setDescription('');
-        setSelectedAdjectives([]);
-        setSelectedModelTypes([]);
-        setSelectedAdTypes([]);
-        setSelectedDuration('');
-        
-        navigate('/usersummary');
-      } else {
-        alert('Failed to store data.');
-      }
-    } catch (error) {
-      alert('An error occurred while saving data.');
-      console.error(error);
-    }
-    /////////////////////////////////////////////////////
+
+    ///////////////////////////
+      /////////////////////////////////////////////////////
 
     
     // Demo
@@ -227,45 +189,107 @@ export const Module2 = () => {
     data.append('product_video_three', productVideoThree);
     data.append('product_video_four', productVideoFour);
   
+     // Create an XMLHttpRequest object
+     const xhr = new XMLHttpRequest();
+  
+     // Configure the request
+     xhr.open('POST', 'http://62.72.59.146:8005/business-details-media/');
+   
+     // Listen for the progress event to track upload progress
+    xhr.upload.addEventListener('progress', (event) => {
+       if (event.lengthComputable) {
+         const percentage = (event.loaded / event.total) * 100;
+         setUploadPercentage(percentage.toFixed(2)); // Update the state with the percentage
+       }
+     });
+   
+     // Listen for the load event when the upload is complete
+     xhr.addEventListener('load', () => {
+       if (xhr.status === 200) {
+         // Clear the form after successful upload
+         setFormId('');
+         setUploadLogo(null);
+         setStorePhotoOne(null);
+         setStorePhotoTwo(null);
+         setStorePhotoThree(null);
+         setStorePhotoFour(null);
+         setStorePhotoFive(null);
+         setProductPhotoOne(null);
+         setProductPhotoTwo(null);
+         setProductPhotoThree(null);
+         setProductPhotoFour(null);
+         setProductPhotoFive(null);
+         setStoreVideoOne(null);
+         setStoreVideoTwo(null);
+         setStoreVideoThree(null);
+         setStoreVideoFour(null);
+         setProductVideoOne(null);
+         setProductVideoTwo(null);
+         setProductVideoThree(null);
+         setProductVideoFour(null);
+       } else {
+         alert('Media data uploaded successfully');
+
+       }
+     });
+   
+     // Listen for the error event
+     xhr.addEventListener('error', (error) => {
+       console.error('Error uploading media data:', error);
+       alert('An error occurred while uploading media data');
+     });
+   
+     // Send the FormData object with the XMLHttpRequest
+     xhr.send(data)
+
+
+
+
+///////////////////////////////////////////
+    const newData = {
+      businessName,
+      tagline,
+      description,
+      selectedAdjectives,
+      selectedModelTypes,
+      selectedAdTypes,
+      selectedDuration,
+    };
+  
+  
     try {
-      // Now, you can send a POST request with the FormData object
-      const response = await fetch('http://62.72.59.146:8005/business-details-media/', {
+      setIssub(true);
+      const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
         method: 'POST',
-        body: data, // Use the FormData object as the body
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
       });
   
-      if (response.status === 200) {
-        // alert('Media data uploaded successfully');
-        // Clear the form after successful upload
-        setFormId('');
-        setUploadLogo(null);
-        setStorePhotoOne('');
-        setStorePhotoTwo('');
-        setStorePhotoThree('');
-        setStorePhotoFour('');
-        setStorePhotoFive('');
-        setProductPhotoOne('');
-        setProductPhotoTwo('');
-        setProductPhotoThree('');
-        setProductPhotoFour('');
-        setProductPhotoFive('');
-        setStoreVideoOne('');
-        setStoreVideoTwo('');
-        setStoreVideoFour('');
-        setProductVideoOne('');
-        setProductVideoTwo('');
-        setProductVideoThree('');
-        setProductVideoFour('');
-        setStoreVideoThree('');
-        alert('Media data uploaded successfully');
+      if (response.ok) {
+        // Data saved successfully
+        alert('Data Stored');
+        // Reset state values
+        setBusinessName('');
+        setTagline('');
+        setDescription('');
+        setSelectedAdjectives([]);
+        setSelectedModelTypes([]);
+        setSelectedAdTypes([]);
+        setSelectedDuration('');
 
+          navigate('/usersummary');
+        
+        console.log(uploadPercentage)
       } else {
-        // alert('Failed to upload media data');
+        alert('Failed to store data.');
       }
     } catch (error) {
-      console.error('Error uploading media data:', error);
-      alert('An error occurred while uploading media data');
+      alert('An error occurred while saving data.');
+      console.error(error);
     }
+  
   };
   
   // };
@@ -397,7 +421,7 @@ export const Module2 = () => {
   </div>
 </div>
 <div>
-<h2>Product Photos (Max 5)</h2>
+<h4>Product Photos (Max 5)</h4>
 <div>
 <input
 type="file"
@@ -590,6 +614,7 @@ onChange={(event) => handleVideoChange(event, setProductVideoFour)}
         ))}
         <br />
 
+<h3>Upload Progress: {uploadPercentage}%</h3>
         <button disabled={isSub} type="submit">
           {isSub ? "Submiting":"Submit"}
         </button>
