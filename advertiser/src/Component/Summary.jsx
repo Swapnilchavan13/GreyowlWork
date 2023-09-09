@@ -149,9 +149,7 @@ export const Summary = () => {
                   </button>
           </div>
         ))}
-        
-      </ul>
-      
+      </ul> 
       </div>
     </div>
     <div>
@@ -253,9 +251,6 @@ export const Summary = () => {
               <source src={item.product_video_four} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-
-
-
         </div>
       ))}
         </div>
