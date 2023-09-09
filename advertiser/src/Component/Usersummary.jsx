@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
+
 
 export const Usersummary = () => {
+
+  const navigate = useNavigate();
+
   const [savedData, setSavedData] = useState([]);
   const [campData, setCampdata] = useState([]);
   const [mediaData, setMediaData] = useState([]);
@@ -132,6 +137,11 @@ export const Usersummary = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  const submit = () => {
+    alert("Thank You")
+    navigate('/')
+  }
 
   // Function to handle inline editing
   const handleEdit = () => {
@@ -403,10 +413,10 @@ export const Usersummary = () => {
     "60 Sec",
   ];
   
-
   return (
     <div style={{ padding: "10px" }}>
       <h1>User Campaign Summary</h1>
+      <button onClick={submit}>Submit</button>
       <div id="summary">
         {/* Create Account */}
         <div>
