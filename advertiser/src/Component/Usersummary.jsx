@@ -327,9 +327,53 @@ export const Usersummary = () => {
     },
   ];
 
+  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [selectedTaluka, setSelectedTaluka] = useState('');
   const [districtOption, setDistrictOption] = useState([]);
   const [talukaOptions, setTalukaOptions] = useState([]);
   const [villageOptions, setVillageOptions] = useState([]);
+
+  // Update the district options based on the data
+  React.useEffect(() => {
+    const districtOptions = districtsData.map((data) => data.district);
+    setDistrictOption(districtOptions);
+  }, []);
+
+  // Update the taluka options based on the selected district
+  React.useEffect(() => {
+    if (selectedDistrict) {
+      const selectedDistrictData = districtsData.find(
+        (data) => data.district === selectedDistrict
+      );
+      if (selectedDistrictData) {
+        const talukaOptions = selectedDistrictData.talukas.map(
+          (talukaData) => talukaData.taluka
+        );
+        setTalukaOptions(talukaOptions);
+      }
+    } else {
+      setTalukaOptions([]);
+    }
+  }, [selectedDistrict]);
+
+  // Update the village options based on the selected taluka
+  React.useEffect(() => {
+    if (selectedTaluka) {
+      const selectedDistrictData = districtsData.find(
+        (data) => data.district === selectedDistrict
+      );
+      if (selectedDistrictData) {
+        const selectedTalukaData = selectedDistrictData.talukas.find(
+          (talukaData) => talukaData.taluka === selectedTaluka
+        );
+        if (selectedTalukaData) {
+          setVillageOptions(selectedTalukaData.villages);
+        }
+      }
+    } else {
+      setVillageOptions([]);
+    }
+  }, [selectedTaluka, selectedDistrict]);
 
 
 
@@ -656,10 +700,10 @@ export const Usersummary = () => {
     multiple
     value={editedCamp.selectedTalukas}
     onChange={(e) => {
-      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+      // const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
       setEditedCamp({
         ...editedCamp,
-        selectedTalukas: selectedOptions,
+        selectedTalukas: e.target.value,
       });
     }}
   >
