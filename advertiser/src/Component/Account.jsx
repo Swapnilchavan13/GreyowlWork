@@ -117,7 +117,7 @@ export const Account = () => {
         value={formData.businessType1}
         onChange={handleChange}
       >
-        <option value="">Choose</option>
+        {/* <option value="">Choose</option> */}
         {Btype.map((item) => (
           <option key={item.type} value={item.type}>
             {item.type}
@@ -132,7 +132,7 @@ export const Account = () => {
             value={formData.businessType2}
             onChange={handleChange}
           >
-            <option value="">Choose</option>
+            {/* <option value="">Choose</option> */}
             {Btype.find((item) => item.type === formData.businessType1)?.subtype.map((subtype) => (
               <option key={subtype} value={subtype}>
                 {subtype}
