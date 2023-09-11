@@ -117,7 +117,7 @@ export const Account = () => {
         value={formData.businessType1}
         onChange={handleChange}
       >
-        {/* <option value="">Choose</option> */}
+        <option value="">Choose</option>
         {Btype.map((item) => (
           <option key={item.type} value={item.type}>
             {item.type}
