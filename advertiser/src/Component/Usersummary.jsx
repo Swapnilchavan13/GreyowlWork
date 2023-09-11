@@ -338,6 +338,7 @@ export const Usersummary = () => {
     const districtOptions = districtsData.map((data) => data.district);
     setDistrictOption(districtOptions);
   }, []);
+  
 
   // Update the taluka options based on the selected district
   React.useEffect(() => {
@@ -375,6 +376,7 @@ export const Usersummary = () => {
     }
   }, [selectedTaluka, selectedDistrict]);
 
+  
 
 
   const ageRanges = [
@@ -457,6 +459,11 @@ export const Usersummary = () => {
     "60 Sec",
   ];
   
+
+
+console.log(editedCamp.selectedTalukas)
+console.log(editedCamp.selectedVillages)
+
   return (
     <div style={{ padding: "10px" }}>
       <h1>User Campaign Summary</h1>
@@ -700,10 +707,10 @@ export const Usersummary = () => {
     multiple
     value={editedCamp.selectedTalukas}
     onChange={(e) => {
-      // const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
       setEditedCamp({
         ...editedCamp,
-        selectedTalukas: e.target.value,
+        selectedTalukas: selectedOptions,
       });
     }}
   >
@@ -729,7 +736,7 @@ export const Usersummary = () => {
       });
     }}
   >
-    {villageOptions.map((option) => (
+    {editedCamp.selectedVillages.map((option) => (
       <option key={option} value={option}>
         {option}
       </option>
