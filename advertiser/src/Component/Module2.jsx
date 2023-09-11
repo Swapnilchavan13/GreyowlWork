@@ -157,92 +157,103 @@ export const Module2 = () => {
     // Demo
     // Create a new FormData object
     const data = new FormData();
-    // const form = new FormData();
-  //  data.append('data', JSON.stringify(data));
-    // Append individual form fields one by one
+  
+    // Append individual form fields one by one if they have values
     data.append('form_id', formId);
     data.append('upload_logo', uploadLogo);
   
-    // Store Photos
-    data.append('store_photo_one', storePhotoOne);
-    data.append('store_photo_two', storePhotoTwo);
-    data.append('store_photo_three', storePhotoThree);
-    data.append('store_photo_four', storePhotoFour);
-    data.append('store_photo_five', storePhotoFive);
+    const imageFields = [
+      storePhotoOne, storePhotoTwo, storePhotoThree, storePhotoFour, storePhotoFive,
+    ];
+    const imageFields2 = [
+      productPhotoOne, productPhotoTwo, productPhotoThree, productPhotoFour, productPhotoFive,
+    ];
   
-    // Product Photos
-    data.append('product_photo_one', productPhotoOne);
-    data.append('product_photo_two', productPhotoTwo);
-    data.append('product_photo_three', productPhotoThree);
-    data.append('product_photo_four', productPhotoFour);
-    data.append('product_photo_five', productPhotoFive);
+    const videoFields = [
+      storeVideoOne, storeVideoTwo, storeVideoThree, storeVideoFour,
+    ];
+    const videoFields2 = [
+      productVideoOne, productVideoTwo, productVideoThree, productVideoFour,
+    ];
+
+    const numbsimg = [
+      "one","two","three","four","five"
+    ]
   
-    // Store Videos
-    data.append('store_video_one', storeVideoOne);
-    data.append('store_video_two', storeVideoTwo);
-    data.append('store_video_three', storeVideoThree);
-    data.append('store_video_four', storeVideoFour);
+    const numbsvid = [
+      "one","two","three","four"
+    ]
+    // Append image fields with 'store_photo_' and video fields with 'store_video_'
+    imageFields.forEach((field, index) => {
+      if (field !== null) {
+        data.append(`store_photo_${numbsimg[index]}`, field);
+      }
+    });
+    imageFields2.forEach((field, index) => {
+      if (field !== null) {
+        data.append(`product_photo_${numbsimg[index]}`, field);
+      }
+    });
+
+    videoFields2.forEach((field, index) => {
+      if (field !== null) {
+        data.append(`product_video_${numbsvid[index]}`, field);
+      }
+    });
   
-    // Product Videos
-    data.append('product_video_one', productVideoOne);
-    data.append('product_video_two', productVideoTwo);
-    data.append('product_video_three', productVideoThree);
-    data.append('product_video_four', productVideoFour);
+    videoFields.forEach((field, index) => {
+      if (field !== null) {
+        data.append(`store_video_${numbsvid[index]}`, field);
+      }
+    });
   
-     // Create an XMLHttpRequest object
-     const xhr = new XMLHttpRequest();
+    // Create an XMLHttpRequest object
+    const xhr = new XMLHttpRequest();
   
-     // Configure the request
-     xhr.open('POST', 'http://62.72.59.146:8005/business-details-media/');
-   
-     // Listen for the progress event to track upload progress
+    // Configure the request
+    xhr.open('POST', 'http://62.72.59.146:8005/business-details-media/');
+  
+    // Listen for the progress event to track upload progress
     xhr.upload.addEventListener('progress', (event) => {
-       if (event.lengthComputable) {
-         const percentage = (event.loaded / event.total) * 100;
-         setUploadPercentage(percentage.toFixed(2)); // Update the state with the percentage
-       }
-     });
-   
-     // Listen for the load event when the upload is complete
-     xhr.addEventListener('load', () => {
-       if (xhr.status === 200) {
-         // Clear the form after successful upload
-         setFormId('');
-         setUploadLogo(null);
-         setStorePhotoOne(null);
-         setStorePhotoTwo(null);
-         setStorePhotoThree(null);
-         setStorePhotoFour(null);
-         setStorePhotoFive(null);
-         setProductPhotoOne(null);
-         setProductPhotoTwo(null);
-         setProductPhotoThree(null);
-         setProductPhotoFour(null);
-         setProductPhotoFive(null);
-         setStoreVideoOne(null);
-         setStoreVideoTwo(null);
-         setStoreVideoThree(null);
-         setStoreVideoFour(null);
-         setProductVideoOne(null);
-         setProductVideoTwo(null);
-         setProductVideoThree(null);
-         setProductVideoFour(null);
-       } else {
-         alert('Media data uploaded successfully');
+      if (event.lengthComputable) {
+        const percentage = (event.loaded / event.total) * 100;
+        setUploadPercentage(percentage.toFixed(2)); // Update the state with the percentage
+      }
+    });
+  
+    // Listen for the load event when the upload is complete
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        // Clear the form after successful upload
+        setFormId('');
+        setUploadLogo(null);
+        imageFields.forEach((_, index) => {
+          setStorePhotoOne(null);
+          setProductPhotoOne(null);
+        });
+        videoFields.forEach((_, index) => {
+          setStoreVideoOne(null);
+          setProductVideoOne(null);
+        });
+        console.log(uploadPercentage)
+      } else {
+        if(uploadPercentage=="100.00"){
 
-       }
-     });
-   
-     // Listen for the error event
-     xhr.addEventListener('error', (error) => {
-       console.error('Error uploading media data:', error);
-       alert('An error occurred while uploading media data');
-     });
-   
-     // Send the FormData object with the XMLHttpRequest
-     xhr.send(data)
+          alert('Media data uploaded successfully');
+        }
 
-
+      }
+    });
+  
+    // Listen for the error event
+    xhr.addEventListener('error', (error) => {
+      console.error('Error uploading media data:', error);
+      alert('An error occurred while uploading media data');
+    });
+  
+    // Send the FormData object with the XMLHttpRequest
+    xhr.send(data);
+  
 
 
 ///////////////////////////////////////////
@@ -269,8 +280,8 @@ export const Module2 = () => {
   
       if (response.ok) {
         // Data saved successfully
-        alert('Data Stored');
         // Reset state values
+
         setBusinessName('');
         setTagline('');
         setDescription('');
@@ -278,10 +289,9 @@ export const Module2 = () => {
         setSelectedModelTypes([]);
         setSelectedAdTypes([]);
         setSelectedDuration('');
+        alert('Data Stored');
 
-          navigate('/usersummary');
         
-        console.log(uploadPercentage)
       } else {
         alert('Failed to store data.');
       }
@@ -291,6 +301,9 @@ export const Module2 = () => {
     }
   
   };
+  if(uploadPercentage==100.00){
+    navigate('/usersummary');
+  }
   
   // };
   

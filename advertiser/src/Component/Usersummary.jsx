@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 export const Usersummary = () => {
-
   const navigate = useNavigate();
 
   const [savedData, setSavedData] = useState([]);
@@ -11,7 +9,6 @@ export const Usersummary = () => {
   const [mediaData, setMediaData] = useState([]);
 
   const [allMediaData, setAllMediaData] = useState([]);
-
 
   const [editedData, setEditedData] = useState({});
   const [editedCamp, setEditedCamp] = useState({});
@@ -21,18 +18,17 @@ export const Usersummary = () => {
   const [isEditingcamp, setIsEditingcamp] = useState(false);
   const [isEditingbuss, setIsEditingbuss] = useState(false);
 
-
   useEffect(() => {
     // Fetch data from the API when the component mounts
-    fetch('http://62.72.59.146:8005/business-details-media/')
+    fetch("http://62.72.59.146:8005/business-details-media/")
       .then((response) => response.json())
       .then((data) => {
-        const lth = data.data.length-1
-        const allmedia = data.data[lth]// Get the last item
+        const lth = data.data.length - 1;
+        const allmedia = data.data[lth]; // Get the last item
         setAllMediaData(allmedia);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       });
   }, []);
 
@@ -139,9 +135,9 @@ export const Usersummary = () => {
   }, []);
 
   const submit = () => {
-    alert("Thank You")
-    navigate('/')
-  }
+    alert("Thank You");
+    navigate("/");
+  };
 
   // Function to handle inline editing
   const handleEdit = () => {
@@ -327,8 +323,8 @@ export const Usersummary = () => {
     },
   ];
 
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedTaluka, setSelectedTaluka] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedTaluka, setSelectedTaluka] = useState("");
   const [districtOption, setDistrictOption] = useState([]);
   const [talukaOptions, setTalukaOptions] = useState([]);
   const [villageOptions, setVillageOptions] = useState([]);
@@ -338,7 +334,6 @@ export const Usersummary = () => {
     const districtOptions = districtsData.map((data) => data.district);
     setDistrictOption(districtOptions);
   }, []);
-  
 
   // Update the taluka options based on the selected district
   React.useEffect(() => {
@@ -375,9 +370,6 @@ export const Usersummary = () => {
       setVillageOptions([]);
     }
   }, [selectedTaluka, selectedDistrict]);
-
-  
-
 
   const ageRanges = [
     { label: "13-17", value: "13-17" },
@@ -458,11 +450,7 @@ export const Usersummary = () => {
     "50 Sec",
     "60 Sec",
   ];
-  
 
-
-console.log(editedCamp.selectedTalukas)
-console.log(editedCamp.selectedVillages)
 
   return (
     <div style={{ padding: "10px" }}>
@@ -685,65 +673,70 @@ console.log(editedCamp.selectedVillages)
           {isEditingcamp ? (
             <div>
               <div>
-  <label>Select District:</label>
-  <select
-    value={editedCamp.selectedDistrict}
-    onChange={(e) =>
-      setEditedCamp({
-        ...editedCamp,
-        selectedDistrict: e.target.value,
-      })
-    }
-  >
-    <option value="">Select</option>
-    {districtOptions}
-  </select>
-</div>
+                <label>Select District:</label>
+                <select
+                  value={editedCamp.selectedDistrict}
+                  onChange={(e) =>
+                    setEditedCamp({
+                      ...editedCamp,
+                      selectedDistrict: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">Select</option>
+                  {districtOptions}
+                </select>
+              </div>
 
-<div className="dropdown">
-  <label className="selelabel">Select Talukas:</label>
-  <select
-    className="sele"
-    multiple
-    value={editedCamp.selectedTalukas}
-    onChange={(e) => {
-      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-      setEditedCamp({
-        ...editedCamp,
-        selectedTalukas: selectedOptions,
-      });
-    }}
-  >
-    {editedCamp.selectedTalukas.map((option) => (
-      <option key={option} value={option}>
-        {option}
-      </option>
-    ))}
-  </select>
-</div>
+              <div className="dropdown">
+                <label className="selelabel">Select Talukas:</label>
+                <select
+                  className="sele"
+                  multiple
+                  value={editedCamp.selectedTalukas}
+                  onChange={(e) => {
+                    const selectedOptions = Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value
+                    );
+                    setEditedCamp({
+                      ...editedCamp,
+                      selectedTalukas: selectedOptions,
+                    });
+                  }}
+                >
+                  {editedCamp.selectedTalukas.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-<div className="dropdown">
-  <label className="selelabel">Select Villages:</label>
-  <select
-    className="sele"
-    multiple
-    value={editedCamp.selectedVillages}
-    onChange={(e) => {
-      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-      setEditedCamp({
-        ...editedCamp,
-        selectedVillages: selectedOptions,
-      });
-    }}
-  >
-    {editedCamp.selectedVillages.map((option) => (
-      <option key={option} value={option}>
-        {option}
-      </option>
-    ))}
-  </select>
-</div>
-
+              <div className="dropdown">
+                <label className="selelabel">Select Villages:</label>
+                <select
+                  className="sele"
+                  multiple
+                  value={editedCamp.selectedVillages}
+                  onChange={(e) => {
+                    const selectedOptions = Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value
+                    );
+                    setEditedCamp({
+                      ...editedCamp,
+                      selectedVillages: selectedOptions,
+                    });
+                  }}
+                >
+                  {editedCamp.selectedVillages.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               <div>
                 <label>Campaign Range :</label>
@@ -804,36 +797,38 @@ console.log(editedCamp.selectedVillages)
                 <label>Select Age Range :</label>
                 <br />
                 {ageRanges.map((range) => (
-  <label key={range.value}>
-    <input
-      type="checkbox"
-      value={range.value}
-      checked={editedCamp.selectedRanges.includes(range.value)}
-      onChange={(e) => {
-        const isChecked = e.target.checked;
-        setEditedCamp((prevState) => {
-          if (isChecked) {
-            // Add the age range to the selectedRanges array
-            return {
-              ...prevState,
-              selectedRanges: [...prevState.selectedRanges, range.value],
-            };
-          } else {
-            // Remove the age range from the selectedRanges array
-            return {
-              ...prevState,
-              selectedRanges: prevState.selectedRanges.filter(
-                (selectedRange) => selectedRange !== range.value
-              ),
-            };
-          }
-        });
-      }}
-    />
-    {range.label}
-  </label>
-))}
-
+                  <label key={range.value}>
+                    <input
+                      type="checkbox"
+                      value={range.value}
+                      checked={editedCamp.selectedRanges.includes(range.value)}
+                      onChange={(e) => {
+                        const isChecked = e.target.checked;
+                        setEditedCamp((prevState) => {
+                          if (isChecked) {
+                            // Add the age range to the selectedRanges array
+                            return {
+                              ...prevState,
+                              selectedRanges: [
+                                ...prevState.selectedRanges,
+                                range.value,
+                              ],
+                            };
+                          } else {
+                            // Remove the age range from the selectedRanges array
+                            return {
+                              ...prevState,
+                              selectedRanges: prevState.selectedRanges.filter(
+                                (selectedRange) => selectedRange !== range.value
+                              ),
+                            };
+                          }
+                        });
+                      }}
+                    />
+                    {range.label}
+                  </label>
+                ))}
               </div>
 
               <div>
@@ -1288,73 +1283,123 @@ console.log(editedCamp.selectedVillages)
                 <strong>Selected Duration:</strong> {mediaData.selectedDuration}
                 <br />
                 <div>
-              <div className="media-display">
-    
-        <div key={allMediaData.id}>
-          {/* <h2>Form ID: {allMediaData.form_id}</h2> */}
-          <h3>Uploaded Logo</h3>
-          <img src={allMediaData.upload_logo} alt="Logo" />
+                  <div className="media-display">
+                    <div key={allMediaData.id}>
+                      {/* <h2>Form ID: {allMediaData.form_id}</h2> */}
+                      <h3>Uploaded Logo</h3>
+                      <img src={allMediaData.upload_logo} alt="Logo" />
 
-          <h3>Store Photos</h3>
-          <div className="photo-container">
-            <img src={allMediaData.store_photo_one} alt="Store Photo 1" />
-            <img src={allMediaData.store_photo_two} alt="Store Photo 2" />
-            <img src={allMediaData.store_photo_three} alt="Store Photo 3" />
-            <img src={allMediaData.store_photo_four} alt="Store Photo 4" />
-            <img src={allMediaData.store_photo_five} alt="Store Photo 5" />
-          </div>
+                      <h3>Store Photos</h3>
+                      <div className="photo-container">
+                        <img
+                          src={allMediaData.store_photo_one}
+                          alt="Store Photo 1"
+                        />
+                        <img
+                          src={allMediaData.store_photo_two}
+                          alt="Store Photo 2"
+                        />
+                        <img
+                          src={allMediaData.store_photo_three}
+                          alt="Store Photo 3"
+                        />
+                        <img
+                          src={allMediaData.store_photo_four}
+                          alt="Store Photo 4"
+                        />
+                        <img
+                          src={allMediaData.store_photo_five}
+                          alt="Store Photo 5"
+                        />
+                      </div>
 
-          <h3>Product Photos</h3>
-          <div className="photo-container">
-            <img src={allMediaData.product_photo_one} alt="Product Photo 1" />
-            <img src={allMediaData.product_photo_two} alt="Product Photo 2" />
-            <img src={allMediaData.product_photo_three} alt="Product Photo 3" />
-            <img src={allMediaData.product_photo_four} alt="Product Photo 4" />
-            <img src={allMediaData.product_photo_five} alt="Product Photo 5" />
-          </div>
+                      <h3>Product Photos</h3>
+                      <div className="photo-container">
+                        <img
+                          src={allMediaData.product_photo_one}
+                          alt="Product Photo 1"
+                        />
+                        <img
+                          src={allMediaData.product_photo_two}
+                          alt="Product Photo 2"
+                        />
+                        <img
+                          src={allMediaData.product_photo_three}
+                          alt="Product Photo 3"
+                        />
+                        <img
+                          src={allMediaData.product_photo_four}
+                          alt="Product Photo 4"
+                        />
+                        <img
+                          src={allMediaData.product_photo_five}
+                          alt="Product Photo 5"
+                        />
+                      </div>
 
-          <h3>Store Videos</h3>
-          <div className="video-container">
-            <video controls>
-              <source src={allMediaData.store_video_one} type="video/mp4" />
-            </video>
-            <video controls>
-              <source src={allMediaData.store_video_two} type="video/mp4" />
-            </video>
-            <video controls>
-              <source src={allMediaData.store_video_three} type="video/mp4" />
-            </video>
-            <video controls>
-              <source src={allMediaData.store_video_four} type="video/mp4" />
-            </video>
-          </div>
+                      <h3>Store Videos</h3>
+                      <div className="video-container">
+                        <video controls>
+                          <source
+                            src={allMediaData.store_video_one}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <video controls>
+                          <source
+                            src={allMediaData.store_video_two}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <video controls>
+                          <source
+                            src={allMediaData.store_video_three}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <video controls>
+                          <source
+                            src={allMediaData.store_video_four}
+                            type="video/mp4"
+                          />
+                        </video>
+                      </div>
 
-          <h3>Product Videos</h3>
-          <div className="video-container">
-            <video controls>
-              <source src={allMediaData.product_video_one} type="video/mp4" />
-            </video>
-            <video controls>
-              <source src={allMediaData.product_video_two} type="video/mp4" />
-            </video>
-            <video controls>
-              <source src={allMediaData.product_video_three} type="video/mp4" />
-            </video>
-            <video controls>
-              <source src={allMediaData.product_video_four} type="video/mp4" />
-            </video>
-          </div>
-        </div>
-    </div>
-        </div>    
-                
+                      <h3>Product Videos</h3>
+                      <div className="video-container">
+                        <video controls>
+                          <source
+                            src={allMediaData.product_video_one}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <video controls>
+                          <source
+                            src={allMediaData.product_video_two}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <video controls>
+                          <source
+                            src={allMediaData.product_video_three}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <video controls>
+                          <source
+                            src={allMediaData.product_video_four}
+                            type="video/mp4"
+                          />
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-             
               <button onClick={handleEditBuss}>Edit</button>
             </ul>
           )}
-        
         </div>
       </div>
     </div>
