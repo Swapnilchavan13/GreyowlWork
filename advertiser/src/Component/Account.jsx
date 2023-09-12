@@ -80,7 +80,7 @@ export const Account = () => {
       if (response.ok) {
         alert('Account Created Successfully');
         setIsSaving(false);
-        navigate('/campaign'); // Replace with the actual route
+        navigate('/addcreator'); // Replace with the actual route
 
       } else {
         alert('Failed to create account');

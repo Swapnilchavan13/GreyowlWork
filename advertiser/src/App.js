@@ -5,13 +5,21 @@ import { Campaigndetails } from './Component/Campaigndetails';
 import { Module2 } from './Component/Module2';
 import { Summary } from './Component/Summary';
 import { Usersummary } from './Component/Usersummary';
+import { Signup } from './Component/Signup';
+import { Login } from './Component/Login';
+import { Createown } from './Component/Createown';
+import { Addcreator } from './Component/Addcreator';
 
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Account />}></Route>
+      <Route path="/" element={<Signup />}></Route>
+      <Route path="/account" element={<Account />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/addcreatore" element={<Addcreator />}></Route>
+      <Route path="/createown" element={<Createown />}></Route>
       <Route path="/campaign" element={<Campaigndetails />}></Route>
       <Route path="/module2" element={<Module2 />}></Route>
       <Route path="/summary" element={<Summary />}></Route>

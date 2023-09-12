@@ -178,7 +178,6 @@ export const Campaigndetails = () => {
 
   villageOptions.unshift({ label: 'Select All Villages', value: 'selectAll' });
 
-
   // Target Range
   const handleRangeChange = (event) => {
     const newRange = event.target.value;
