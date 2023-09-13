@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -16,30 +15,34 @@ export const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = () => {
-    // Get existing users' data from local storage
-    const existingUsersData = JSON.parse(localStorage.getItem('usersData')) || [];
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/signup');
+      const data = await response.json();
 
-    // Find the user with the matching email
-    const user = existingUsersData.find((userData) => userData.email === email);
+      // Check if a user with the provided email exists and the password matches
+      const user = data.find((userData) => userData.email === email);
 
-    // Check if a user with the provided email exists and the password matches
-    if (user && user.password === password) {
-      // Call the onLogin callback to redirect to the creation page
-    //   onLogin();
-    alert("Successfully Logged In")
-      navigate("/account")
-    } else {
-      setErrorMessage('Invalid email or password.');
+      if (user && user.password === password) {
+        // Successfully logged in, navigate to the account page
+        alert('Successfully Logged In');
+        navigate('/account');
+      } else {
+        setErrorMessage('Invalid email or password.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setErrorMessage('An error occurred. Please try again later.');
     }
   };
-  const createhandle = ()=>{
-    navigate("/")
-  }
+
+  const createhandle = () => {
+    navigate('/');
+  };
 
   return (
     <div className="App">
-      <h1>Login</h1>
+      <h1>Login Page</h1>
       {errorMessage && <p className="error">{errorMessage}</p>}
       <div>
         <label htmlFor="email">User Email Id</label><br />

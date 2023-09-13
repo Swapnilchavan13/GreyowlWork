@@ -35,7 +35,7 @@ export const Createown = () => {
   }, []);
 
   const handleclick = () => {
-    navigate('/module2');
+    navigate('/campaign');
   };
 
   return (

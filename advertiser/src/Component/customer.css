@@ -43,3 +43,6 @@ video{
 .error{
     color: red;
 }
+p{
+    cursor: pointer;
+}

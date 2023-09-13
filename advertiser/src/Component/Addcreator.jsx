@@ -14,11 +14,15 @@ export const Addcreator = () => {
 
   return (
     <div className='App'>
-        <h1>Add Creator</h1>
+        <h1>Add Creator (select any one)</h1>
+        <ul>
+          <li>
         <h2 onClick={handleown}>Create Your Own</h2>
-        
+          </li>
+          <li>
         <h2 onClick={handleme}>Create For Me</h2>
-        
+          </li>
+        </ul>
     </div>
   )
 }

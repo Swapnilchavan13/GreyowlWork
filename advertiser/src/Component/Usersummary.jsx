@@ -672,7 +672,7 @@ export const Usersummary = () => {
           <h3>Campaign Elements</h3>
           {isEditingcamp ? (
             <div>
-              <div>
+              {/* <div>
                 <label>Select District:</label>
                 <select
                   value={editedCamp.selectedDistrict}
@@ -736,7 +736,7 @@ export const Usersummary = () => {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               <div>
                 <label>Campaign Range :</label>

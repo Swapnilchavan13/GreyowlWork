@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const Signup = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,35 +25,46 @@ export const Signup = () => {
     setCpassword(e.target.value);
   };
 
-  const handleLogin =() => {
-    navigate('/login')
-  }
+  const handleLogin = () => {
+    navigate('/login');
+  };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     // Validate the form fields
     if (!name || !email || !password || !cpassword) {
       setErrorMessage('All fields are required.');
     } else if (password !== cpassword) {
       setErrorMessage('Passwords do not match.');
     } else {
-      // Get existing users' data from local storage
-      const existingUsersData = JSON.parse(localStorage.getItem('usersData')) || [];
+      try {
+        // Create an object to represent the user data
+        const userData = {
+          name,
+          email,
+          password,
+        };
 
-      // Create an object to represent the user data
-      const userData = {
-        name,
-        email,
-        password,
-      };
+        // Make a POST request to your API to save the user data
+        const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
 
-      // Add the new user data to the existing users' data
-      existingUsersData.push(userData);
+        // Check if the request was successful
+        if (response.status === 201) {
+          alert('Account Is Created');
+          navigate('/login');
+        } else {
+          setErrorMessage('Failed to create an account.');
+        }
+      } catch (error) {
+        console.error('Error creating an account:', error);
+        setErrorMessage('Failed to create an account.');
+      }
 
-      // Save the updated users' data array in local storage
-      localStorage.setItem('usersData', JSON.stringify(existingUsersData));
-
-      alert("Account Is Created");
-      navigate("/login")
       // Clear the form fields and error message after saving
       setName('');
       setEmail('');
@@ -65,10 +76,11 @@ export const Signup = () => {
 
   return (
     <div className="App">
-      <h1>Signup Form</h1>
+      <h1>Signup Page</h1>
       {errorMessage && <p className="error">{errorMessage}</p>}
       <div>
-        <label htmlFor="name">User Name</label><br />
+        <label htmlFor="name">User Name</label>
+        <br />
         <input
           type="text"
           id="name"
@@ -78,7 +90,8 @@ export const Signup = () => {
         />
       </div>
       <div>
-        <label htmlFor="email">User Email Id</label><br />
+        <label htmlFor="email">User Email Id</label>
+        <br />
         <input
           type="email"
           id="email"
@@ -88,7 +101,8 @@ export const Signup = () => {
         />
       </div>
       <div>
-        <label htmlFor="password">Password</label><br />
+        <label htmlFor="password">Password</label>
+        <br />
         <input
           type="password"
           id="password"
@@ -98,7 +112,8 @@ export const Signup = () => {
         />
       </div>
       <div>
-        <label htmlFor="cpassword">Confirm Password</label><br />
+        <label htmlFor="cpassword">Confirm Password</label>
+        <br />
         <input
           type="password"
           id="cpassword"
@@ -106,12 +121,11 @@ export const Signup = () => {
           placeholder="Again Enter Password"
           onChange={handleCpasswordChange}
         />
-      </div><br />
+      </div>
+      <br />
       <button onClick={handleSignup}>Signup</button>
-    
-      <p onClick={handleLogin}>Already an User</p>
-      
-    </div>
 
+      <p onClick={handleLogin}>Already an User</p>
+    </div>
   );
 };
