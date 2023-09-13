@@ -45,4 +45,20 @@
 .image-container {
   margin: auto;
   padding: 20px;
+  cursor: pointer;
+}
+
+
+/* CSS for selected images */
+.selected-media {
+  border: 2px solid #033e7e; /* Add a border to selected images */
+  background-color: #5242e9; /* Change the background color for selected images */
+  cursor: pointer;
+}
+
+/* CSS for selected videos */
+.selected-video {
+  border: 2px solid #ca4949; /* Add a border to selected videos */
+  background-color: #f06363; /* Change the background color for selected videos */
+  cursor: pointer;
 }
