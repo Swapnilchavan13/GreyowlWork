@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+
+
 
 const businessAdjectives = [
   'Reliable',
@@ -49,7 +52,11 @@ const durations = [
 
 
 export const Module2 = () => {
+  const location = useLocation();
+  const media_id = location.state;
 
+  const me_id= media_id.m_id
+  // console.log ("hello me id" +me_id)
   const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
 
   ////////////////////////
@@ -59,12 +66,12 @@ export const Module2 = () => {
   const [storePhotoOne, setStorePhotoOne] = useState(null);
   const [storePhotoTwo, setStorePhotoTwo] = useState(null);
   const [storePhotoThree, setStorePhotoThree] = useState(null);
-  const [storePhotoFour, setStorePhotoFour] = useState(null);
   const [storePhotoFive, setStorePhotoFive] = useState(null);
 
   const [productPhotoOne, setProductPhotoOne] = useState(null);
   const [productPhotoTwo, setProductPhotoTwo] = useState(null);
   const [productPhotoThree, setProductPhotoThree] = useState(null);
+  const [storePhotoFour, setStorePhotoFour] = useState(null);
   const [productPhotoFour, setProductPhotoFour] = useState(null);
 
   const [storeVideoOne, setStoreVideoOne] = useState(null);
@@ -258,6 +265,7 @@ export const Module2 = () => {
 
 ///////////////////////////////////////////
     const newData = {
+      media_id: me_id,
       businessName,
       tagline,
       description,

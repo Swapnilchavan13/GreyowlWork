@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Signup = () => {
   const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,8 +44,8 @@ export const Signup = () => {
           email,
           password,
         };
-
         // Make a POST request to your API to save the user data
+        
         const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/signup', {
           method: 'POST',
           headers: {

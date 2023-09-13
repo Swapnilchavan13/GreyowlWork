@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import "./account.css";
 
 export const Account = () => {
+
+  const location = useLocation();
+  const iddata = location.state;
  
   const navigate = useNavigate();
   const [isSaving, setIsSaving] = useState(false);
@@ -35,8 +40,12 @@ export const Account = () => {
     }
   ]
 
-  
+  // console.log(iddata.register_id)
+  const campiddata = { register_camp_id: iddata.register_id}
+
+
   const [formData, setFormData] = useState({
+    register_id: iddata.register_id,
     name: '',
     year: '',
     businessType1: '',
@@ -80,7 +89,7 @@ export const Account = () => {
       if (response.ok) {
         alert('Account Created Successfully');
         setIsSaving(false);
-        navigate('/addcreator'); // Replace with the actual route
+        navigate('/addcreator', { state: campiddata }); // Replace with the actual route
 
       } else {
         alert('Failed to create account');

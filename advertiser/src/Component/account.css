@@ -35,3 +35,14 @@
     display: grid;
     grid-template-columns: repeat(4 , 1fr);
   }
+
+  /* Add this to your CSS file or <style> tag */
+.selected-image {
+  border: 2px solid #03264d; /* Add a border to selected images */
+  background-color: #768fc7; /* Change the background color for selected images */
+  border-radius: 10px;
+}
+.image-container {
+  margin: auto;
+  padding: 20px;
+}

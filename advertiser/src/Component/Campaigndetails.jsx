@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import "./customer.css";
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 export const Campaigndetails = () => {
-
+  const location = useLocation();
+  const campid = location.state;
   const navigate = useNavigate();
 
   const [isSubmit, setIssubmit] = useState(false);
@@ -191,7 +193,12 @@ export const Campaigndetails = () => {
     const handleSubmit = async (event) => {
       event.preventDefault();
 
+      const camp_id = campid.me_id;
+      const media_id={m_id:camp_id}
+
+      console.log("camp" + camp_id)
       const formData = {
+        camp_id,
         selectedDistrict,
         selectedTalukas,
         selectedVillages,
@@ -236,7 +243,7 @@ export const Campaigndetails = () => {
 
     alert('Data Saved');          
     
-          navigate('/module2');
+          navigate('/module2', {state:media_id});
         } else {
           alert('Failed to store data.');
         }

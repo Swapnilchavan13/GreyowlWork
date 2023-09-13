@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,14 +20,17 @@ export const Login = () => {
     try {
       const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/signup');
       const data = await response.json();
-
-      // Check if a user with the provided email exists and the password matches
+  
+      // Find the user with the provided email
       const user = data.find((userData) => userData.email === email);
-
+  
       if (user && user.password === password) {
         // Successfully logged in, navigate to the account page
+        const register_id= user._id
+        const iddata = { register_id: register_id}
         alert('Successfully Logged In');
-        navigate('/account');
+        console.log(iddata.register_id)
+        navigate(`/account`,{ state: iddata }); // Include the _id in the URL
       } else {
         setErrorMessage('Invalid email or password.');
       }
@@ -35,6 +39,7 @@ export const Login = () => {
       setErrorMessage('An error occurred. Please try again later.');
     }
   };
+  
 
   const createhandle = () => {
     navigate('/');
