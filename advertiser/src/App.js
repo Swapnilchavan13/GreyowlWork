@@ -9,6 +9,7 @@ import { Signup } from './Component/Signup';
 import { Login } from './Component/Login';
 import { Createown } from './Component/Createown';
 import { Addcreator } from './Component/Addcreator';
+import { Imgandvid } from './Component/Imgandvid';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Route path="/module2" element={<Module2 />}></Route>
       <Route path="/summary" element={<Summary />}></Route>
       <Route path="/usersummary" element={<Usersummary />}></Route>
+      <Route path="/slectedimgandvid" element={<Imgandvid />}></Route>
     </Routes>
   </BrowserRouter>
   );

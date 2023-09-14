@@ -194,7 +194,7 @@ export const Campaigndetails = () => {
       event.preventDefault();
 
       const camp_id = campid.me_id;
-      const media_id={m_id:camp_id}
+      const media_id={me_id:camp_id}
 
       console.log("camp" + camp_id)
       const formData = {
