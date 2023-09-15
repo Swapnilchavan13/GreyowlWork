@@ -70,6 +70,46 @@ export const Usersummary = () => {
       type: "Medical",
       subtype: ["Medical Store", "Hospital", "Nursing Homes", "Clinics"],
     },
+
+    {
+      type: "Real Estate",
+      subtype: [
+        "Residential",
+        "Commercial",
+        "Industrial",
+        "Vacation Properties",
+      ],
+    },
+  ];
+
+  var AddressCities = [
+    {
+      type: "Maharashtra",
+      subtype: ["Mumbai", "Pune", "Nagpur", "Nasik", "Aurangabad"],
+    },
+
+    {
+      type: "Punjab",
+      subtype: ["Ludhiana", "Amritsar", "Patiala", "Jalandhar", "Mohali"],
+    },
+
+    {
+      type: "Rajasthan",
+      subtype: ["Jaipur", "Jodhpur", "Bikaner", "Udaipur", "Alwar"],
+    },
+
+    {
+      type: "Madhya Pradesh",
+      subtype: [
+        "Bhopal",
+        "Gwalior",
+        "Jabalpur",
+        "Ujjain",
+        "Dewas",
+        "Satna",
+        "Indore",
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -451,7 +491,6 @@ export const Usersummary = () => {
     "60 Sec",
   ];
 
-
   return (
     <div style={{ padding: "10px" }}>
       <h1>User Campaign Summary</h1>
@@ -529,7 +568,7 @@ export const Usersummary = () => {
                   </span>
                 )}
               </div>
-              <br />
+              {/* <br /> */}
               <label>Description</label>
               <br />
               <input
@@ -544,39 +583,66 @@ export const Usersummary = () => {
               <br />
               <input
                 type="text"
-                value={editedData.address}
+                value={editedData.address1}
                 onChange={(e) =>
-                  setEditedData({ ...editedData, address: e.target.value })
+                  setEditedData({ ...editedData, address1: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                value={editedData.address2}
+                onChange={(e) =>
+                  setEditedData({ ...editedData, address2: e.target.value })
                 }
               />
               <br />
-              <label>State & City</label>
-              <br />
-              <select
-                name="state"
-                value={editedData.state}
-                onChange={(e) =>
-                  setEditedData({ ...editedData, state: e.target.value })
-                }
-              >
-                <option value="">select your State</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-              </select>
-              <select
-                name="city"
-                value={editedData.city}
-                onChange={(e) =>
-                  setEditedData({ ...editedData, city: e.target.value })
-                }
-              >
-                <option value="">select your city</option>
-                <option value="Aurangabad">Aurangabad</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Pune">Pune</option>
-              </select>
-              <br />
+              <div>
+                <label>State & City</label>
+                <br />
+                <select
+                  name="state"
+                  value={editedData.state} // Change to editedData.businessType1
+                  onChange={(e) =>
+                    setEditedData({
+                      ...editedData,
+                      state: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">Choose</option>
+                  {AddressCities.map((item) => (
+                    <option key={item.type} value={item.type}>
+                      {item.type}
+                    </option>
+                  ))}
+                </select>
+
+                {editedData.state && (
+                  <span>
+                    <select
+                      name="businessType2"
+                      value={editedData.city}
+                      onChange={(e) =>
+                        setEditedData({
+                          ...editedData,
+                          city: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="">Choose</option>
+                      {/* Use optional chaining to safely access the subtype array */}
+                      {AddressCities.find(
+                        (item) => item.type === editedData.state
+                      )?.subtype?.map((subtype) => (
+                        <option key={subtype} value={subtype}>
+                          {subtype}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
+                )}
+              </div>
+              {/* <br /> */}
               <label htmlFor="">Pincode</label> <br />
               <input
                 type="text"
@@ -586,7 +652,7 @@ export const Usersummary = () => {
                 }
               />
               <br />
-              <label htmlFor="">Contact Number</label> <br />
+              <label htmlFor="">Contact Person`s Name</label> <br />
               <input
                 type="text"
                 value={editedData.contactPerson}
@@ -598,7 +664,7 @@ export const Usersummary = () => {
                 }
               />
               <br />
-              <label htmlFor="">Email Id</label> <br />
+              <label htmlFor="">Cantact Person`s Email Id</label> <br />
               <input
                 type="text"
                 value={editedData.email}
@@ -607,7 +673,7 @@ export const Usersummary = () => {
                 }
               />
               <br />
-              <label htmlFor="">Other Contact Person</label> <br />
+              <label htmlFor="">Contact Person`s Phone Number</label> <br />
               <input
                 type="text"
                 value={editedData.phone}
@@ -616,12 +682,15 @@ export const Usersummary = () => {
                 }
               />
               <br />
-              <label htmlFor="">Etc</label> <br />
+              <label htmlFor="">Business Phone Number</label> <br />
               <input
                 type="text"
-                value={editedData.etc}
+                value={editedData.businessphone}
                 onChange={(e) =>
-                  setEditedData({ ...editedData, etc: e.target.value })
+                  setEditedData({
+                    ...editedData,
+                    businessphone: e.target.value,
+                  })
                 }
               />
               <br />
@@ -644,7 +713,9 @@ export const Usersummary = () => {
                   <br />
                   <strong>Description:</strong> {savedData.des}
                   <br />
-                  <strong>Address:</strong> {savedData.address}
+                  <strong>Address:</strong> {savedData.address1}
+                  <br />
+                  <strong></strong> {savedData.address2}
                   <br />
                   <strong>City:</strong> {savedData.city}
                   <br />
@@ -656,9 +727,9 @@ export const Usersummary = () => {
                   <br />
                   <strong>Email:</strong> {savedData.email}
                   <br />
-                  <strong>Phone:</strong> {savedData.phone}
+                  <strong>Person`s Phone:</strong> {savedData.phone}
                   <br />
-                  <strong>ETC:</strong> {savedData.etc}
+                  <strong>Business Phone:</strong> {savedData.businessphone}
                   <br />
                   {/* Add more fields here */}
                 </div>
@@ -1074,6 +1145,7 @@ export const Usersummary = () => {
               />
               <div>
                 <label htmlFor="tagline">Tagline:</label>
+                <br />
                 <input
                   type="text"
                   id="tagline"
@@ -1088,6 +1160,7 @@ export const Usersummary = () => {
               </div>
               <div>
                 <label htmlFor="description">Description:</label>
+                <br />
                 <textarea
                   id="description"
                   name="description"

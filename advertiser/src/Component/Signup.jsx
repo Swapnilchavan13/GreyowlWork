@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [cpassword, setCpassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -27,17 +27,18 @@ export const Signup = () => {
   };
 
   const handleLogin = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleSignup = async () => {
     // Validate the form fields
     if (!name || !email || !password || !cpassword) {
-      setErrorMessage('All fields are required.');
+      setErrorMessage("All fields are required.");
     } else if (password !== cpassword) {
-      setErrorMessage('Passwords do not match.');
+      setErrorMessage("Passwords do not match.");
     } else {
       try {
+        setErrorMessage("Failed to create an account.");
         // Create an object to represent the user data
         const userData = {
           name,
@@ -45,33 +46,35 @@ export const Signup = () => {
           password,
         };
         // Make a POST request to your API to save the user data
-        
-        const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
-        });
+
+        const response = await fetch(
+          "https://lonely-cow-life-jacket.cyclic.app/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          }
+        );
 
         // Check if the request was successful
         if (response.status === 201) {
-          alert('Account Is Created');
-          navigate('/login');
+          alert("Account Is Created");
+          navigate("/login");
         } else {
-          setErrorMessage('Failed to create an account.');
+          setErrorMessage("Failed to create an account.");
         }
       } catch (error) {
-        console.error('Error creating an account:', error);
-        setErrorMessage('Failed to create an account.');
+        console.error("Error creating an account:", error);
       }
 
       // Clear the form fields and error message after saving
-      setName('');
-      setEmail('');
-      setPassword('');
-      setCpassword('');
-      setErrorMessage('');
+      setName("");
+      setEmail("");
+      setPassword("");
+      setCpassword("");
+      setErrorMessage("");
     }
   };
 
