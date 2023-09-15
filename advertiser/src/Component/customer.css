@@ -40,6 +40,9 @@ video{
     width: 110px;
     margin: 5px;
 }
+button{
+    cursor: pointer;
+}
 .error{
     color: red;
 }

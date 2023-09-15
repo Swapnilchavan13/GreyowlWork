@@ -22,7 +22,7 @@ function App() {
       <Route path="/addcreator" element={<Addcreator />}></Route>
       <Route path="/createown" element={<Createown />}></Route>
       <Route path="/campaign" element={<Campaigndetails />}></Route>
-      <Route path="/module2" element={<Module2 />}></Route>
+      <Route path="/media" element={<Module2 />}></Route>
       <Route path="/summary" element={<Summary />}></Route>
       <Route path="/usersummary" element={<Usersummary />}></Route>
       <Route path="/slectedimgandvid" element={<Imgandvid />}></Route>
@@ -32,4 +32,3 @@ function App() {
 }
 
 export default App;
-  

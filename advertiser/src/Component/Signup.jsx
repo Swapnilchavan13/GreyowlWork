@@ -38,7 +38,7 @@ export const Signup = () => {
       setErrorMessage("Passwords do not match.");
     } else {
       try {
-        setErrorMessage("Failed to create an account.");
+        // setErrorMessage("Failed to create an account.");
         // Create an object to represent the user data
         const userData = {
           name,

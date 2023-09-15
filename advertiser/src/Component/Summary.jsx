@@ -138,7 +138,9 @@ export const Summary = () => {
                   <br />
                   <strong>Description:</strong> {data.des}
                   <br />
-                  <strong>Address:</strong> {data.address}
+                  <strong>Address:</strong> {data.address1}
+                  <br />
+                  <strong></strong> {data.address2}
                   <br />
                   <strong>City:</strong> {data.city}
                   <br />
@@ -150,9 +152,9 @@ export const Summary = () => {
                   <br />
                   <strong>Email:</strong> {data.email}
                   <br />
-                  <strong>Phone:</strong> {data.phone}
+                  <strong>Person`s Phone:</strong> {data.phone}
                   <br />
-                  <strong>ETC:</strong> {data.etc}
+                  <strong>Business Phone:</strong> {data.businessphone}
                   <br />
                   {/* Add more fields here */}
                   <button onClick={() => handleApproveTogglesum(data._id)}>

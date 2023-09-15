@@ -243,7 +243,7 @@ export const Campaigndetails = () => {
 
     alert('Data Saved');          
     
-          navigate('/module2', {state:media_id});
+          navigate('/media', {state:media_id});
         } else {
           alert('Failed to store data.');
         }

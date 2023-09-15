@@ -1132,6 +1132,7 @@ export const Usersummary = () => {
           {isEditingbuss ? (
             <div>
               <label htmlFor="businessName">Business Name:</label>
+              <br />
               <input
                 type="text"
                 id="businessName"
