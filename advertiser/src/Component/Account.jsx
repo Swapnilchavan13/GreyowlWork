@@ -172,7 +172,7 @@ export const Account = () => {
         <input
           type="text"
           name="year"
-          placeholder="Year Of Establishment Eg. 2026"
+          placeholder="Year Of Establishment Eg. 2012"
           value={formData.year}
           onChange={handleChange}
           required
@@ -324,7 +324,6 @@ export const Account = () => {
           required
         />
       </div>
-
       <br />
       <button
         className="create-button"
