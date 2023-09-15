@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
 
-
 const businessAdjectives = [
   'Reliable',
   'Innovative',
@@ -21,7 +20,6 @@ const businessAdjectives = [
   'Expert',
   'Customer-Oriented'
 ];
-
 
 const modelTypes = [
   'Female (18-25)',
@@ -121,7 +119,6 @@ export const Module2 = () => {
     }
   };
 
-
   const handleBusinessNameChange = (event) => {
     setBusinessName(event.target.value);
   };
@@ -158,10 +155,7 @@ export const Module2 = () => {
     event.preventDefault();
 
     ///////////////////////////
-      /////////////////////////////////////////////////////
-
-    
-    // Demo
+      
     // Create a new FormData object
     const data = new FormData();
   
@@ -175,18 +169,15 @@ export const Module2 = () => {
     const imageFields2 = [
       productPhotoOne, productPhotoTwo, productPhotoThree, productPhotoFour, productPhotoFive,
     ];
-  
     const videoFields = [
       storeVideoOne, storeVideoTwo, storeVideoThree, storeVideoFour,
     ];
     const videoFields2 = [
       productVideoOne, productVideoTwo, productVideoThree, productVideoFour,
     ];
-
     const numbsimg = [
       "one","two","three","four","five"
     ]
-  
     const numbsvid = [
       "one","two","three","four"
     ]
@@ -248,7 +239,6 @@ export const Module2 = () => {
 
           alert('Media data uploaded successfully');
         }
-
       }
     });
   
@@ -310,7 +300,6 @@ export const Module2 = () => {
     navigate('/usersummary');
   }
   
-  // };
   
   return (
   <div className='account-container'>
@@ -365,9 +354,7 @@ export const Module2 = () => {
         ))}
         <br />
         <br />
-
-        {/* /////////////////////////////////////// */}
-        <div>
+      <div>
 
 <h4>Media Upload App</h4>
 {/* <div>
@@ -386,7 +373,6 @@ export const Module2 = () => {
     accept="image/*"
     onChange={handleLogoChange}
   />
-  
 </div>
 <div>
   <h4>Store Photos (Max 5)</h4>
@@ -396,7 +382,6 @@ export const Module2 = () => {
     accept="image/*" 
     onChange={(event) => 
     handleImageChange(event, setStorePhotoOne)} />
-
   </div>
   <div>
     <input
@@ -404,18 +389,15 @@ export const Module2 = () => {
       name="store_photo_two"
       accept="image/*"
       onChange={(event) => handleImageChange(event, setStorePhotoTwo)}
-    />
-    
+    /> 
   </div>
   <div>
     <input
       type="file"
       accept="image/*"
       name="store_photo_three"
-
       onChange={(event) => handleImageChange(event, setStorePhotoThree)}
     />
-    
   </div>
   <div>
     <input
@@ -431,11 +413,9 @@ export const Module2 = () => {
     <input
       type="file"
       name="store_photo_five"
-
       accept="image/*"
       onChange={(event) => handleImageChange(event, setStorePhotoFive)}
     />
-   
   </div>
 </div>
 <div>
@@ -444,7 +424,6 @@ export const Module2 = () => {
 <input
 type="file"
 name="product_photo_one"
-
 accept="image/*"
 onChange={(event) => handleImageChange(event, setProductPhotoOne)}
 />
@@ -454,7 +433,6 @@ onChange={(event) => handleImageChange(event, setProductPhotoOne)}
 <input
 type="file"
 name="product_photo_two"
-
 accept="image/*"
 onChange={(event) => handleImageChange(event, setProductPhotoTwo)}
 />
@@ -464,7 +442,6 @@ onChange={(event) => handleImageChange(event, setProductPhotoTwo)}
 <input
 type="file"
 name="product_photo_three"
-
 accept="image/*"
 onChange={(event) => handleImageChange(event, setProductPhotoThree)}
 />
@@ -474,7 +451,6 @@ onChange={(event) => handleImageChange(event, setProductPhotoThree)}
 <input
 type="file"
 name="product_photo_four"
-
 accept="image/*"
 onChange={(event) => handleImageChange(event, setProductPhotoFour)}
 />
@@ -484,7 +460,6 @@ onChange={(event) => handleImageChange(event, setProductPhotoFour)}
 <input
 type="file"
 name="product_photo_five"
-
 accept="image/*"
 onChange={(event) => handleImageChange(event, setProductPhotoFive)}
 />
@@ -498,7 +473,6 @@ onChange={(event) => handleImageChange(event, setProductPhotoFive)}
 <input
 type="file"
 name="store_video_one"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setStoreVideoOne)}
 />
@@ -508,7 +482,6 @@ onChange={(event) => handleVideoChange(event, setStoreVideoOne)}
 <input
 type="file"
 name="store_video_two"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setStoreVideoTwo)}
 />
@@ -518,7 +491,6 @@ onChange={(event) => handleVideoChange(event, setStoreVideoTwo)}
 <input
 type="file"
 name="store_video_three"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setStoreVideoThree)}
 />
@@ -528,7 +500,6 @@ onChange={(event) => handleVideoChange(event, setStoreVideoThree)}
 <input
 type="file"
 name="store_video_four"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setStoreVideoFour)}
 />
@@ -542,7 +513,6 @@ onChange={(event) => handleVideoChange(event, setStoreVideoFour)}
 <input
 type="file"
 name="product_video_one"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setProductVideoOne)}
 />
@@ -552,7 +522,6 @@ onChange={(event) => handleVideoChange(event, setProductVideoOne)}
 <input
 type="file"
 name="product_video_two"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setProductVideoTwo)}
 />
@@ -562,7 +531,6 @@ onChange={(event) => handleVideoChange(event, setProductVideoTwo)}
 <input
   height="240"
 name="product_video_three"
-
 type="file"
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setProductVideoThree)}
@@ -573,11 +541,9 @@ onChange={(event) => handleVideoChange(event, setProductVideoThree)}
 <input
 type="file"
 name="product_video_four"
-
 accept="video/*"
 onChange={(event) => handleVideoChange(event, setProductVideoFour)}
 />
-
 </div>
 </div>
 
@@ -586,7 +552,6 @@ onChange={(event) => handleVideoChange(event, setProductVideoFour)}
 <br />
 
         {/* ////////////////////////////////////// */}
-
 
 <label>Choose Model Types For Your AD (Select any 2):</label>
         <br />

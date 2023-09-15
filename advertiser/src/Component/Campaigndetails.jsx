@@ -343,10 +343,8 @@ export const Campaigndetails = () => {
         </div>
        
       </div>
-          </label>
-
+        </label>
         </div>
-
         <div>
         <label>Customer Geography:</label>
         <div>
