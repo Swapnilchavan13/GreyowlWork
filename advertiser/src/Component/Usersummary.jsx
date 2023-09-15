@@ -1364,106 +1364,152 @@ export const Usersummary = () => {
 
                       <h3>Store Photos</h3>
                       <div className="photo-container">
-                        <img
-                          src={allMediaData.store_photo_one}
-                          alt="Store Photo 1"
-                        />
-                        <img
-                          src={allMediaData.store_photo_two}
-                          alt="Store Photo 2"
-                        />
-                        <img
-                          src={allMediaData.store_photo_three}
-                          alt="Store Photo 3"
-                        />
-                        <img
-                          src={allMediaData.store_photo_four}
-                          alt="Store Photo 4"
-                        />
-                        <img
-                          src={allMediaData.store_photo_five}
-                          alt="Store Photo 5"
-                        />
+                        {allMediaData.store_photo_one !== null ? (
+                          <img
+                            src={allMediaData.store_photo_one}
+                            alt="Store Photo 1"
+                          />
+                        ) : null}
+                        {allMediaData.store_photo_two !== null ? (
+                          <img
+                            src={allMediaData.store_photo_two}
+                            alt="Store Photo 2"
+                          />
+                        ) : null}
+
+                        {allMediaData.store_photo_three !== null ? (
+                          <img
+                            src={allMediaData.store_photo_three}
+                            alt="Store Photo 3"
+                          />
+                        ) : null}
+
+                        {allMediaData.store_photo_four !== null ? (
+                          <img
+                            src={allMediaData.store_photo_four}
+                            alt="Store Photo 4"
+                          />
+                        ) : null}
+
+                        {allMediaData.store_photo_five !== null ? (
+                          <img
+                            src={allMediaData.store_photo_five}
+                            alt="Store Photo 5"
+                          />
+                        ) : null}
                       </div>
 
                       <h3>Product Photos</h3>
                       <div className="photo-container">
-                        <img
-                          src={allMediaData.product_photo_one}
-                          alt="Product Photo 1"
-                        />
-                        <img
-                          src={allMediaData.product_photo_two}
-                          alt="Product Photo 2"
-                        />
-                        <img
-                          src={allMediaData.product_photo_three}
-                          alt="Product Photo 3"
-                        />
-                        <img
-                          src={allMediaData.product_photo_four}
-                          alt="Product Photo 4"
-                        />
-                        <img
-                          src={allMediaData.product_photo_five}
-                          alt="Product Photo 5"
-                        />
+                        {allMediaData.product_photo_one !== null ? (
+                          <img
+                            src={allMediaData.product_photo_one}
+                            alt="Product Photo 1"
+                          />
+                        ) : null}
+                        {allMediaData.product_photo_two !== null ? (
+                          <img
+                            src={allMediaData.product_photo_two}
+                            alt="Product Photo 2"
+                          />
+                        ) : null}
+                        {allMediaData.product_photo_three !== null ? (
+                          <img
+                            src={allMediaData.product_photo_three}
+                            alt="Product Photo 3"
+                          />
+                        ) : null}
+                        {allMediaData.product_photo_four !== null ? (
+                          <img
+                            src={allMediaData.product_photo_four}
+                            alt="Product Photo 4"
+                          />
+                        ) : null}
+
+                        {allMediaData.product_photo_five !== null ? (
+                          <img
+                            src={allMediaData.product_photo_five}
+                            alt="Product Photo 5"
+                          />
+                        ) : null}
                       </div>
 
                       <h3>Store Videos</h3>
                       <div className="video-container">
-                        <video controls>
-                          <source
-                            src={allMediaData.store_video_one}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <video controls>
-                          <source
-                            src={allMediaData.store_video_two}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <video controls>
-                          <source
-                            src={allMediaData.store_video_three}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <video controls>
-                          <source
-                            src={allMediaData.store_video_four}
-                            type="video/mp4"
-                          />
-                        </video>
+                        {allMediaData.store_video_one !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.store_video_one}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
+
+                        {allMediaData.store_video_two !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.store_video_two}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
+
+                        {allMediaData.store_video_three !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.store_video_three}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
+
+                        {allMediaData.store_video_four !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.store_video_four}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
                       </div>
 
                       <h3>Product Videos</h3>
                       <div className="video-container">
-                        <video controls>
-                          <source
-                            src={allMediaData.product_video_one}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <video controls>
-                          <source
-                            src={allMediaData.product_video_two}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <video controls>
-                          <source
-                            src={allMediaData.product_video_three}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <video controls>
-                          <source
-                            src={allMediaData.product_video_four}
-                            type="video/mp4"
-                          />
-                        </video>
+                        {allMediaData.product_video_one !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.product_video_one}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
+
+                        {allMediaData.product_video_two !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.product_video_two}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
+
+                        {allMediaData.product_video_three !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.product_video_three}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
+
+                        {allMediaData.product_video_four !== null ? (
+                          <video controls>
+                            <source
+                              src={allMediaData.product_video_four}
+                              type="video/mp4"
+                            />
+                          </video>
+                        ) : null}
                       </div>
                     </div>
                   </div>
