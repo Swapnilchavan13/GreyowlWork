@@ -260,8 +260,6 @@ export const Module2 = () => {
   
     // Send the FormData object with the XMLHttpRequest
     xhr.send(data);
-  
-
 
 ///////////////////////////////////////////
     const newData = {
@@ -274,7 +272,6 @@ export const Module2 = () => {
       selectedAdTypes,
       selectedDuration,
     };
-  
   
     try {
       setIssub(true);
