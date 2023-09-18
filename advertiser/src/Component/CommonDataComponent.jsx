@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-export const CommonDataComponent = () => {
+export const CommonDataComponent =() => {
   const [commonData, setCommonData] = useState([]);
-  const [data, setData] = useState([]);
-
 
   useEffect(() => {
     fetchData();
@@ -25,12 +23,6 @@ export const CommonDataComponent = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-
-    fetch("https://jsonplaceholder.typicode.com/users").then(responce => {
-        return responce.json()
-    }).then(data => setData(data)
-    )
-    console.log(data)
   };
   console.log(commonData)
 
@@ -38,20 +30,15 @@ export const CommonDataComponent = () => {
     <div>
       <h1>Common Data</h1>
       <ul>
-        {data.map((i) => {
-            <li key={i.id}>
-            <p>{data.name}</p>
-            </li>
-        })}
         {commonData.map((item) => (
           <li key={item._id}>
-            <p>Name: {item.name}</p>
-            <p>Description: {item.description}</p>
-            {/* Display other fields as needed */}
+            <p>Name (Business): {item.name}</p>
+            <p>Description (Business): {item.description}</p>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
 
