@@ -5,6 +5,7 @@ export const Iddata = () => {
   const navigate = useNavigate();
 
 const mainid = localStorage.getItem("mainid");
+
   const [savedData, setSavedData] = useState([]);
   const [campData, setCampdata] = useState([]);
   const [mediaData, setMediaData] = useState([]);
@@ -492,8 +493,18 @@ const mainid = localStorage.getItem("mainid");
     "60 Sec",
   ];
 
+const handlenextdata = () => {
+
+const register_id = localStorage.getItem("mainid");
+const iddata = { register_id: register_id };
+
+navigate(`/account`, { state: iddata });
+  }
+
   return (
     <div style={{ padding: "10px" }}>
+        <h1>To Fill The Information</h1>
+        <h3 onClick={handlenextdata}>click here to fill information</h3>
       <h1>Filled Data</h1>
       <button onClick={submit}>Submit</button>
       <div id="summary">
@@ -1358,13 +1369,13 @@ const mainid = localStorage.getItem("mainid");
                 <strong>Selected Duration:</strong> {mediaData.selectedDuration}
                 <br />
                 <div>
-                  <div className="media-display">
+                    <div className="media-display">
                     <div key={allMediaData.id}>
                       {/* <h2>Form ID: {allMediaData.form_id}</h2> */}
-                      <h3>Uploaded Logo</h3>
-                      <img src={allMediaData.upload_logo} alt="Logo" />
+                      {/* <h3>Uploaded Logo</h3>
+                      <img src={allMediaData.upload_logo} alt="Logo" /> */}
 
-                      <h3>Store Photos</h3>
+                      {/* <h3>Store Photos</h3>
                       <div className="photo-container">
                         {allMediaData.store_photo_one !== null ? (
                           <img
@@ -1399,9 +1410,9 @@ const mainid = localStorage.getItem("mainid");
                             alt="Store Photo 5"
                           />
                         ) : null}
-                      </div>
+                      </div> */}
 
-                      <h3>Product Photos</h3>
+                      {/* <h3>Product Photos</h3>
                       <div className="photo-container">
                         {allMediaData.product_photo_one !== null ? (
                           <img
@@ -1434,9 +1445,9 @@ const mainid = localStorage.getItem("mainid");
                             alt="Product Photo 5"
                           />
                         ) : null}
-                      </div>
+                      </div> */}
 
-                      <h3>Store Videos</h3>
+                      {/* <h3>Store Videos</h3>
                       <div className="video-container">
                         {allMediaData.store_video_one !== null ? (
                           <video controls>
@@ -1473,10 +1484,10 @@ const mainid = localStorage.getItem("mainid");
                             />
                           </video>
                         ) : null}
-                      </div>
+                      </div> */}
 
-                      <h3>Product Videos</h3>
-                      <div className="video-container">
+                      {/* <h3>Product Videos</h3> */}
+                      {/* <div className="video-container">
                         {allMediaData.product_video_one !== null ? (
                           <video controls>
                             <source
@@ -1512,7 +1523,7 @@ const mainid = localStorage.getItem("mainid");
                             />
                           </video>
                         ) : null}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
