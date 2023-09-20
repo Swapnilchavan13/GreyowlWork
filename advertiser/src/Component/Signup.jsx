@@ -62,7 +62,12 @@ export const Signup = () => {
         if (response.status === 201) {
           alert("Account Is Created");
           navigate("/login");
-        } else {
+        } 
+        if (response.status === 500) {
+          alert("Email is already Registerd");
+          // navigate("/login");
+        }
+        else {
           setErrorMessage("Failed to create an account.");
         }
       } catch (error) {
