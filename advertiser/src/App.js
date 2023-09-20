@@ -11,11 +11,12 @@ import { Createown } from './Component/Createown';
 import { Addcreator } from './Component/Addcreator';
 import { Imgandvid } from './Component/Imgandvid';
 import { CommonDataComponent } from './Component/CommonDataComponent';
+import { Iddata } from './Component/Iddata';
 
 
 function App() {
   return (
-    <BrowserRouter>
+  <BrowserRouter>
     <Routes>
       <Route path="/" element={<Signup />}></Route>
       <Route path="/account" element={<Account />}></Route>
@@ -28,8 +29,7 @@ function App() {
       <Route path="/usersummary" element={<Usersummary />}></Route>
       <Route path="/slectedimgandvid" element={<Imgandvid />}></Route>
       <Route path="/hi" element={<CommonDataComponent />}></Route>
-
-      
+      <Route path="/iddata" element={<Iddata />}></Route>      
     </Routes>
   </BrowserRouter>
   );

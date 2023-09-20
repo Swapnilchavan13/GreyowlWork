@@ -30,11 +30,15 @@ export const Login = () => {
         // Successfully logged in, navigate to the account page
         const register_id = user._id;
         const iddata = { register_id: register_id };
+        localStorage.setItem("mainid", register_id); 
         alert("Successfully Logged In");
         console.log(iddata.register_id);
-        navigate(`/account`, { state: iddata }); // Include the _id in the URL
-      } else {
-        setErrorMessage("Invalid email or password.");
+        // Save register_id in local storage
+        navigate("/iddata")
+        // navigate(`/account`, { state: iddata }); // Include the _id in the URL
+      }
+      else {
+        setErrorMessage("Invalid email or password");
       }
     } catch (error) {
       console.error("Error:", error);

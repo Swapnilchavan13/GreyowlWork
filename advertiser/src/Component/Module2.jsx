@@ -161,7 +161,11 @@ export const Module2 = () => {
   
     // Append individual form fields one by one if they have values
     data.append('form_id', formId);
-    data.append('upload_logo', uploadLogo);
+    // data.append('upload_logo', uploadLogo);
+
+    if (uploadLogo !== null) {
+      data.append('upload_logo', uploadLogo);
+    }
   
     const imageFields = [
       storePhotoOne, storePhotoTwo, storePhotoThree, storePhotoFour, storePhotoFive,
