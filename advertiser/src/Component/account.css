@@ -72,6 +72,6 @@
   padding: 20px;
   margin: auto;
 }
-li{
+li,.fill{
   cursor: pointer;
 }
