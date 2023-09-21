@@ -29,8 +29,11 @@ export const Login = () => {
       if (user && user.password === password) {
         // Successfully logged in, navigate to the account page
         const register_id = user._id;
+        const loginname = user.name;
+
         const iddata = { register_id: register_id };
         localStorage.setItem("mainid", register_id); 
+        localStorage.setItem("lname", loginname); 
         alert("Successfully Logged In");
         console.log(iddata.register_id);
         // Save register_id in local storage
