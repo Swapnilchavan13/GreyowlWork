@@ -521,7 +521,7 @@ navigate(`/account`, { state: iddata });
                 type="text"
                 value={editedData.name}
                 onChange={(e) =>
-                  setEditedData({ ...editedData, name: e.target.value })
+                setEditedData({ ...editedData, name: e.target.value })
                 }
               />
               <br />
@@ -531,7 +531,7 @@ navigate(`/account`, { state: iddata });
                 type="text"
                 value={editedData.year}
                 onChange={(e) =>
-                  setEditedData({ ...editedData, year: e.target.value })
+                setEditedData({ ...editedData, year: e.target.value })
                 }
               />
               <br />
