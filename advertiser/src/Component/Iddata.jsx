@@ -502,6 +502,22 @@ const iddata = { register_id: register_id };
 navigate(`/account`, { state: iddata });
   }
 
+
+  const handlaccount = () => {
+
+    const register_id = localStorage.getItem("mainid");
+    const iddata = { register_id: register_id };
+    
+    navigate(`/account`, { state: iddata });
+      }
+
+
+      const handladd = () => {
+        const register_id = localStorage.getItem("mainid");
+        const campiddata = { register_id: register_id };
+        navigate("/addcreator", { state: campiddata });
+          }
+
   return (
     <div style={{ padding: "10px" }}>
         <h1>Hello 👋 {lname} To Fill The Information</h1>
@@ -751,7 +767,10 @@ navigate(`/account`, { state: iddata });
                 <button onClick={handleEdit}>Edit</button>
                 </div>
               </ul>
-              : <h1>No Data Found</h1> }
+              : <div>
+                <h1>No Data Found</h1>
+                <button onClick={handlaccount}>Fill Information</button> 
+               </div>}
               </div>
               )}
               </div>
@@ -1142,7 +1161,10 @@ navigate(`/account`, { state: iddata });
                 <br />
                 <button onClick={handleEditCamp}>Edit</button>
               </div>
-              : <h1>No Data Found</h1> }
+              : <div>
+                <h1>No Data Found</h1>
+                <button onClick={handladd}>Fill Information</button> 
+               </div>}
               </ul>
           )}
         </div>
@@ -1538,7 +1560,10 @@ navigate(`/account`, { state: iddata });
                 </div>
                 <button onClick={handleEditBuss}>Edit</button>
               </div>
-              : <h1>No Data Found</h1> }
+              : <div>
+              <h1>No Data Found</h1>
+              <button>Fill Information</button> 
+             </div>}
               </ul>
           )}
         </div>
