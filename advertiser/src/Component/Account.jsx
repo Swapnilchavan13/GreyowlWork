@@ -9,10 +9,6 @@ export const Account = () => {
   const iddata = location.state;
 
   const navigate = useNavigate();
-
-  const [businessPhone, setBusinessPhone] = useState('');
-  const [error, setError] = useState('');
-
   const [isSaving, setIsSaving] = useState(false);
 
   var Btype = [
@@ -117,21 +113,6 @@ export const Account = () => {
   });
 
   const handleChange = (e) => {
-    const inputValue = e.target.value;
-
-    // Remove any non-digit characters and spaces from the input
-    const digitsOnly = inputValue.replace(/\D/g, '');
-
-    // Check if the input contains more than 10 digits
-    if (digitsOnly.length > 10) {
-      setBusinessPhone(digitsOnly.slice(0, 10)); // Truncate to 10 digits
-      setError('Business phone number should not exceed 10 digits.');
-    } else {
-      setBusinessPhone(digitsOnly);
-      setError('');
-    }
-
-
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -310,20 +291,18 @@ export const Account = () => {
           required
         />
       </div>
-    <div>
-      <label htmlFor="businessphone">Enter Your Business Phone Number:</label>
-      <input
-        type="text"
-        id="businessphone"
-        name="businessphone"
-        placeholder="Enter Your Business Phone Number"
-        value={businessPhone}
-        onChange={handleChange}
-        required
-      />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
-
+      <div>
+        <label>Enter Business Phone Number</label>
+        <br />
+        <input
+          type="businessnumber"
+          name="businessphone"
+          pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+          placeholder="Enter Your Business Phone Number"
+          onChange={handleChange}
+          required
+        />
+      </div>
       <div>
         <label>Contact Person`s Email Id</label>
         <br />

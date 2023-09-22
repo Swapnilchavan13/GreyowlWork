@@ -508,6 +508,7 @@ navigate(`/account`, { state: iddata });
         <h3 className="fill" onClick={handlenextdata}>👉 Click here to fill information 👈</h3>
       <h1>Filled Information</h1>
       <button onClick={submit}>Submit</button>
+      <br />
       <div id="summary">
         {/* Create Account */}
         <div>
@@ -714,6 +715,7 @@ navigate(`/account`, { state: iddata });
             </div>
           ) : (
             <div>
+            {savedData.name ? 
               <ul>
                 <div className="main">
                   <strong>Name:</strong> {savedData.name}
@@ -744,13 +746,15 @@ navigate(`/account`, { state: iddata });
                   <br />
                   <strong>Business Phone:</strong> {savedData.businessphone}
                   <br />
+                  <br />
                   {/* Add more fields here */}
+                <button onClick={handleEdit}>Edit</button>
                 </div>
               </ul>
-              <button onClick={handleEdit}>Edit</button>
-            </div>
-          )}
-        </div>
+              : <h1>No Data Found</h1> }
+              </div>
+              )}
+              </div>
         {/* Campaign Data */}
         <div>
           <h3>Campaign Elements</h3>
@@ -1090,6 +1094,7 @@ navigate(`/account`, { state: iddata });
             </div>
           ) : (
             <ul>
+            {campData.budget ? 
               <div className="main">
                 <strong>Selected District:</strong> {campData.selectedDistrict}
                 <br />
@@ -1134,9 +1139,11 @@ navigate(`/account`, { state: iddata });
                 <strong>Detail:</strong> {campData.detail}
                 <br />
                 {/* Add more fields here */}
+                <br />
+                <button onClick={handleEditCamp}>Edit</button>
               </div>
-              <button onClick={handleEditCamp}>Edit</button>
-            </ul>
+              : <h1>No Data Found</h1> }
+              </ul>
           )}
         </div>
         {/* Business Data */}
@@ -1342,6 +1349,7 @@ navigate(`/account`, { state: iddata });
             </div>
           ) : (
             <ul>
+            {mediaData.businessName ? 
               <div className="main">
                 <strong>Business Name:</strong> {mediaData.businessName}
                 <br />
@@ -1513,8 +1521,7 @@ navigate(`/account`, { state: iddata });
                               src={allMediaData.product_video_three}
                               type="video/mp4"
                             />
-                          </video>
-                        ) : null}
+                            ) : null}
 
                         {allMediaData.product_video_four !== null ? (
                           <video controls>
@@ -1523,15 +1530,16 @@ navigate(`/account`, { state: iddata });
                               type="video/mp4"
                             />
                           </video>
+                            </video>
                         ) : null}
                       </div> */}
                     </div>
                   </div>
                 </div>
+                <button onClick={handleEditBuss}>Edit</button>
               </div>
-
-              <button onClick={handleEditBuss}>Edit</button>
-            </ul>
+              : <h1>No Data Found</h1> }
+              </ul>
           )}
         </div>
       </div>
