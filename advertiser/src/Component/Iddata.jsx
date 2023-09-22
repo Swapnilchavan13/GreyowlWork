@@ -513,11 +513,10 @@ navigate(`/account`, { state: iddata });
     navigate(`/account`, { state: iddata });
       }
 
-
       const handladd = () => {
-        const register_id = localStorage.getItem("mainid");
-        const campiddata = { register_id: register_id };
-        navigate("/addcreator", { state: campiddata });
+        const camp_id = localStorage.getItem("mainid");
+        const campiddata = { camp_id: camp_id };
+        navigate("/campaign", { state: campiddata });
           }
 
   return (
