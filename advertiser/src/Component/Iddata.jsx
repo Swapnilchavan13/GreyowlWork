@@ -178,9 +178,11 @@ const lname = localStorage.getItem("lname")
   }, [mainid]);
 
   const submit = () => {
-    alert("Thank You");
+    alert("Logout successful");
+    localStorage.clear(); // This clears all data from local storage
     navigate("/");
-  };
+};
+
 
   // Function to handle inline editing
   const handleEdit = () => {
@@ -523,7 +525,7 @@ navigate(`/account`, { state: iddata });
         <h1>Hello 👋 {lname}</h1>
         <h3 className="fill" onClick={handlenextdata}>🌟👉 Click here to fill information 👈🌟</h3>
       <h1>Filled Information 👇👇👇</h1>
-      <button onClick={submit}>Submit</button>
+      <button onClick={submit}>Logout</button>
       <br />
       <div id="summary">
         {/* Create Account */}
