@@ -176,7 +176,7 @@ export const Usersummary = () => {
 
   const submit = () => {
     alert("Thank You");
-    navigate("/");
+    navigate("/iddata");
   };
 
   // Function to handle inline editing
