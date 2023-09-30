@@ -7,7 +7,7 @@ export const Createown = () => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const resultsPerPage = 36;
+  const resultsPerPage = 100;
 
   useEffect(() => {
     const apikey = 'en7mrb3c4adwv9k99reqhcur';
@@ -42,8 +42,8 @@ export const Createown = () => {
   const handleQChange = (e) => {
     setQuery(e.target.value);
   };
-  const handlePageChange = (currentPage) => {
-    setCurrentPage(currentPage + 1);
+  const handlePageChange = (prev) => {
+    setCurrentPage(prev + 1);
   };
 
   const totalPages = Math.ceil(photos.length / resultsPerPage);
