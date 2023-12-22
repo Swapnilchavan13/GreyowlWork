@@ -6,9 +6,33 @@ export const Admin = () => {
   const [addressData, setAddressData] = useState(null);
   const [campaignData, setCampaignData] = useState(null);
   const [businessData, setBusinessData] = useState(null);
+  const [mediaData, setMediaData] = useState(null);
+
   const [viewMode, setViewMode] = useState(null); // 'address' or 'campaign'
 
-  const [mediaData, setMediaData] = useState([]);
+
+// Function to render videos
+const renderVideos = (media, videoType) => {
+  const videoKeys = [
+    `${videoType}_video_one`,
+    `${videoType}_video_two`,
+    `${videoType}_video_three`,
+    `${videoType}_video_four`,
+  ];
+
+  return videoKeys.map((key, index) => {
+    const videoUrl = media[key];
+    return videoUrl ? (
+      <div key={index}>
+        <h4>Video {index + 1}</h4>
+        <video width="320" height="240" controls>
+          <source src={videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    ) : null;
+  });
+};
 
 
 
@@ -27,13 +51,13 @@ export const Admin = () => {
   };
 
   const handleCampaignClick = (userId) => {
-    fetchCampaignData(userId);
     setViewMode('campaign');
   };
 
   const handleBusinessClick = (userId) => {
     setSelectedUserId(userId);
     fetchBusinessData(userId);
+    fetchCampaignData(userId);
     setViewMode('business');
   };
 
@@ -55,18 +79,29 @@ export const Admin = () => {
   const fetchBusinessData = (userId) => {
     fetch(`http://localhost:3000/business/${userId}`)
       .then(response => response.json())
-      .then(data => setBusinessData(data))
+      .then(businessData => {
+        setBusinessData(businessData);
+  
+        const miid = businessData[0].mi;
+        // console.log('MIID:', miid);
+  
+        // Fetch data from the media details API
+        fetch('http://62.72.59.146:8005/business-details-media/')
+          .then(response => response.json())
+          .then(mediaDetailsData => {
+            // Filter the media data based on the miid
+            const filteredMediaData = mediaDetailsData.data.filter(media => media.form_id.toString() === miid.toString());
+  
+            // Update the state or handle the filtered data as required
+            setMediaData(filteredMediaData);
+  
+            // console.log('Filtered Media Data:', filteredMediaData);
+          })
+          .catch(error => console.error('Error fetching media details data:', error));
+      })
       .catch(error => console.error('Error fetching business data:', error));
   };
-
-  const fetchMediaData = () => {
-    fetch('http://62.72.59.146:8005/business-details-media/')
-      .then(response => response.json())
-      .then(data => setMediaData(data.data))
-      .catch(error => console.error('Error fetching media data:', error));
-    };
-    console.log(mediaData[mediaData.length-1].id+1);
-
+  
 
   return (
     <div>
@@ -90,26 +125,11 @@ export const Admin = () => {
                 <button onClick={() => handleUserClick(user._id)}>View Address</button>
                 <button onClick={() => handleCampaignClick(user._id)}>View Campaign</button>
                 <button onClick={() => handleBusinessClick(user._id)}>View Business</button>
-                <button onClick={fetchMediaData}>Load Media Data</button>
-
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-
-      {mediaData.map((item, index) => (
-        <div key={index}>
-          <img src={item.upload_logo} alt="Logo" />
-          <img src={item.store_photo_one} alt="Store Photo 1" />
-          {/* ... Render other images similarly */}
-          {/* Render videos if they exist */}
-          {item.store_video_one && <video src={item.store_video_one} controls />}
-          {/* ... Render other videos similarly */}
-        </div>
-      ))}
-
 
       {viewMode === 'address' && addressData && Array.isArray(addressData) && (
         <div>
@@ -172,6 +192,38 @@ export const Admin = () => {
               <p>Tagline: {business.tagline}</p>
             </div>
           ))}
+           {mediaData && (
+      <div>
+        <h3>Media Data:</h3>
+        {/* Example: Render the upload_logo image */}
+        <h3>Logo Image</h3>
+        {mediaData[0].upload_logo && <img src={mediaData[0].upload_logo} alt="Logo" />}
+
+        <h3>Product Photos</h3>
+
+        {mediaData[0].product_photo_one && <img src={mediaData[0].product_photo_one} alt="one" />}
+        {mediaData[0].product_photo_two && <img src={mediaData[0].product_photo_two} alt="two" />}
+        {mediaData[0].product_photo_three && <img src={mediaData[0].product_photo_three} alt="three" />}
+        {mediaData[0].product_photo_four && <img src={mediaData[0].product_photo_four} alt="four" />}
+        {mediaData[0].product_photo_five && <img src={mediaData[0].product_photo_five} alt="five" />}
+
+<h3>Store Photos</h3>
+
+        {mediaData[0].store_photo_one && <img src={mediaData[0].store_photo_one} alt="Logo" />}
+        {mediaData[0].store_photo_two && <img src={mediaData[0].store_photo_two} alt="Logo" />}
+        {mediaData[0].store_photo_three && <img src={mediaData[0].store_photo_three} alt="Logo" />}
+        {mediaData[0].store_photo_four && <img src={mediaData[0].store_photo_four} alt="Logo" />}
+        {mediaData[0].store_photo_five && <img src={mediaData[0].store_photo_five} alt="Logo" />}
+
+
+ <h3>Store Videos</h3>
+        {renderVideos(mediaData[0], 'store')}
+
+  <h3>Product Videos</h3>
+        {renderVideos(mediaData[0], 'product')}
+
+      </div>
+    )}
         </div>
       )}
     </div>

@@ -53,14 +53,12 @@ export const Module2 = () => {
   const location = useLocation();
   const media_id = location.state;
 
-  const mi= localStorage.getItem('mainid')
-
   const me_id= media_id.me_id
   // console.log ("hello me id" +me_id)
   const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
 
   ////////////////////////
-  const [formId, setFormId] = useState(mi);
+  const [formId, setFormId] = useState(Date.now());
   const [uploadLogo, setUploadLogo] = useState(null);
   const [productPhotoFive, setProductPhotoFive] = useState(null);
   const [storePhotoOne, setStorePhotoOne] = useState(null);
@@ -104,6 +102,7 @@ export const Module2 = () => {
   const [isSub, setIssub] = useState(false)
 
   const [businessName, setBusinessName] = useState('');
+  const [mi, setMi] = useState(Date.now());
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
   const [selectedAdjectives, setSelectedAdjectives] = useState([]);
@@ -260,6 +259,7 @@ export const Module2 = () => {
 ///////////////////////////////////////////
     const newData = {
       media_id: me_id,
+      mi,
       businessName,
       tagline,
       description,
@@ -271,7 +271,7 @@ export const Module2 = () => {
   
     try {
       setIssub(true);
-      const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/business', {
+      const response = await fetch('http://localhost:3000/business', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
