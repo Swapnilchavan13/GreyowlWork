@@ -11,6 +11,21 @@ export const Admin = () => {
   const [viewMode, setViewMode] = useState(null); // 'address' or 'campaign'
 
 
+  const isMediaAvailable = (media) => {
+    if (!media || media.length === 0) return false;
+  
+    const mediaKeys = [
+      'upload_logo',
+      'product_photo_one', 'product_photo_two', 'product_photo_three', 'product_photo_four', 'product_photo_five',
+      'store_photo_one', 'store_photo_two', 'store_photo_three', 'store_photo_four', 'store_photo_five',
+      'store_video_one', 'store_video_two', 'store_video_three', 'store_video_four',
+      'product_video_one', 'product_video_two', 'product_video_three', 'product_video_four',
+    ];
+  
+    return mediaKeys.some(key => media[0][key]);
+  };
+  
+
 // Function to render videos
 const renderVideos = (media, videoType) => {
   const videoKeys = [
@@ -192,38 +207,44 @@ const renderVideos = (media, videoType) => {
               <p>Tagline: {business.tagline}</p>
             </div>
           ))}
-           {mediaData && (
+        
+
+        
+    {mediaData && isMediaAvailable(mediaData) ? (
       <div>
         <h3>Media Data:</h3>
-        {/* Example: Render the upload_logo image */}
         <h3>Logo Image</h3>
         {mediaData[0].upload_logo && <img src={mediaData[0].upload_logo} alt="Logo" />}
 
         <h3>Product Photos</h3>
-
         {mediaData[0].product_photo_one && <img src={mediaData[0].product_photo_one} alt="one" />}
         {mediaData[0].product_photo_two && <img src={mediaData[0].product_photo_two} alt="two" />}
         {mediaData[0].product_photo_three && <img src={mediaData[0].product_photo_three} alt="three" />}
         {mediaData[0].product_photo_four && <img src={mediaData[0].product_photo_four} alt="four" />}
         {mediaData[0].product_photo_five && <img src={mediaData[0].product_photo_five} alt="five" />}
 
-<h3>Store Photos</h3>
-
+        <h3>Store Photos</h3>
         {mediaData[0].store_photo_one && <img src={mediaData[0].store_photo_one} alt="Logo" />}
         {mediaData[0].store_photo_two && <img src={mediaData[0].store_photo_two} alt="Logo" />}
         {mediaData[0].store_photo_three && <img src={mediaData[0].store_photo_three} alt="Logo" />}
         {mediaData[0].store_photo_four && <img src={mediaData[0].store_photo_four} alt="Logo" />}
         {mediaData[0].store_photo_five && <img src={mediaData[0].store_photo_five} alt="Logo" />}
 
-
- <h3>Store Videos</h3>
+        <h3>Store Videos</h3>
         {renderVideos(mediaData[0], 'store')}
 
-  <h3>Product Videos</h3>
+        <h3>Product Videos</h3>
         {renderVideos(mediaData[0], 'product')}
-
       </div>
-    )}
+    ) : (
+      <div>
+        <h3>No media added</h3>
+      </div>
+)}
+
+
+
+
         </div>
       )}
     </div>
