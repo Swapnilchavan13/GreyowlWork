@@ -10,7 +10,6 @@ export const Campaigndetails = () => {
 
   const [isSubmit, setIssubmit] = useState(false);
 
-
   var districtsData  = [
     {
       "district": "Mumbai",

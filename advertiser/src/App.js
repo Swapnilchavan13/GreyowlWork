@@ -11,6 +11,7 @@ import { Createown } from './Component/Createown';
 import { Addcreator } from './Component/Addcreator';
 import { Imgandvid } from './Component/Imgandvid';
 import { Iddata } from './Component/Iddata';
+import { Admin } from './Component/Admin';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
       <Route path="/summary" element={<Summary />}></Route>
       <Route path="/usersummary" element={<Usersummary />}></Route>
       <Route path="/slectedimgandvid" element={<Imgandvid />}></Route>
-      <Route path="/iddata" element={<Iddata />}></Route>      
+      <Route path="/iddata" element={<Iddata />}></Route>    
+      <Route path="/admin" element={<Admin />}></Route>      
     </Routes>
   </BrowserRouter>
   );
