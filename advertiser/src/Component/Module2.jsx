@@ -53,12 +53,14 @@ export const Module2 = () => {
   const location = useLocation();
   const media_id = location.state;
 
+  const mi= localStorage.getItem('mainid')
+
   const me_id= media_id.me_id
   // console.log ("hello me id" +me_id)
   const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
 
   ////////////////////////
-  const [formId, setFormId] = useState(Date.now());
+  const [formId, setFormId] = useState(mi);
   const [uploadLogo, setUploadLogo] = useState(null);
   const [productPhotoFive, setProductPhotoFive] = useState(null);
   const [storePhotoOne, setStorePhotoOne] = useState(null);

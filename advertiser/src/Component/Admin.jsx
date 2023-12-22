@@ -8,6 +8,9 @@ export const Admin = () => {
   const [businessData, setBusinessData] = useState(null);
   const [viewMode, setViewMode] = useState(null); // 'address' or 'campaign'
 
+  const [mediaData, setMediaData] = useState([]);
+
+
 
   useEffect(() => {
     fetch('http://localhost:3000/signup')
@@ -56,6 +59,15 @@ export const Admin = () => {
       .catch(error => console.error('Error fetching business data:', error));
   };
 
+  const fetchMediaData = () => {
+    fetch('http://62.72.59.146:8005/business-details-media/')
+      .then(response => response.json())
+      .then(data => setMediaData(data.data))
+      .catch(error => console.error('Error fetching media data:', error));
+    };
+    console.log(mediaData[mediaData.length-1].id+1);
+
+
   return (
     <div>
       <h1>Admin Dashboard</h1>
@@ -78,11 +90,26 @@ export const Admin = () => {
                 <button onClick={() => handleUserClick(user._id)}>View Address</button>
                 <button onClick={() => handleCampaignClick(user._id)}>View Campaign</button>
                 <button onClick={() => handleBusinessClick(user._id)}>View Business</button>
+                <button onClick={fetchMediaData}>Load Media Data</button>
+
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+
+      {mediaData.map((item, index) => (
+        <div key={index}>
+          <img src={item.upload_logo} alt="Logo" />
+          <img src={item.store_photo_one} alt="Store Photo 1" />
+          {/* ... Render other images similarly */}
+          {/* Render videos if they exist */}
+          {item.store_video_one && <video src={item.store_video_one} controls />}
+          {/* ... Render other videos similarly */}
+        </div>
+      ))}
+
 
       {viewMode === 'address' && addressData && Array.isArray(addressData) && (
         <div>
