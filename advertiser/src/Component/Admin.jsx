@@ -13,7 +13,7 @@ export const Admin = () => {
 
   const isMediaAvailable = (media) => {
     if (!media || media.length === 0) return false;
-  
+
     const mediaKeys = [
       'upload_logo',
       'product_photo_one', 'product_photo_two', 'product_photo_three', 'product_photo_four', 'product_photo_five',
@@ -21,35 +21,32 @@ export const Admin = () => {
       'store_video_one', 'store_video_two', 'store_video_three', 'store_video_four',
       'product_video_one', 'product_video_two', 'product_video_three', 'product_video_four',
     ];
-  
+
     return mediaKeys.some(key => media[0][key]);
   };
-  
 
-// Function to render videos
-const renderVideos = (media, videoType) => {
-  const videoKeys = [
-    `${videoType}_video_one`,
-    `${videoType}_video_two`,
-    `${videoType}_video_three`,
-    `${videoType}_video_four`,
-  ];
+  // Function to render videos
+  const renderVideos = (media, videoType) => {
+    const videoKeys = [
+      `${videoType}_video_one`,
+      `${videoType}_video_two`,
+      `${videoType}_video_three`,
+      `${videoType}_video_four`,
+    ];
 
-  return videoKeys.map((key, index) => {
-    const videoUrl = media[key];
-    return videoUrl ? (
-      <div key={index}>
-        <h4>Video {index + 1}</h4>
-        <video width="320" height="240" controls>
-          <source src={videoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    ) : null;
-  });
-};
-
-
+    return videoKeys.map((key, index) => {
+      const videoUrl = media[key];
+      return videoUrl ? (
+        <div key={index}>
+          <h4>Video {index + 1}</h4>
+          <video width="320" height="240" controls>
+            <source src={videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ) : null;
+    });
+  };
 
   useEffect(() => {
     fetch('http://localhost:3000/signup')
@@ -96,27 +93,19 @@ const renderVideos = (media, videoType) => {
       .then(response => response.json())
       .then(businessData => {
         setBusinessData(businessData);
-  
         const miid = businessData[0].mi;
-        // console.log('MIID:', miid);
-  
+
         // Fetch data from the media details API
         fetch('http://62.72.59.146:8005/business-details-media/')
           .then(response => response.json())
           .then(mediaDetailsData => {
-            // Filter the media data based on the miid
             const filteredMediaData = mediaDetailsData.data.filter(media => media.form_id.toString() === miid.toString());
-  
-            // Update the state or handle the filtered data as required
             setMediaData(filteredMediaData);
-  
-            // console.log('Filtered Media Data:', filteredMediaData);
           })
           .catch(error => console.error('Error fetching media details data:', error));
       })
       .catch(error => console.error('Error fetching business data:', error));
   };
-  
 
   return (
     <div>
@@ -173,27 +162,25 @@ const renderVideos = (media, videoType) => {
         <div>
           <h2>Campaign Details for User ID: {selectedUserId}</h2>
           {campaignData.map(campaign => (
-            <div key={campaign._id}>       
-        <p>Detail: {campaign.detail}</p>
-        <p>Budget: {campaign.budget}</p>
-        <p>Selected Villages: {campaign.selectedVillages.join(', ')}</p>
-        <p>Selected Talukas: {campaign.selectedTalukas.join(', ')}</p>
-        <p>Selected Ranges: {campaign.selectedRanges.join(', ')}</p>
-        <p>Selected Genders: {campaign.selectedGenders.join(', ')}</p>
-        <p>Selected District: {campaign.selectedDistrict}</p>
-        <p>Selected Attributes: {campaign.selectedAttributes.join(', ')}</p>
-        <p>Range: {campaign.range}</p>
-        <p>Media Video: {campaign.mediaVideo ? 'Yes' : 'No'}</p>
-        <p>Media Slide: {campaign.mediaSlide ? 'Yes' : 'No'}</p>
-        <p>Media 3D: {campaign.media3D ? 'Yes' : 'No'}</p>
-      </div>
-
+            <div key={campaign._id}>
+              <p>Detail: {campaign.detail}</p>
+              <p>Budget: {campaign.budget}</p>
+              <p>Selected Villages: {campaign.selectedVillages.join(', ')}</p>
+              <p>Selected Talukas: {campaign.selectedTalukas.join(', ')}</p>
+              <p>Selected Ranges: {campaign.selectedRanges.join(', ')}</p>
+              <p>Selected Genders: {campaign.selectedGenders.join(', ')}</p>
+              <p>Selected District: {campaign.selectedDistrict}</p>
+              <p>Selected Attributes: {campaign.selectedAttributes.join(', ')}</p>
+              <p>Range: {campaign.range}</p>
+              <p>Media Video: {campaign.mediaVideo ? 'Yes' : 'No'}</p>
+              <p>Media Slide: {campaign.mediaSlide ? 'Yes' : 'No'}</p>
+              <p>Media 3D: {campaign.media3D ? 'Yes' : 'No'}</p>
+            </div>
           ))}
         </div>
       )}
 
-
-{viewMode === 'business' && businessData && Array.isArray(businessData) && (
+      {viewMode === 'business' && businessData && Array.isArray(businessData) && (
         <div>
           <h2>Business Details for User ID: {selectedUserId}</h2>
           {businessData.map(business => (
@@ -207,44 +194,38 @@ const renderVideos = (media, videoType) => {
               <p>Tagline: {business.tagline}</p>
             </div>
           ))}
-        
 
-        
-    {mediaData && isMediaAvailable(mediaData) ? (
-      <div>
-        <h3>Media Data:</h3>
-        <h3>Logo Image</h3>
-        {mediaData[0].upload_logo && <img src={mediaData[0].upload_logo} alt="Logo" />}
+          {mediaData && isMediaAvailable(mediaData) ? (
+            <div>
+              <h3>Media Data:</h3>
+              <h3>Logo Image</h3>
+              {mediaData[0].upload_logo && <img src={mediaData[0].upload_logo} alt="Logo" />}
 
-        <h3>Product Photos</h3>
-        {mediaData[0].product_photo_one && <img src={mediaData[0].product_photo_one} alt="one" />}
-        {mediaData[0].product_photo_two && <img src={mediaData[0].product_photo_two} alt="two" />}
-        {mediaData[0].product_photo_three && <img src={mediaData[0].product_photo_three} alt="three" />}
-        {mediaData[0].product_photo_four && <img src={mediaData[0].product_photo_four} alt="four" />}
-        {mediaData[0].product_photo_five && <img src={mediaData[0].product_photo_five} alt="five" />}
+              <h3>Product Photos</h3>
+              {mediaData[0].product_photo_one && <img src={mediaData[0].product_photo_one} alt="one" />}
+              {mediaData[0].product_photo_two && <img src={mediaData[0].product_photo_two} alt="two" />}
+              {mediaData[0].product_photo_three && <img src={mediaData[0].product_photo_three} alt="three" />}
+              {mediaData[0].product_photo_four && <img src={mediaData[0].product_photo_four} alt="four" />}
+              {mediaData[0].product_photo_five && <img src={mediaData[0].product_photo_five} alt="five" />}
 
-        <h3>Store Photos</h3>
-        {mediaData[0].store_photo_one && <img src={mediaData[0].store_photo_one} alt="Logo" />}
-        {mediaData[0].store_photo_two && <img src={mediaData[0].store_photo_two} alt="Logo" />}
-        {mediaData[0].store_photo_three && <img src={mediaData[0].store_photo_three} alt="Logo" />}
-        {mediaData[0].store_photo_four && <img src={mediaData[0].store_photo_four} alt="Logo" />}
-        {mediaData[0].store_photo_five && <img src={mediaData[0].store_photo_five} alt="Logo" />}
+              <h3>Store Photos</h3>
+              {mediaData[0].store_photo_one && <img src={mediaData[0].store_photo_one} alt="Logo" />}
+              {mediaData[0].store_photo_two && <img src={mediaData[0].store_photo_two} alt="Logo" />}
+              {mediaData[0].store_photo_three && <img src={mediaData[0].store_photo_three} alt="Logo" />}
+              {mediaData[0].store_photo_four && <img src={mediaData[0].store_photo_four} alt="Logo" />}
+              {mediaData[0].store_photo_five && <img src={mediaData[0].store_photo_five} alt="Logo" />}
 
-        <h3>Store Videos</h3>
-        {renderVideos(mediaData[0], 'store')}
+              <h3>Store Videos</h3>
+              {renderVideos(mediaData[0], 'store')}
 
-        <h3>Product Videos</h3>
-        {renderVideos(mediaData[0], 'product')}
-      </div>
-    ) : (
-      <div>
-        <h3>No media added</h3>
-      </div>
-)}
-
-
-
-
+              <h3>Product Videos</h3>
+              {renderVideos(mediaData[0], 'product')}
+            </div>
+          ) : (
+            <div>
+              <h3>No media added</h3>
+            </div>
+          )}
         </div>
       )}
     </div>
