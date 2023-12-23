@@ -192,7 +192,6 @@ function Demo() {
             type="file"
             accept="image/*"
             name="store_photo_three"
-
             onChange={(event) => handleImageChange(event, setStorePhotoThree)}
           />
           
@@ -202,7 +201,6 @@ function Demo() {
             type="file"
             accept="image/*"
             name="store_photo_four"
-
             onChange={(event) => handleImageChange(event, setStorePhotoFour)}
           />
          
@@ -211,11 +209,9 @@ function Demo() {
           <input
             type="file"
             name="store_photo_five"
-
             accept="image/*"
             onChange={(event) => handleImageChange(event, setStorePhotoFive)}
           />
-         
         </div>
       </div>
       <div>
@@ -224,7 +220,6 @@ function Demo() {
     <input
       type="file"
       name="product_photo_one"
-
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoOne)}
     />
@@ -234,7 +229,6 @@ function Demo() {
     <input
       type="file"
       name="product_photo_two"
-
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoTwo)}
     />
@@ -244,7 +238,6 @@ function Demo() {
     <input
       type="file"
       name="product_photo_three"
-
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoThree)}
     />
@@ -254,7 +247,6 @@ function Demo() {
     <input
       type="file"
       name="product_photo_four"
-
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoFour)}
     />
@@ -264,7 +256,6 @@ function Demo() {
     <input
       type="file"
       name="product_photo_five"
-
       accept="image/*"
       onChange={(event) => handleImageChange(event, setProductPhotoFive)}
     />
@@ -278,7 +269,6 @@ function Demo() {
     <input
       type="file"
       name="store_video_one"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoOne)}
     />
@@ -288,7 +278,6 @@ function Demo() {
     <input
       type="file"
       name="store_video_two"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoTwo)}
     />
@@ -298,7 +287,6 @@ function Demo() {
     <input
       type="file"
       name="store_video_three"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoThree)}
     />
@@ -308,7 +296,6 @@ function Demo() {
     <input
       type="file"
       name="store_video_four"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setStoreVideoFour)}
     />
@@ -322,7 +309,6 @@ function Demo() {
     <input
       type="file"
       name="product_video_one"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoOne)}
     />
@@ -332,7 +318,6 @@ function Demo() {
     <input
       type="file"
       name="product_video_two"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoTwo)}
     />
@@ -340,9 +325,8 @@ function Demo() {
   </div>
   <div>
     <input
-        height="240"
+      height="240"
       name="product_video_three"
-
       type="file"
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoThree)}
@@ -353,7 +337,6 @@ function Demo() {
     <input
       type="file"
       name="product_video_four"
-
       accept="video/*"
       onChange={(event) => handleVideoChange(event, setProductVideoFour)}
     />
