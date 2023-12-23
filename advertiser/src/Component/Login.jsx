@@ -19,7 +19,7 @@ export const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        "https://lonely-cow-life-jacket.cyclic.app/signup"
+        "http://62.72.59.146:3000/signup"
       );
       const data = await response.json();
 

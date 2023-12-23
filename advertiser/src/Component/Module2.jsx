@@ -271,7 +271,7 @@ export const Module2 = () => {
   
     try {
       setIssub(true);
-      const response = await fetch('http://localhost:3000/business', {
+      const response = await fetch('http://62.72.59.146:3000/business', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

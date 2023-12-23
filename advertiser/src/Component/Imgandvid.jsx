@@ -6,7 +6,7 @@ export const Imgandvid = () => {
 
   useEffect(() => {
     // Fetch data from the provided URL
-    fetch("https://lonely-cow-life-jacket.cyclic.app/imgandvid")
+    fetch("http://62.72.59.146:3000/imgandvid")
       .then((response) => response.json())
       .then((data) => {
         setMediaData(data[data.length - 1].imgandvid);

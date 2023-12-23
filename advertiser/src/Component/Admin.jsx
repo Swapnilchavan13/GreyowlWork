@@ -50,7 +50,7 @@ export const Admin = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/signup')
+    fetch('http://62.72.59.146:3000/signup')
       .then(response => response.json())
       .then(data => setUserData(data))
       .catch(error => console.error('Error:', error));
@@ -76,21 +76,21 @@ export const Admin = () => {
 
 
   const fetchAddressData = (userId) => {
-    fetch(`http://localhost:3000/address/${userId}`)
+    fetch(`http://62.72.59.146:3000/address/${userId}`)
       .then(response => response.json())
       .then(data => setAddressData(data))
       .catch(error => console.error('Error fetching address data:', error));
   };
 
   const fetchCampaignData = (userId) => {
-    fetch(`http://localhost:3000/campaign/${userId}`)
+    fetch(`http://62.72.59.146:3000/campaign/${userId}`)
       .then(response => response.json())
       .then(data => setCampaignData(data))
       .catch(error => console.error('Error fetching campaign data:', error));
   };
 
   const fetchBusinessData = (userId) => {
-    fetch(`http://localhost:3000/business/${userId}`)
+    fetch(`http://62.72.59.146:3000/business/${userId}`)
       .then(response => response.json())
       .then(businessData => {
         setBusinessData(businessData);

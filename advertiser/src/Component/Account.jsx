@@ -129,7 +129,7 @@ export const Account = () => {
     try {
       setIsSaving(true);
       const response = await fetch(
-        "https://lonely-cow-life-jacket.cyclic.app/address",
+        "http://62.72.59.146:3000/address",
         {
           method: "POST",
           headers: {

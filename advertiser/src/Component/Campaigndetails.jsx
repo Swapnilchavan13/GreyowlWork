@@ -215,7 +215,7 @@ export const Campaigndetails = () => {
       
       try {
         setIssubmit(true)
-        const response = await fetch('https://lonely-cow-life-jacket.cyclic.app/campaign', {
+        const response = await fetch('http://62.72.59.146:3000/campaign', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

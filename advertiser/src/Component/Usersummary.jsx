@@ -113,7 +113,7 @@ export const Usersummary = () => {
   ];
 
   useEffect(() => {
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/address";
+    const apiUrl = "http://62.72.59.146:3000/address";
 
     // Fetch data from the API
     fetch(apiUrl)
@@ -134,7 +134,7 @@ export const Usersummary = () => {
 
   useEffect(() => {
     // Define the API endpoint URL
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/campaign";
+    const apiUrl = "http://62.72.59.146:3000/campaign";
 
     // Fetch data from the API
     fetch(apiUrl)
@@ -155,7 +155,7 @@ export const Usersummary = () => {
 
   useEffect(() => {
     // Define the API endpoint URL
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/business";
+    const apiUrl = "http://62.72.59.146:3000/business";
 
     // Fetch data from the API
     fetch(apiUrl)
@@ -219,7 +219,7 @@ export const Usersummary = () => {
     // If validation fails, display an error message and prevent saving
 
     // Assuming the validation is successful, you can send the updated data to the server
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/address"; // Replace with the correct API URL
+    const apiUrl = "http://62.72.59.146:3000/address"; // Replace with the correct API URL
 
     // Send a PUT request to update the data on the server
     fetch(apiUrl, {
@@ -256,7 +256,7 @@ export const Usersummary = () => {
     // If validation fails, display an error message and prevent saving
 
     // Assuming the validation is successful, you can send the updated data to the server
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/campaign"; // Replace with the correct API URL
+    const apiUrl = "http://62.72.59.146:3000/campaign"; // Replace with the correct API URL
 
     // Send a PUT request to update the data on the server
     fetch(apiUrl, {
@@ -292,7 +292,7 @@ export const Usersummary = () => {
     // If validation fails, display an error message and prevent saving
 
     // Assuming the validation is successful, you can send the updated data to the server
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/business"; // Replace with the correct API URL
+    const apiUrl = "http://62.72.59.146:3000/business"; // Replace with the correct API URL
 
     // Send a PUT request to update the data on the server
     fetch(apiUrl, {

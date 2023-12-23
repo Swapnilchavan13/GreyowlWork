@@ -32,7 +32,7 @@ export const Summary = () => {
   }, []);
 
   useEffect(() => {
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/address";
+    const apiUrl = "http://62.72.59.146:3000/address";
 
     // Fetch data from the API
     fetch(apiUrl)
@@ -54,7 +54,7 @@ export const Summary = () => {
 
   useEffect(() => {
     // Define the API endpoint URL
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/campaign";
+    const apiUrl = "http://62.72.59.146:3000/campaign";
 
     // Fetch data from the API
     fetch(apiUrl)
@@ -75,7 +75,7 @@ export const Summary = () => {
 
   useEffect(() => {
     // Define the API endpoint URL
-    const apiUrl = "https://lonely-cow-life-jacket.cyclic.app/business";
+    const apiUrl = "http://62.72.59.146:3000/business";
 
     // Fetch data from the API
     fetch(apiUrl)
