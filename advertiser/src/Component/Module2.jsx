@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
-
 const businessAdjectives = [
   'Reliable',
   'Innovative',
@@ -52,13 +51,14 @@ const durations = [
 export const Module2 = () => {
   const location = useLocation();
   const media_id = location.state;
+  const dd= Date.now()
 
   const me_id= media_id.me_id
   // console.log ("hello me id" +me_id)
   const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
 
   ////////////////////////
-  const [formId, setFormId] = useState(Date.now());
+  const [formId, setFormId] = useState(dd);
   const [uploadLogo, setUploadLogo] = useState(null);
   const [productPhotoFive, setProductPhotoFive] = useState(null);
   const [storePhotoOne, setStorePhotoOne] = useState(null);
@@ -102,7 +102,7 @@ export const Module2 = () => {
   const [isSub, setIssub] = useState(false)
 
   const [businessName, setBusinessName] = useState('');
-  const [mi, setMi] = useState(Date.now());
+  const [mi, setMi] = useState(dd);
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
   const [selectedAdjectives, setSelectedAdjectives] = useState([]);

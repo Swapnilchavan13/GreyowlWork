@@ -4,7 +4,6 @@ function Demo() {
 
   const [uploadPercentage, setUploadPercentage] = useState(0);  //New state variable for percentage
 
-
   const [formId, setFormId] = useState('');
   const [uploadLogo, setUploadLogo] = useState(null);
   const [storePhotoOne, setStorePhotoOne] = useState(null);
