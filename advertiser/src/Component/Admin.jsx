@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Admin.css'; 
 
 export const Admin = () => {
   const [userData, setUserData] = useState([]);
@@ -108,38 +109,39 @@ export const Admin = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {userData.map(user => (
-            <tr key={user._id}>
-              <td>{user._id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>
-                <button onClick={() => handleUserClick(user._id)}>View Address</button>
-                <button onClick={() => handleCampaignClick(user._id)}>View Campaign</button>
-                <button onClick={() => handleBusinessClick(user._id)}>View Business</button>
-              </td>
+    <div className="admin-dashboard">
+      <div className="dashboard-container">
+        <h1 className="dashboard-title">Admin Dashboard</h1>
+        <table className="user-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {userData.map(user => (
+              <tr key={user._id}>
+                <td>{user._id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <button className="action-button" onClick={() => handleUserClick(user._id)}>View Address</button>
+                  <button className="action-button" onClick={() => handleCampaignClick(user._id)}>View Campaign</button>
+                  <button className="action-button" onClick={() => handleBusinessClick(user._id)}>View Business</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
       {viewMode === 'address' && addressData && Array.isArray(addressData) && (
-        <div>
-          <h2>Full Details for User ID: {selectedUserId}</h2>
-          {addressData.map(user => (
-            <div key={user._id}>
+       <div className="details-section">
+       <h2 className="section-title">Full Details for User ID: {selectedUserId}</h2>
+       {addressData.map(user => (
+         <div className="detail-block" key={user._id}>
               <p>Name: {user.name}</p>
               <p>Email: {user.email}</p>
               <p>Address 1: {user.address1}</p>
@@ -159,14 +161,14 @@ export const Admin = () => {
         </div>
       )}
       {viewMode === 'campaign' && campaignData && Array.isArray(campaignData) && (
-        <div>
-          <h2>Campaign Details for User ID: {selectedUserId}</h2>
-          {campaignData.map(campaign => (
-            <div key={campaign._id}>
+        <div className="details-section">
+       <h2 className="section-title">Campaign Details for User ID: {selectedUserId}</h2>
+       {campaignData.map(campaign => (
+         <div className="detail-block" key={campaign._id}>
               <p>Detail: {campaign.detail}</p>
               <p>Budget: {campaign.budget}</p>
+           <p>Selected Talukas: {campaign.selectedTalukas.join(', ')}</p>
               <p>Selected Villages: {campaign.selectedVillages.join(', ')}</p>
-              <p>Selected Talukas: {campaign.selectedTalukas.join(', ')}</p>
               <p>Selected Ranges: {campaign.selectedRanges.join(', ')}</p>
               <p>Selected Genders: {campaign.selectedGenders.join(', ')}</p>
               <p>Selected District: {campaign.selectedDistrict}</p>
@@ -181,10 +183,10 @@ export const Admin = () => {
       )}
 
       {viewMode === 'business' && businessData && Array.isArray(businessData) && (
-        <div>
-          <h2>Business Details for User ID: {selectedUserId}</h2>
-          {businessData.map(business => (
-            <div key={business._id}>
+        <div className="details-section">
+        <h2 className="section-title">Business Details for User ID: {selectedUserId}</h2>
+        {businessData.map(business => (
+          <div className="detail-block" key={business._id}>
               <p>Business Name: {business.businessName}</p>
               <p>Description: {business.description}</p>
               <p>Selected Ad Types: {business.selectedAdTypes.join(', ')}</p>
@@ -196,12 +198,12 @@ export const Admin = () => {
           ))}
 
           {mediaData && isMediaAvailable(mediaData) ? (
-            <div>
-              <h3>Media Data:</h3>
+            <div className="media-section">
+              <h3 className="section-title">Media Data:</h3>
+          
               <h3>Logo Image</h3>
               {mediaData[0].upload_logo && <img src={mediaData[0].upload_logo} alt="Logo" />}
 
-              <h3>Product Photos</h3>
               {mediaData[0].product_photo_one && <img src={mediaData[0].product_photo_one} alt="one" />}
               {mediaData[0].product_photo_two && <img src={mediaData[0].product_photo_two} alt="two" />}
               {mediaData[0].product_photo_three && <img src={mediaData[0].product_photo_three} alt="three" />}
@@ -215,19 +217,22 @@ export const Admin = () => {
               {mediaData[0].store_photo_four && <img src={mediaData[0].store_photo_four} alt="Logo" />}
               {mediaData[0].store_photo_five && <img src={mediaData[0].store_photo_five} alt="Logo" />}
 
+              <h3>Product Photos</h3>
               <h3>Store Videos</h3>
               {renderVideos(mediaData[0], 'store')}
 
               <h3>Product Videos</h3>
               {renderVideos(mediaData[0], 'product')}
             </div>
-          ) : (
-            <div>
-              <h3>No media added</h3>
+              ) : (
+              <div className="media-section">
+              <h3 className="section-title">No media added</h3>
+              </div>
+              )}
+              </div>
+              )}
             </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
+          </div>
+      );
+  };
+        

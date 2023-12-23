@@ -180,7 +180,6 @@ function Demo() {
         </div>
         <div>
           <input
-            type="file"
             name="store_photo_two"
             accept="image/*"
             onChange={(event) => handleImageChange(event, setStorePhotoTwo)}
@@ -196,6 +195,7 @@ function Demo() {
           />
           
         </div>
+            type="file"
         <div>
           <input
             type="file"
